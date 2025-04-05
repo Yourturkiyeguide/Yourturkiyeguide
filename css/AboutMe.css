@@ -1,0 +1,29 @@
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  transition: var(--transition-default);
+}
+
+article img:hover {
+  transform: scale(1.02);
+}
+
+article h1 {
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px var(--shadow-light);
+}
+
+article p {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 400;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
