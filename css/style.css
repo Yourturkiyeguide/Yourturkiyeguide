@@ -1,0 +1,332 @@
+:root {
+  --primary: #073245;
+  --secondary: #4886af;
+  --accent: #83c1e8;
+}
+/* Скидаємо базові стилі */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Стилі для body */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e3ebf8 0%, #8eb0e6 100%); /* М'який градієнт */
+  background-attachment: fixed; /* Фіксований фон */
+  color: #333333; /* Основний колір тексту */
+  line-height: 1.6; /* Висота рядка для кращої читабельності */
+  padding-bottom: 60px; /* Збільшено відступ знизу через mobile-menu */
+  min-height: 100vh; /* Щоб футер залишався внизу */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стилі для секції */
+section {
+  flex: 1; /* Щоб секція займала доступний простір */
+  padding: 50px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Стилі для статті */
+article {
+  background: rgba(255, 255, 255, 0.95); /* Напівпрозорий білий фон */
+  backdrop-filter: blur(5px); /* Ефект розмиття */
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Тінь для глибини */
+  text-align: center;
+  animation: fadeIn 1s ease-in-out; /* Анімація появи */
+}
+
+/* Анімація для статті */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+article img:hover {
+  transform: scale(1.02); /* Легке збільшення при наведенні */
+}
+
+article h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000000; /* Акцентний колір */
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: gradientAnimation 5s ease infinite;
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+article p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #555555;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Стилі для хедера (залишаємо без змін) */
+header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-left: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+  display: block;
+}
+
+.menu nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu nav ul li {
+  position: relative;
+  margin: 0 10px;
+}
+
+.menu nav ul li a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.menu nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #2b3a67;
+  transform: translateY(-2px);
+}
+
+.menu nav ul li .sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgb(194, 212, 240);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 220px;
+  z-index: 1001;
+  border-radius: 10px;
+  padding: 10px 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu nav ul li:hover .sub-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sub-menu li {
+  display: block;
+  margin: 0;
+}
+
+.sub-menu li a {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  display: block;
+  border-radius: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sub-menu li a:hover {
+  background-color: #ff6200;
+  color: #ffffff;
+}
+
+/* Стилі для футера (оновимо для гармонії) */
+footer {
+  background: linear-gradient(135deg, #222222, #333333); /* Градієнт для футера */
+  color: #ffffff;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-contact p,
+.footer-copy p {
+  margin: 5px 0;
+  font-weight: 300;
+}
+
+.footer-social a {
+  margin: 0 10px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  transform: scale(1.2); /* Збільшення іконок при наведенні */
+}
+
+/*.footer-social img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1); !* Білі іконки *!
+}*/
+
+/* Стилі для нижнього меню (оновимо для гармонії) */
+.mobile-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 999;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu a {
+  font-size: 24px;
+  color: #333333;
+  text-decoration: none;
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: #ff6200;
+  transform: scale(1.2);
+}
+
+/* Медіа-запити */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: flex;
+  }
+  .menu {
+    display: none;
+  }
+
+  article {
+    padding: 20px;
+  }
+
+  article h1 {
+    font-size: 28px;
+  }
+
+  article p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none;
+  }
+  .menu {
+    display: block;
+  }
+}
