@@ -119,7 +119,9 @@ header {
 }
 
 .logo-text {
+    /*
     font-family: 'Poppins', sans-serif;
+    */
     font-size: clamp(20px, 4vw, 26px);
     font-weight: 700;
     color: var(--white);
@@ -144,7 +146,9 @@ header {
 }
 
 .menu nav ul li a {
+    /*
     font-family: 'Poppins', sans-serif;
+    */
     font-size: 16px;
     font-weight: 500;
     color: var(--white);
@@ -224,6 +228,17 @@ footer {
     font-weight: 300;
 }
 
+.footer-contact a {
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition-default);
+}
+
+.footer-contact a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}
+
 .footer-social {
     display: flex;
     justify-content: center;
@@ -297,6 +312,28 @@ footer {
 
 .mobile-menu a:hover::after {
     width: 100%;
+}
+
+/* Стиль для активного посилання в основному меню */
+.menu nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: var(--hover-color);
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+/* Стиль для активного посилання в мобільному меню */
+.mobile-menu a.active {
+    background-color: var(--hover-color);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+.mobile-menu a.active::after {
+    width: 100%;
+    height: 3px;
+    background: var(--white);
 }
 
 /* Медіа-запити */
