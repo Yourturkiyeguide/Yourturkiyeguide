@@ -1,4 +1,4 @@
-.card-container {
+/*.card-container {
   display: flex;
   justify-content: space-evenly;
   gap: 20px;
@@ -67,9 +67,8 @@ h1 a:hover {
 
 .arrow-button:hover .arrow {
   transform: translateX(3px);
-}
+}*/
 
-/*
 .card-container {
   display: flex;
   justify-content: space-evenly;
@@ -175,7 +174,7 @@ h1 a:hover {
   transform: translateX(5px);
 }
 
-!* Адаптивність для мобільних пристроїв *!
+/* Адаптивність для мобільних пристроїв */
 @media (max-width: 768px) {
   .card-container {
     gap: 20px;
@@ -191,4 +190,4 @@ h1 a:hover {
   .card-content {
     padding: 20px;
   }
-}*/
+}
