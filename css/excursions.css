@@ -1,74 +1,3 @@
-/*.card-container {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 20px;
-}
-
-.card {
-  width: 300px;
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  color: var(--white);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 50%);
-  z-index: 1;
-}
-
-.card-content {
-  position: relative;
-  width: 100%;
-  z-index: 2;
-  padding: 20px;
-  align-items: center;
-}
-
-.arrow-button {
-  color: var(--white);
-  background: var(--accent);
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-h1 a {
-  color: var(--white);
-  text-decoration: none;
-}
-
-h1 a:hover {
-  color: var(--hover-color);
-}
-
-.arrow-button:hover {
-  background: var(--hover-color);
-  }
-
-.arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.arrow-button:hover .arrow {
-  transform: translateX(3px);
-}*/
-
 .card-container {
   display: flex;
   justify-content: space-evenly;
@@ -77,6 +6,12 @@ h1 a:hover {
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.clickable-link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
 }
 
 .card {
@@ -92,6 +27,7 @@ h1 a:hover {
   color: var(--white);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -126,11 +62,13 @@ h1 a:hover {
   font-size: 1.5rem;
   margin: 0;
   font-weight: 600;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease; /* Додав transition для color */
+  color: var(--white);
 }
 
 .card:hover h1 {
   transform: translateY(-5px);
+  color: var(--hover-color);
 }
 
 .arrow-button {
@@ -150,27 +88,18 @@ h1 a:hover {
   height: 50px;
 }
 
-h1 a {
-  color: var(--white);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-h1 a:hover {
-  color: var(--hover-color, #ffcc80);
-}
-
-.arrow-button:hover {
-  background: var(--hover-color, #ffcc80);
-  transform: scale(1.1);
-}
-
 .arrow {
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.arrow-button:hover .arrow {
+/* Hover ефекти для картки */
+.card:hover .arrow-button {
+  background: var(--hover-color, #ffcc80);
+  transform: scale(1.1);
+}
+
+.card:hover .arrow {
   transform: translateX(5px);
 }
 
