@@ -210,5 +210,199 @@
 
 
 
+/* Рейтинг у верхній частині картки - новий формат */
+.card-rating {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.6s ease-out 0.8s both;
+}
 
+.stars {
+  color: #FFD700;
+  font-size: 0.8rem;
+}
+
+.rating-text {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* Переробляємо існуючі стилі */
+.card-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  text-align: left !important;
+}
+
+.card-text {
+  flex: 1;
+  text-align: left;
+}
+
+.card-content h1 {
+  margin: 0 0 5px 0 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-content p {
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 300 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Синя кнопка навпроти тексту */
+.info-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  min-width: 75px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.info-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.info-button:hover::before {
+  left: 100%;
+}
+
+.info-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2980b9, #1abc9c);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+}
+
+.info-button .duration {
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.info-button .price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.info-button .arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+  font-weight: 700;
+}
+
+.info-button:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Прибираємо старі стилі кнопки */
+.arrow-button {
+  display: none !important;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .card-rating {
+    top: 12px;
+    right: 12px;
+    padding: 5px 10px;
+    gap: 5px;
+  }
+
+  .stars {
+    font-size: 0.75rem;
+  }
+
+  .rating-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .info-button {
+    padding: 10px 14px;
+    font-size: 0.7rem;
+    min-width: 70px;
+  }
+
+  .info-button .duration {
+    font-size: 0.85rem;
+  }
+
+  .info-button .price {
+    font-size: 1rem;
+  }
+
+  .info-button .arrow {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-rating {
+    top: 10px;
+    right: 10px;
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .stars {
+    font-size: 0.7rem;
+  }
+
+  .rating-text {
+    font-size: 0.75rem;
+  }
+
+  .info-button {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    min-width: 65px;
+  }
+
+  .info-button .duration {
+    font-size: 0.7rem;
+  }
+
+  .info-button .price {
+    font-size: 0.75rem;
+  }
+
+  .info-button .arrow {
+    font-size: 12px;
+  }
+}
 
