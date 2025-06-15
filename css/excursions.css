@@ -12,10 +12,14 @@
   text-decoration: none;
   display: block;
   color: inherit;
+  /* Додаємо флекс-властивості для рівномірного розподілу */
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
 }
 
 .card {
-  width: 320px;
+  width: 100%;
   height: 420px;
   background-size: cover;
   background-position: center;
@@ -54,16 +58,18 @@
   z-index: 2;
   padding: 25px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .card h1 {
   font-size: 1.5rem;
   margin: 0;
   font-weight: 600;
-  transition: transform 0.3s ease, color 0.3s ease; /* Додав transition для color */
+  transition: transform 0.3s ease, color 0.3s ease;
   color: var(--white);
+  flex: 1;
 }
 
 .card:hover h1 {
@@ -93,7 +99,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Hover ефекти для картки */
 .card:hover .arrow-button {
   background: var(--hover-color, #ffcc80);
   transform: scale(1.1);
@@ -103,20 +108,77 @@
   transform: translateX(5px);
 }
 
+/* Адаптивність для планшетів */
+@media (max-width: 1024px) {
+  .card-container {
+    gap: 25px;
+    padding: 30px 15px;
+    justify-content: center;
+  }
+
+  .clickable-link {
+    min-width: 260px;
+    max-width: 300px;
+  }
+}
+
 /* Адаптивність для мобільних пристроїв */
 @media (max-width: 768px) {
   .card-container {
     gap: 20px;
-    padding: 20px 10px;
+    padding: 20px 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clickable-link {
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
   }
 
   .card {
-    width: 100%;
-    max-width: 340px;
-    height: 380px;
+    height: 350px;
+    margin: 0 auto;
   }
 
   .card-content {
     padding: 20px;
+  }
+
+  .card h1 {
+    font-size: 1.3rem;
+  }
+
+  .arrow-button {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+}
+
+/* Для дуже маленьких екранів */
+@media (max-width: 480px) {
+  .card-container {
+    padding: 15px 10px;
+    gap: 15px;
+  }
+
+  .card {
+    height: 420px;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card h1 {
+    font-size: 1.2rem;
+  }
+
+  .arrow-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
   }
 }
