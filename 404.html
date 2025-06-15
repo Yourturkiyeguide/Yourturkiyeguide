@@ -1,62 +1,700 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
 
 <head>
   <meta charset="utf-8">
-  <title>Page Not Found</title>
+  <title>Сторінка не знайдена - 404 | Турецькі Екскурсії</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    * {
-      line-height: 1.2;
-      margin: 0;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-    html {
-      color: #888;
-      display: table;
-      font-family: sans-serif;
-      height: 100%;
-      text-align: center;
-      width: 100%;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #83c1e8, #6ba3d6, #4a90e2, #2e7bd6, #1e5f99);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
     }
 
-    h1 {
-      color: #555;
-      font-size: 2em;
-      font-weight: 400;
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    p {
-      margin: 0 auto;
-      width: 280px;
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
-    @media only screen and (max-width: 280px) {
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
 
-      body,
-      p {
-        width: 95%;
+    .star:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+    .star:nth-child(2) { top: 80%; left: 80%; animation-delay: 1s; }
+    .star:nth-child(3) { top: 40%; left: 70%; animation-delay: 2s; }
+    .star:nth-child(4) { top: 70%; left: 30%; animation-delay: 0.5s; }
+    .star:nth-child(5) { top: 10%; left: 60%; animation-delay: 1.5s; }
+    .star:nth-child(6) { top: 90%; left: 10%; animation-delay: 2.5s; }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      z-index: 10;
+      position: relative;
+      max-width: 600px;
+      padding: 2rem;
+    }
+
+    .error-code {
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 700;
+      line-height: 0.8;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff, #f0f8ff, #e6f3ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate, rainbow 4s linear infinite;
+      position: relative;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
+      to { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6)); }
+    }
+
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: slideInFromLeft 1s ease-out 0.5s both, textWave 3s ease-in-out infinite;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes textWave {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .description {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      animation: slideInFromRight 1s ease-out 0.7s both, fadeInOut 4s ease-in-out infinite;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .btn-container {
+      animation: fadeInUp 1s ease-out 1s both, pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, rgba(131, 193, 232, 0.2), rgba(107, 163, 214, 0.15));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(131, 193, 232, 0.3);
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 8px 25px rgba(131, 193, 232, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(131, 193, 232, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) rotate(2deg);
+      box-shadow:
+        0 15px 35px rgba(131, 193, 232, 0.25),
+        0 0 50px rgba(131, 193, 232, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.2);
+      background: linear-gradient(135deg, rgba(131, 193, 232, 0.3), rgba(107, 163, 214, 0.25));
+      border-color: rgba(131, 193, 232, 0.5);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Паперові літачки */
+    .paper-plane {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      opacity: 0.8;
+      filter: drop-shadow(0 2px 8px rgba(131, 193, 232, 0.3));
+    }
+
+    .paper-plane svg {
+      width: 100%;
+      height: 100%;
+      fill: #83c1e8;
+      stroke: #6ba3d6;
+      stroke-width: 1;
+    }
+
+    .paper-plane:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation: planeFly1 25s infinite linear;
+    }
+
+    .paper-plane:nth-child(2) {
+      top: 60%;
+      right: 20%;
+      animation: planeFly2 30s infinite linear;
+      animation-delay: 8s;
+      transform: scale(0.8);
+    }
+
+    .paper-plane:nth-child(3) {
+      bottom: 30%;
+      left: 15%;
+      animation: planeFly3 20s infinite linear;
+      animation-delay: 15s;
+      transform: scale(1.2);
+    }
+
+    @keyframes planeFly1 {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      20% { transform: translate(200px, -100px) rotate(45deg) scale(1.1); }
+      40% { transform: translate(400px, -50px) rotate(90deg) scale(0.9); }
+      60% { transform: translate(500px, 80px) rotate(135deg) scale(1.2); }
+      80% { transform: translate(300px, 150px) rotate(180deg) scale(0.8); }
+      100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+    }
+
+    @keyframes planeFly2 {
+      0% { transform: translate(0, 0) rotate(0deg) scale(0.8); }
+      25% { transform: translate(-150px, -80px) rotate(-30deg) scale(1); }
+      50% { transform: translate(-350px, -30px) rotate(-90deg) scale(0.7); }
+      75% { transform: translate(-200px, 120px) rotate(-180deg) scale(1.1); }
+      100% { transform: translate(0, 0) rotate(-360deg) scale(0.8); }
+    }
+
+    @keyframes planeFly3 {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1.2); }
+      30% { transform: translate(250px, -120px) rotate(60deg) scale(1); }
+      60% { transform: translate(450px, -60px) rotate(120deg) scale(1.4); }
+      100% { transform: translate(0, 0) rotate(360deg) scale(1.2); }
+    }
+
+    /* Плаваючі частинки компаса */
+    .compass-particle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      opacity: 0.7;
+      animation: compassSpin 8s linear infinite, compassFloat 6s ease-in-out infinite;
+    }
+
+    .compass-particle svg {
+      width: 100%;
+      height: 100%;
+      fill: #83c1e8;
+      stroke: #ffffff;
+      stroke-width: 0.5;
+    }
+
+    @keyframes compassSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes compassFloat {
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+    }
+
+    .compass-particle:nth-child(4) {
+      top: 15%;
+      right: 25%;
+      animation-delay: 2s;
+    }
+
+    .compass-particle:nth-child(5) {
+      bottom: 20%;
+      right: 30%;
+      animation-delay: 5s;
+    }
+
+    .compass-particle:nth-child(6) {
+      top: 70%;
+      left: 20%;
+      animation-delay: 8s;
+    }
+
+    /* Анімовані хвилі */
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(90deg, transparent, rgba(131, 193, 232, 0.1), transparent);
+      opacity: 0.6;
+    }
+
+    .wave::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        rgba(131, 193, 232, 0.1) 10px,
+        transparent 20px
+      );
+      animation: waveMove 10s linear infinite;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    /* Сонечко з променями */
+    .sun {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #ffd700, #ffed4e);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: sunRotate 20s linear infinite, sunPulse 4s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .sun::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: conic-gradient(
+        transparent 0deg,
+        rgba(255, 215, 0, 0.3) 45deg,
+        transparent 90deg,
+        rgba(255, 215, 0, 0.3) 135deg,
+        transparent 180deg,
+        rgba(255, 215, 0, 0.3) 225deg,
+        transparent 270deg,
+        rgba(255, 215, 0, 0.3) 315deg,
+        transparent 360deg
+      );
+      border-radius: 50%;
+      animation: sunRaysRotate 10s linear infinite reverse;
+    }
+
+    @keyframes sunRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes sunRaysRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes sunPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Ефект глітчу з покращеннями */
+    .glitch-effect {
+      position: relative;
+    }
+
+    .glitch-effect::before,
+    .glitch-effect::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch-effect::before {
+      animation: glitch1 3s infinite;
+      color: #ff6b9d;
+      z-index: -1;
+    }
+
+    .glitch-effect::after {
+      animation: glitch2 3s infinite;
+      color: #4ecdc4;
+      z-index: -2;
+    }
+
+    @keyframes glitch1 {
+      0%, 100% { transform: translate(0); opacity: 0.8; }
+      20% { transform: translate(-3px, 3px); opacity: 0.6; }
+      40% { transform: translate(-3px, -3px); opacity: 0.4; }
+      60% { transform: translate(3px, 3px); opacity: 0.6; }
+      80% { transform: translate(3px, -3px); opacity: 0.8; }
+    }
+
+    @keyframes glitch2 {
+      0%, 100% { transform: translate(0); opacity: 0.8; }
+      25% { transform: translate(3px, -3px); opacity: 0.5; }
+      50% { transform: translate(-3px, 3px); opacity: 0.3; }
+      75% { transform: translate(3px, 3px); opacity: 0.5; }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
       }
 
-      h1 {
-        font-size: 1.5em;
-        margin: 0 0 0.3em;
+      .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
       }
 
+      .sun {
+        width: 40px;
+        height: 40px;
+        top: 5%;
+        right: 5%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>Page Not Found</h1>
-  <p>Sorry, but the page you were trying to view does not exist.</p>
+<div class="stars">
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+</div>
+
+<div class="floating-shapes">
+  <!-- Паперові літачки -->
+  <div class="paper-plane">
+    <svg viewBox="0 0 24 24">
+      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+    </svg>
+  </div>
+
+  <div class="paper-plane">
+    <svg viewBox="0 0 24 24">
+      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+    </svg>
+  </div>
+
+  <div class="paper-plane">
+    <svg viewBox="0 0 24 24">
+      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+    </svg>
+  </div>
+
+  <!-- Компаси -->
+  <div class="compass-particle">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+      <path d="M12 2l2 4-2-1-2 1z"/>
+      <path d="M12 22l-2-4 2 1 2-1z"/>
+      <path d="M2 12l4-2-1 2 1 2z"/>
+      <path d="M22 12l-4 2 1-2-1-2z"/>
+    </svg>
+  </div>
+
+  <div class="compass-particle">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+      <path d="M12 2l2 4-2-1-2 1z"/>
+      <path d="M12 22l-2-4 2 1 2-1z"/>
+      <path d="M2 12l4-2-1 2 1 2z"/>
+      <path d="M22 12l-4 2 1-2-1-2z"/>
+    </svg>
+  </div>
+
+  <div class="compass-particle">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+      <path d="M12 2l2 4-2-1-2 1z"/>
+      <path d="M12 22l-2-4 2 1 2-1z"/>
+      <path d="M2 12l4-2-1 2 1 2z"/>
+      <path d="M22 12l-4 2 1-2-1-2z"/>
+    </svg>
+  </div>
+</div>
+
+<!-- Сонечко -->
+<div class="sun"></div>
+
+<!-- Хвилі -->
+<div class="wave"></div>
+
+<div class="container">
+  <div class="error-code glitch-effect" data-text="404">404</div>
+  <h1 class="title">Екскурсія не знайдена</h1>
+  <p class="description">
+    Здається, ви заблукали в лабіринтах Туреччини! Але не хвилюйтеся - ми знаємо дорогу назад до найкращих екскурсій.
+  </p>
+  <div class="btn-container">
+    <a href="/" class="btn">🧭 Повернутися до екскурсій</a>
+  </div>
+</div>
+
+<script>
+  // Parallax ефект для зірок
+  document.addEventListener('mousemove', (e) => {
+    const stars = document.querySelectorAll('.star');
+    stars.forEach((star, index) => {
+      const speed = (index + 1) * 0.01;
+      const x = (e.clientX * speed);
+      const y = (e.clientY * speed);
+      star.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  });
+
+  // Parallax для літачків
+  document.addEventListener('mousemove', (e) => {
+    const planes = document.querySelectorAll('.paper-plane');
+    const mouseX = (e.clientX / window.innerWidth) - 0.5;
+    const mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+    planes.forEach((plane, index) => {
+      const speed = (index + 1) * 8;
+      const x = mouseX * speed;
+      const y = mouseY * speed;
+      plane.style.transform += ` translate(${x}px, ${y}px)`;
+    });
+  });
+
+  // Інтерактивні спалахи при кліку
+  document.addEventListener('click', (e) => {
+    createTravelExplosion(e.clientX, e.clientY);
+  });
+
+  function createTravelExplosion(x, y) {
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement('div');
+      particle.innerHTML = ['✈️', '🗺️', '🧭', '⭐'][Math.floor(Math.random() * 4)];
+      particle.style.cssText = `
+          position: fixed;
+          font-size: 20px;
+          pointer-events: none;
+          left: ${x}px;
+          top: ${y}px;
+          z-index: 1000;
+          filter: drop-shadow(0 0 10px rgba(131, 193, 232, 0.8));
+        `;
+
+      document.body.appendChild(particle);
+
+      const angle = (360 / 12) * i;
+      const velocity = 120 + Math.random() * 80;
+      const radian = (angle * Math.PI) / 180;
+
+      particle.animate([
+        {
+          transform: 'translate(0, 0) scale(1) rotate(0deg)',
+          opacity: 1
+        },
+        {
+          transform: `translate(${Math.cos(radian) * velocity}px, ${Math.sin(radian) * velocity}px) scale(0) rotate(720deg)`,
+          opacity: 0
+        }
+      ], {
+        duration: 1500,
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      }).onfinish = () => {
+        particle.remove();
+      };
+    }
+  }
+
+  // Динамічна зміна кольору 404
+  let colorIndex = 0;
+  setInterval(() => {
+    const errorCode = document.querySelector('.error-code');
+    const colors = [0, 60, 120, 180, 240, 300];
+    errorCode.style.filter = `hue-rotate(${colors[colorIndex]}deg)`;
+    colorIndex = (colorIndex + 1) % colors.length;
+  }, 2000);
+
+  // Анімація появи елементів
+  window.addEventListener('load', () => {
+    const planes = document.querySelectorAll('.paper-plane');
+    const compasses = document.querySelectorAll('.compass-particle');
+
+    planes.forEach((plane, index) => {
+      setTimeout(() => {
+        plane.style.opacity = '1';
+        plane.style.transform = 'scale(1)';
+      }, index * 800);
+    });
+
+    compasses.forEach((compass, index) => {
+      setTimeout(() => {
+        compass.style.opacity = '0.7';
+        compass.style.transform = 'scale(1)';
+      }, index * 600 + 1000);
+    });
+  });
+
+  // Ефект світіння кнопки з обертанням
+  const btn = document.querySelector('.btn');
+  btn.addEventListener('mouseenter', () => {
+    btn.style.boxShadow = '0 15px 35px rgba(131, 193, 232, 0.4), 0 0 60px rgba(131, 193, 232, 0.3)';
+    btn.style.transform = 'translateY(-5px) rotate(3deg) scale(1.05)';
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    btn.style.boxShadow = '0 8px 25px rgba(131, 193, 232, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.1)';
+    btn.style.transform = 'translateY(0) rotate(0deg) scale(1)';
+  });
+
+  // Рандомні спалахи зірок
+  setInterval(() => {
+    const stars = document.querySelectorAll('.star');
+    const randomStar = stars[Math.floor(Math.random() * stars.length)];
+    randomStar.style.animation = 'none';
+    setTimeout(() => {
+      randomStar.style.animation = 'twinkle 3s infinite';
+    }, 100);
+  }, 3000);
+
+  // Інтерактивне сонце
+  const sun = document.querySelector('.sun');
+  sun.addEventListener('mouseenter', () => {
+    sun.style.transform = 'scale(1.3)';
+    sun.style.boxShadow = '0 0 50px rgba(255, 215, 0, 0.8)';
+  });
+
+  sun.addEventListener('mouseleave', () => {
+    sun.style.transform = 'scale(1)';
+    sun.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.5)';
+  });
+</script>
 </body>
 
 </html>
-<!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->

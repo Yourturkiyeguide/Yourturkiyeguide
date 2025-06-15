@@ -3,21 +3,41 @@ document.addEventListener("DOMContentLoaded", function() {
   const currentLocation = window.location.pathname;
   let filename = currentLocation.substring(currentLocation.lastIndexOf('/') + 1);
 
+  // Отримуємо повний шлях для визначення розділу
+  const fullPath = currentLocation;
+
   // Якщо файл не вказано (головна сторінка), встановлюємо значення за замовчуванням
   if (filename === '' || filename === '/') {
-    filename = 'index.html'; // Або інша назва вашої головної сторінки
+    filename = 'index.html';
   }
 
+  // Мапа відповідності підсторінок до батьківських розділів
+  const pageMapping = {
+    // Підрозділи екскурсій
+    'Personalised excursions.html': 'excursions.html',
+    'group.html': 'excursions.html',
+    'copyright.html': 'excursions.html',
+
+    // Підрозділи послуг
+    'yachts.html': 'servis.html',
+    'Transfer.html': 'servis.html',
+    'medical.html': 'servis.html',
+    'shopping.html': 'servis.html'
+  };
+
   // Функція для перевірки активності посилання
-  function isActiveLink(linkHref) {
+  function isActiveLink(linkHref, linkElement) {
+    // Очищуємо href від відносних шляхів для порівняння
+    let cleanHref = linkHref.replace('../', '').replace('./', '');
+
     // Перевіряємо точний збіг
-    if (linkHref === filename) {
+    if (cleanHref === filename || linkHref.endsWith('/' + filename)) {
       return true;
     }
 
     // Перевіряємо для головної сторінки
     if ((filename === 'index.html' || filename === 'index.php') &&
-      (linkHref === '/' || linkHref === '' || linkHref === '#' || linkHref === filename)) {
+      (linkHref === '/' || linkHref === '' || linkHref === '#' || cleanHref === filename)) {
       return true;
     }
 
@@ -26,24 +46,68 @@ document.addEventListener("DOMContentLoaded", function() {
       return true;
     }
 
+    // Перевіряємо чи поточна сторінка є підсторінкою цього розділу
+    const parentPage = pageMapping[filename];
+    if (parentPage && cleanHref === parentPage) {
+      return true;
+    }
+
+    // Додаткова перевірка за шляхом директорії
+    if (fullPath.includes('/excursions/') && cleanHref === 'excursions.html') {
+      return true;
+    }
+
+    if (fullPath.includes('/servis/') && cleanHref === 'servis.html') {
+      return true;
+    }
+
     return false;
   }
 
-  // Встановлюємо клас active для посилань в основному меню
-  const menuLinks = document.querySelectorAll('.menu nav ul li a');
-  menuLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (isActiveLink(href)) {
-      link.classList.add('active');
-    }
-  });
+  // Функція для додавання класу active
+  function setActiveClass(links) {
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (isActiveLink(href, link)) {
+        link.classList.add('active');
 
-  // Встановлюємо клас active для посилань в мобільному меню
+        // Додаємо клас active для батьківського li елемента (для випадків з випадаючими меню)
+        const parentLi = link.closest('li');
+        if (parentLi) {
+          parentLi.classList.add('active-parent');
+        }
+      }
+    });
+  }
+
+  // Встановлюємо клас active для посилань в основному меню
+  const menuLinks = document.querySelectorAll('nav ul li a');
+  setActiveClass(menuLinks);
+
+  // Встановлюємо клас active для посилань в мобільному меню (якщо є)
   const mobileLinks = document.querySelectorAll('.mobile-menu a');
-  mobileLinks.forEach(link => {
+  if (mobileLinks.length > 0) {
+    setActiveClass(mobileLinks);
+  }
+
+  // Додаткова обробка для випадаючих меню
+  const subMenuLinks = document.querySelectorAll('.sub-menu a');
+  subMenuLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (isActiveLink(href)) {
+    let cleanHref = href.replace('../', '').replace('./', '');
+
+    if (cleanHref === filename || href.endsWith('/' + filename)) {
       link.classList.add('active');
+
+      // Знаходимо батьківський елемент меню і також позначаємо його як активний
+      const parentMenu = link.closest('li').parentElement.closest('li');
+      if (parentMenu) {
+        const parentLink = parentMenu.querySelector('a');
+        if (parentLink) {
+          parentLink.classList.add('active');
+          parentMenu.classList.add('active-parent');
+        }
+      }
     }
   });
 });
