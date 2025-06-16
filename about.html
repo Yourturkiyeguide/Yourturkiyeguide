@@ -11,44 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/img/inon_rez/list.png" type="image/x-icon">
-  <link rel="stylesheet" href="assets/css/layout/style.css">
-  <link rel="stylesheet" href="assets/css/pages/about.css">
 </head>
 <body>
-<header>
-  <div class="container-header">
-    <div class="logo">
-      <a href="index.html">
-        <img src="icon.png" alt="Іконка сайту" width="64px" height="64px">
-        <span class="logo-text">TravelsTurkey</span>
-      </a>
-    </div>
-    <div class="menu">
-      <nav>
-        <ul>
-          <li><a href="index.html">Главная</a></li>
-          <li><a href="about.html">Обо мне</a></li>
-          <li><a href="excursions/excursions.html">Экскурсии</a>
-            <ul class="sub-menu">
-              <li><a href="excursions/personalised.html">Индивидуальные экскурсии</a></li>
-              <li><a href="excursions/group.html">Групповые экскурсии</a></li>
-              <li><a href="excursions/copyright.html">Авторские туры</a></li>
-            </ul>
-          </li>
-          <li><a href="servis/servis.html">Другие услуги</a>
-            <ul class="sub-menu">
-              <li><a href="servis/yachts.html">Яхты</a></li>
-              <li><a href="servis/transfer.html">Трансфер</a></li>
-              <li><a href="servis/medical.html">Медицинский туризм</a></li>
-              <li><a href="servis/shopping.html">Шопинг</a></li>
-            </ul>
-          </li>
-          <li><a href="reviews.html">Отзывы</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+
+<div id="header-container"></div>
 
 <section>
   <div class="container">
@@ -67,40 +33,13 @@
     </article>
   </div>
 </section>
-<footer>
-  <div class="footer-contact">
-    <p>📞 Телефон:<a href="tel:+905443266871">+90 544 326 6871</a> </p>
-    <p>📧 Email: <a href="mailto:firatdicle_47@hotmail.com"> firatdicle_47@hotmail.com</a></p>
-  </div>
-  <div class="footer-social">
-    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
-    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
-    <a href="https://t.me/+905443266871"target="_blank"><img src="assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
-    <a href="https://wa.me/+905443266871" target="_blank"><img src="assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
-    <a href="viber://chat?number=+905443266871" target="_blank"><img src="assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
-  </div>
-  <div class="footer-copy">
-    <p>&copy; 2025 Türkiye Travellings. Усі права захищені.</p>
-  </div>
-</footer>
+
+<div id="footer-container"></div>
+
 <!-- Додаємо нижнє меню всередину <body>, перед </body> -->
-<nav class="mobile-menu">
-  <a href="index.html">
-    <img src="assets/img/icon/home.png" alt="Главная" width="24" height="24">
-  </a>
-  <a href="about.html">
-    <img src="assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
-  </a>
-  <a href="excursions/excursions.html">
-    <img src="assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
-  </a>
-  <a href="servis/servis.html">
-    <img src="assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
-  </a>
-  <a href="reviews.html">
-    <img src="assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
-  </a>
-</nav>
+<div id="mobile-menu-container"></div>
+
+<script src="shared/components.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>
