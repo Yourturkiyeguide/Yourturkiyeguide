@@ -202,8 +202,14 @@
 
 <div id="mobile-menu-container"></div>
 
-<script src="../assets/js/script.js"></script>
+<!-- 1. Спочатку компоненти (щоб хедер і футер завантажилися в DOM) -->
 <script src="../shared/components.js"></script>
+
+<!-- 2. Потім script.js, бо він працює з уже вставленим меню -->
+<script src="../assets/js/script.js"></script>
+
+<!-- 3. І в самому кінці — скрипт для сторінки (не обов’язково останній, але бажано) -->
 <script src="../assets/js/pages/search.js"></script>
+
 </body>
 </html>
