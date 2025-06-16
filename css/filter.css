@@ -365,3 +365,7 @@
     font-size: 14px;
   }
 }
+
+.btn-primary {
+  display: none; /* Скрываем кнопку "Применить" */
+}

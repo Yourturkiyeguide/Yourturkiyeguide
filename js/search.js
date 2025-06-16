@@ -41,8 +41,8 @@ class ExcursionFilter {
     // Зміна фільтрів
     this.categorySelect.addEventListener('change', () => this.updateFilters());
     this.durationSelect.addEventListener('change', () => this.updateFilters());
-    this.priceFromInput.addEventListener('input', () => this.updateFilters());
-    this.priceToInput.addEventListener('input', () => this.updateFilters());
+    this.priceFromInput.addEventListener('input', debounce(() => this.updateFilters(), 500));
+    this.priceToInput.addEventListener('input', debounce(() => this.updateFilters(), 500));
 
     // Пошук у реальному часі
     this.searchInput.addEventListener('input', () => {
@@ -145,6 +145,7 @@ class ExcursionFilter {
       search: this.searchInput.value
     };
     this.updateActiveFiltersDisplay();
+    this.performFilter(); // Добавляем автоматическое применение фильтра
   }
 
   updateActiveFiltersDisplay() {
@@ -236,8 +237,7 @@ class ExcursionFilter {
   }
 
   applyFilterChanges() {
-    this.toggleFilters();
-    this.performFilter();
+    this.toggleFilters(); // Просто закрываем панель фильтров
   }
 
   performFilter() {
