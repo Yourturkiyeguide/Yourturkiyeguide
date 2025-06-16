@@ -24,7 +24,6 @@ class ExcursionFilter {
     this.priceFromInput = document.getElementById('priceFromInput');
     this.priceToInput = document.getElementById('priceToInput');
     this.clearFilters = document.getElementById('clearFilters');
-    this.applyFilters = document.getElementById('applyFilters');
     this.activeFilters = document.getElementById('activeFilters');
     this.filterTags = document.getElementById('filterTags');
     this.cardContainer = document.getElementById('cardContainer');
@@ -36,7 +35,6 @@ class ExcursionFilter {
     this.filterToggle.addEventListener('click', () => this.toggleFilters());
     this.searchBtn.addEventListener('click', () => this.performFilter());
     this.clearFilters.addEventListener('click', () => this.clearAllFilters());
-    this.applyFilters.addEventListener('click', () => this.applyFilterChanges());
 
     // Зміна фільтрів
     this.categorySelect.addEventListener('change', () => this.updateFilters());
@@ -236,11 +234,7 @@ class ExcursionFilter {
     this.performFilter();
   }
 
-  applyFilterChanges() {
-    this.toggleFilters(); // Просто закрываем панель фильтров
-  }
-
-  performFilter() {
+   performFilter() {
     let visibleCount = 0;
 
     console.log('Performing filter with state:', this.filterState);
