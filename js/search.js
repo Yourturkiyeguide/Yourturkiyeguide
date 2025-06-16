@@ -186,8 +186,42 @@ class ExcursionFilter {
   addFilterTag(text, type) {
     const tag = document.createElement('span');
     tag.className = `filter-tag ${type}`;
-    tag.textContent = text;
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = text;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-tag';
+    removeBtn.innerHTML = '×';
+    removeBtn.title = 'Удалить фильтр';
+    removeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.removeFilter(type);
+    });
+
+    tag.appendChild(textSpan);
+    tag.appendChild(removeBtn);
     this.filterTags.appendChild(tag);
+  }
+
+  removeFilter(type) {
+    switch(type) {
+      case 'category':
+        this.categorySelect.value = '';
+        break;
+      case 'duration':
+        this.durationSelect.value = '';
+        break;
+      case 'price':
+        this.priceFromInput.value = '';
+        this.priceToInput.value = '';
+        this.hidePriceWarning();
+        break;
+    }
+
+    this.updateFilters();
+    this.performFilter();
   }
 
   clearAllFilters() {
