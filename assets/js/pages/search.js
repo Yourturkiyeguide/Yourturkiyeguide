@@ -18,7 +18,6 @@ class ExcursionFilter {
     this.filterToggle = document.getElementById('filterToggle');
     this.filterPanel = document.getElementById('filterPanel');
     this.chevron = document.getElementById('chevron');
-    this.searchBtn = document.getElementById('searchBtn');
     this.categorySelect = document.getElementById('categorySelect');
     this.durationSelect = document.getElementById('durationSelect');
     this.priceFromInput = document.getElementById('priceFromInput');
@@ -33,7 +32,6 @@ class ExcursionFilter {
   bindEvents() {
     // Основні кнопки
     this.filterToggle.addEventListener('click', () => this.toggleFilters());
-    this.searchBtn.addEventListener('click', () => this.performFilter());
     this.clearFilters.addEventListener('click', () => this.clearAllFilters());
 
     // Зміна фільтрів
