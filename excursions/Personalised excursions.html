@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/excursions.css">
   <link rel="stylesheet" href="../css/excursionsT.css">
+  <link rel="stylesheet" href="../css/filter.css">
 </head>
 
 <body>
@@ -62,10 +63,87 @@
         <p>Разработаем маршрут под ваши интересы!</p>
       </div>
 
-      <div class="card-container">
+      <!-- Фільтр пошуку -->
+      <div class="search-filter">
+        <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="Поиск экскурсий...">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+        </div>
+
+        <div class="filter-controls">
+          <button class="filter-toggle" id="filterToggle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+            </svg>
+            Фильтры
+            <svg class="chevron" id="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+          </button>
+
+          <button class="search-btn" id="searchBtn">Найти</button>
+        </div>
+
+        <div class="filter-panel" id="filterPanel">
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label class="filter-label">Тематика экскурсии</label>
+              <select class="filter-select" id="categorySelect">
+                <option value="">Все темы</option>
+                <option value="историческая">Историческая</option>
+                <option value="мистецька">Мистецька</option>
+                <option value="шопинг">Шопинг</option>
+                <option value="гастро-тур">Гастро-тур</option>
+                <option value="фототур">Фототур</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Продолжительность</label>
+              <select class="filter-select" id="durationSelect">
+                <option value="">Любая</option>
+                <option value="3">До 3 часов</option>
+                <option value="4">До 4 часов</option>
+                <option value="6">До 6 часов</option>
+                <option value="6+">Больше 6 часов</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Цена (USD)</label>
+              <div class="price-inputs">
+                <input type="number" class="filter-select price-input" id="priceFromInput" placeholder="От" min="0">
+                <span class="price-separator">-</span>
+                <input type="number" class="filter-select price-input" id="priceToInput" placeholder="До" min="0">
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn-secondary" id="clearFilters">Очистить</button>
+            <button class="btn-primary" id="applyFilters">Применить</button>
+          </div>
+        </div>
+
+        <div class="active-filters" id="activeFilters" style="display: none;">
+          <span class="active-filters-label">Активные фильтры:</span>
+          <div id="filterTags"></div>
+        </div>
+      </div>
+
+      <div class="card-container" id="cardContainer">
 
         <a href="Personalised%20excursions/hello.html" class="clickable-link">
-          <div class="card" style="background-image: url('../img/Привет/IMG_6778.jpg');">
+          <div class="card"
+               style="background-image: url('../img/Привет/IMG_6778.jpg');"
+               data-title="Привет, Стамбул!"
+               data-description="Главные достопримечательности города на легкой экскурсии"
+               data-duration="4"
+               data-price="50"
+               data-category="историческая">
             <div class="card-rating">
               <span class="stars">⭐⭐⭐⭐⭐</span>
               <span class="rating-text">4.9</span>
@@ -85,7 +163,13 @@
         </a>
 
         <a href="Personalised%20excursions/colourful.html" class="clickable-link">
-          <div class="card" style="background-image: url('../img/Колоритный Стамбул/IMG_2470.jpg');">
+          <div class="card"
+               style="background-image: url('../img/Колоритный Стамбул/IMG_2470.jpg');"
+               data-title="Колоритный Стамбул"
+               data-description="Увидеть разные грани прекрасного города"
+               data-duration="6"
+               data-price="75"
+               data-category="мистецька">
             <div class="card-rating">
               <span class="stars">⭐⭐⭐⭐⭐</span>
               <span class="rating-text">4.8</span>
@@ -105,7 +189,13 @@
         </a>
 
         <a href="Personalised%20excursions/transit.html" class="clickable-link">
-          <div class="card" style="background-image: url('../img/Транзитный Стамбул/IMG_2316.jpg')">
+          <div class="card"
+               style="background-image: url('../img/Транзитный Стамбул/IMG_2316.jpg')"
+               data-title="Транзитный Стамбул"
+               data-description="Не скучать в аэропорту и увидеть самое главное"
+               data-duration="3"
+               data-price="40"
+               data-category="историческая">
             <div class="card-rating">
               <span class="stars">⭐⭐⭐⭐⭐</span>
               <span class="rating-text">4.7</span>
@@ -125,13 +215,17 @@
         </a>
       </div>
 
+      <div class="no-results" id="noResults" style="display: none;">
+        <h3>Экскурсии не найдены</h3>
+        <p>Попробуйте изменить параметры поиска</p>
+      </div>
+
       <div class="cta">
         <h2>Не нашли нужную экскурсию?</h2>
         <p>Напишите мне - подберу маршрут именно для вас!</p>
         <a href="https://t.me/+905443266871" target="_blank" class="cta-btn">Зв'язатись у Telegram</a>
         <a href="https://wa.me/+905443266871" target="_blank" class="cta-btn1">Зв'язатись у WhatsApp</a>
       </div>
-
 
     </article>
   </div>
@@ -154,7 +248,6 @@
   </div>
 </footer>
 
-<!-- Додаємо нижнє меню всередину <body>, перед </body> -->
 <nav class="mobile-menu">
   <a href="../index.html">
     <img src="../img/icon/home.png" alt="Главная" width="24" height="24">
@@ -172,6 +265,9 @@
     <img src="../img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
   </a>
 </nav>
+
+<script src="../js/search.js"></script>
 <script src="../js/script.js"></script>
+
 </body>
 </html>
