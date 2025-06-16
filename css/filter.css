@@ -315,59 +315,6 @@
 /* Адаптивність */
 @media (max-width: 768px) {
   .search-filter {
-    padding: 20px 15px;
-  }
-
-  .filter-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filter-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-actions {
-    flex-direction: column;
-  }
-
-  .price-inputs {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .price-separator {
-    align-self: center;
-    transform: rotate(90deg);
-  }
-
-  .card-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-filter {
-    padding: 15px 10px;
-  }
-
-  .filter-panel {
-    padding: 20px 15px;
-  }
-
-  .search-input {
-    padding: 12px 12px 12px 40px;
-    font-size: 14px;
-  }
-
-  .filter-toggle, .search-btn {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-filter {
     padding: 15px;
     margin: 15px 10px; /* Додаємо бокові відступи */
     border-radius: 8px;
