@@ -14,9 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
   // Мапа відповідності підсторінок до батьківських розділів
   const pageMapping = {
     // Підрозділи екскурсій
-    'Personalised excursions.html': 'excursions.html',
-    'group.html': 'excursions.html',
+    'hello.html': 'excursions.html',
+    'transit.html': 'excursions.html',
     'copyright.html': 'excursions.html',
+    'excursions.html': 'excursions.html',
+    'group.html': 'excursions.html',
+    'personalised.html': 'excursions.html',
+    'Personalised excursions.html': 'excursions.html',
 
     // Підрозділи послуг
     'yachts.html': 'servis.html',
@@ -58,6 +62,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (fullPath.includes('/servis/') && cleanHref === 'servis.html') {
+      return true;
+    }
+
+    // Спеціальна перевірка для сторінок в папці excursions
+    if (fullPath.includes('/excursions/') && linkHref.includes('excursions')) {
       return true;
     }
 
