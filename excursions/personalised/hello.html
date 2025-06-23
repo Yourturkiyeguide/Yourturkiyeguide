@@ -13,6 +13,7 @@
   <link rel="icon" href="../../icon.png" type="favicon">
   <link rel="stylesheet" href="../../assets/css/layout/style.css">
   <link rel="stylesheet" href="../../assets/css/layout/tourMapSelected.css">
+  <link rel="stylesheet" href="../../assets/css/pages/hello.css">
 </head>
 
 <body>
@@ -76,24 +77,88 @@
         <div class="subsection-title">Дворец Топкапы и площадь Султанахмет</div>
         <p class="subsection-text">На центральной площади Султанахмет вы увидите Египетский обелиск, Немецкий фонтан и Змеиную колонну. Раскроете, при каких обстоятельствах они здесь появились, и услышите интересные факты о Константинополе. Во дворце Топкапы погуляете по роскошным залам, галереям и живописному парку с видом на Босфор. Я расскажу о сериале «Великолепный век», взлетах и падении Османской империи, султанах и их наложницах.</p>
 
-        <h2 class="section-title">Маршрут экскурсии</h2>
-        <ul class="route-list">
-          <li class="route-item">
-            <strong>Айя-София</strong> — мечеть, сочетающая в себе элементы православной и мусульманской культуры, а также включенная в список Всемирного наследия Юнеско.
-          </li>
-          <li class="route-item">
-            <strong>Дворец Топкапы</strong> — главный дворец Османской империи, в котором жили и правили 25 султанов.
-          </li>
-          <li class="route-item">
-            <strong>Римский ипподром</strong> (площадь Султанахмед) — это главная площадь Стамбула c сохранившимися памятниками разных цивилизаций.
-          </li>
-          <li class="route-item">
-            <strong>Голубая мечеть</strong> — выдающийся шедевр исламской и мировой архитектуры 17 века.
-          </li>
-          <li class="route-item">
-            <strong>Цистерна Базилика</strong> — одно из самых крупных и хорошо сохранившихся древних подземных водохранилищ Константинополя.
-          </li>
-        </ul>
+
+        <div class="korobka">
+          <div class="floating-elements">
+            <div class="floating-circle" style="width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+            <div class="floating-circle" style="width: 60px; height: 60px; top: 70%; right: 10%; animation-delay: 2s;"></div>
+            <div class="floating-circle" style="width: 80px; height: 80px; top: 30%; right: 5%; animation-delay: 4s;"></div>
+          </div>
+
+          <div class="gallery-container">
+            <button class="auto-play-toggle" onclick="toggleAutoPlay()">
+              <span id="autoPlayIcon">
+                <div class="play-triangle"></div>
+              </span>
+              <span id="autoPlayText">Авто</span>
+            </button>
+
+            <h2 class="section-title">Маршрут экскурсии</h2>
+
+            <div class="carousel-wrapper">
+              <div class="carousel" id="carousel">
+                <div class="carousel-item active">
+                  <div class="step-number">1</div>
+                  <img src="../../assets/img/hello/IMG_6778.jpg" alt="Айя-София" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Айя-София</h3>
+                    <p class="item-description">Мечеть, сочетающая в себе элементы православной и мусульманской культуры, а также включенная в список Всемирного наследия Юнеско.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item next">
+                  <div class="step-number">2</div>
+                  <img src="../../assets/img/hello/IMG_3751.JPG" alt="Дворец Топкапы" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Дворец Топкапы</h3>
+                    <p class="item-description">Главный дворец Османской империи, в котором жили и правили 25 султанов.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item hidden">
+                  <div class="step-number">3</div>
+                  <img src="../../assets/img/hello/36604772216_675dde054d_5k.jpg" alt="Римский ипподром" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Римский ипподром</h3>
+                    <p class="item-description">Площадь Султанахмед — это главная площадь Стамбула c сохранившимися памятниками разных цивилизаций.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item hidden">
+                  <div class="step-number">4</div>
+                  <img src="../../assets/img/hello/1c2bed8e-597c-4654-86f3-ebf8314a6900.webp" alt="Голубая мечеть" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Голубая мечеть</h3>
+                    <p class="item-description">Выдающийся шедевр исламской и мировой архитектуры 17 века.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item prev">
+                  <div class="step-number">5</div>
+                  <img src="../../assets/img/hello/IMG_3639.jpg" alt="Цистерна Базилика" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Цистерна Базилика</h3>
+                    <p class="item-description">Одно из самых крупных и хорошо сохранившихся древних подземных водохранилищ Константинополя.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-controls">
+              <button class="control-btn" onclick="prevSlide()">‹</button>
+              <div class="indicators">
+                <div class="indicator active" onclick="goToSlide(0)" tabindex="0"></div>
+                <div class="indicator" onclick="goToSlide(1)" tabindex="0"></div>
+                <div class="indicator" onclick="goToSlide(2)" tabindex="0"></div>
+                <div class="indicator" onclick="goToSlide(3)" tabindex="0"></div>
+                <div class="indicator" onclick="goToSlide(4)" tabindex="0"></div>
+              </div>
+              <button class="control-btn" onclick="nextSlide()">›</button>
+            </div>
+          </div>
+        </div>
+
+
 
         <div class="info-sections">
           <div class="info-block">
@@ -228,5 +293,6 @@
 </nav>
 
 <script src="../../assets/js/script.js"></script>
+<script src="../../assets/js/pages/picture.js"></script>
 </body>
 </html>
