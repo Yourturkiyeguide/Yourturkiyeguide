@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вертикальна галерея з мініатюрами</title>
+  <link rel="stylesheet" href="assets/css/pages/galleria.css">
+</head>
+<body>
+<div class="gallery-container">
+  <div class="vertical-carousel">
+    <div class="main-display" id="mainDisplay" onclick="openFullscreen()">
+      <div class="image-placeholder" id="mainImageContainer">
+        <span>📷</span>
+        <span>Завантаження зображення...</span>
+      </div>
+      <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
+      </div>
+      <div class="progress-bar" id="progressBar" style="width: 33.33%;"></div>
+    </div>
+
+    <div class="thumbnails-container" id="thumbnailsContainer">
+      <!-- Мініатюри будуть створені динамічно -->
+    </div>
+  </div>
+
+  <div class="gallery-info">
+    <p>Натисніть на мініатюру для перегляду або використовуйте клавіші ↑/↓ для навігації</p>
+    <p>Enter - повноекранний режим, Space - автоплей, R - випадковий слайд</p>
+    <div class="error-message" id="errorMessage" style="display: none;"></div>
+  </div>
+</div>
+
+<!-- Повноекранний оверлей -->
+<div class="fullscreen-overlay" id="fullscreenOverlay">
+  <div class="fullscreen-content">
+    <button class="close-button" onclick="closeFullscreen()">×</button>
+    <button class="fullscreen-nav nav-prev" onclick="navigateFullscreen(-1)">‹</button>
+    <button class="fullscreen-nav nav-next" onclick="navigateFullscreen(1)">›</button>
+
+    <div class="fullscreen-main" id="fullscreenMain">
+      <div class="image-placeholder">
+        <span>📷</span>
+        <span>Завантаження зображення...</span>
+      </div>
+    </div>
+
+    <div class="fullscreen-counter">
+      <span id="fullscreenCurrentSlide">1</span> / <span id="fullscreenTotalSlides">3</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/pages/galleria.js"></script>
+</body>
+</html>
