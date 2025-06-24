@@ -23,6 +23,7 @@ body {
   padding: 40px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden; /* ДОДАНО: запобігає виходу за межі */
 }
 
 .vertical-carousel {
@@ -30,6 +31,7 @@ body {
   height: 600px;
   gap: 30px;
   position: relative;
+  overflow: hidden; /* ДОДАНО: обмежує вміст */
 }
 
 .main-display {
@@ -47,13 +49,18 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* ВИПРАВЛЕНО: забезпечуємо правильні розміри */
+  min-height: 0;
+  min-width: 0;
 }
 
 .main-display img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* ВАЖЛИВО: зберігає пропорції без переповнення */
+  object-position: center; /* ДОДАНО: центрує зображення */
   border-radius: 20px;
+  display: block; /* ДОДАНО: усуває проблеми з inline елементами */
 }
 
 .main-display::before {
@@ -91,6 +98,8 @@ body {
   backdrop-filter: blur(10px);
   white-space: nowrap;
   z-index: 3;
+  max-width: 90%; /* ДОДАНО: обмежує ширину підказки */
+  text-align: center;
 }
 
 .main-display:hover::after {
@@ -107,7 +116,8 @@ body {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.2em;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #2d37e3 100%);
+  overflow: hidden; /* ДОДАНО */
 }
 
 .thumbnails-container {
@@ -117,13 +127,16 @@ body {
   width: 160px;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.3) transparent;
+  flex-shrink: 0; /* ДОДАНО: не дозволяє стиснення */
 }
 
 .thumbnails-container::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 .thumbnails-container::-webkit-scrollbar-track {
@@ -138,6 +151,8 @@ body {
 
 .thumbnail {
   height: 120px;
+  min-height: 120px;
+  width: 100%; /* ВИПРАВЛЕНО: використовуємо всю доступну ширину */
   border-radius: 15px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -154,13 +169,16 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  flex-shrink: 0;
 }
 
 .thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* ВАЖЛИВО: правильне масштабування */
+  object-position: center; /* ДОДАНО */
   border-radius: 13px;
+  display: block; /* ДОДАНО */
 }
 
 .thumbnail::before {
@@ -202,6 +220,7 @@ body {
   font-size: 0.9em;
   text-align: center;
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  overflow: hidden; /* ДОДАНО */
 }
 
 .progress-bar {
@@ -252,7 +271,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
   z-index: 1000;
   display: flex;
@@ -261,6 +280,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden; /* ДОДАНО */
 }
 
 .fullscreen-overlay.active {
@@ -280,6 +300,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* ДОДАНО */
 }
 
 .fullscreen-overlay.active .fullscreen-content {
@@ -288,17 +309,15 @@ body {
 
 .fullscreen-main {
   border-radius: 30px;
-  padding: 20px; /* Зменшити padding */
+  padding: 20px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  /* Видалити min-height та змінити display */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  /* Додати обмеження розміру */
+  background: linear-gradient(135deg, #667eea 0%, #2d37e3 100%);
   max-width: 100%;
   max-height: 100%;
   width: fit-content;
@@ -306,15 +325,14 @@ body {
 }
 
 .fullscreen-main img {
-  /* Ключові зміни для правильного масштабування */
-  max-width: 80vw; /* Обмежити ширину відносно екрану */
-  max-height: 80vh; /* Обмежити висоту відносно екрану */
+  max-width: 80vw;
+  max-height: 80vh;
   width: auto;
   height: auto;
-  object-fit: contain;
+  object-fit: contain; /* ВАЖЛИВО: зберігає пропорції в повноекранному режимі */
   border-radius: 20px;
-  /* Додати плавний перехід */
   transition: all 0.3s ease;
+  display: block; /* ДОДАНО */
 }
 
 .close-button {
@@ -392,7 +410,7 @@ body {
   z-index: 10;
 }
 
-/* Адаптивні стилі */
+/* ВИПРАВЛЕНІ адаптивні стилі */
 @media (max-width: 768px) {
   .vertical-carousel {
     flex-direction: column;
@@ -403,11 +421,13 @@ body {
   .main-display {
     height: 400px;
     order: 2;
+    width: 100%; /* ДОДАНО */
   }
 
   .main-display::after {
     font-size: 0.9em;
     padding: 10px 20px;
+    max-width: 85%; /* ЗМЕНШЕНО для мобільних */
   }
 
   .thumbnails-container {
@@ -417,11 +437,14 @@ body {
     order: 1;
     overflow-x: auto;
     overflow-y: hidden;
+    padding: 10px 0; /* ЗМІНЕНО: вертикальний padding */
   }
 
   .thumbnail {
     min-width: 100px;
+    width: 100px;
     height: 100px;
+    flex-shrink: 0;
     transform: translateY(20px);
   }
 
@@ -431,6 +454,7 @@ body {
 
   .gallery-container {
     padding: 20px;
+    overflow: hidden; /* ДОДАНО */
   }
 
   .fullscreen-content {
@@ -441,7 +465,7 @@ body {
   }
 
   .fullscreen-main {
-    padding: 15px; /* Ще менший padding для mobile */
+    padding: 15px;
   }
 
   .close-button, .fullscreen-nav {
@@ -470,8 +494,8 @@ body {
   }
 
   .fullscreen-main img {
-    max-width: 85vw; /* Трохи більше для mobile */
-    max-height: 75vh; /* Менше висоти для кнопок навігації */
+    max-width: 85vw;
+    max-height: 75vh;
   }
 
   .slide-counter {
@@ -485,6 +509,7 @@ body {
 @media (max-width: 480px) {
   .gallery-container {
     padding: 15px;
+    margin: 10px; /* ДОДАНО */
   }
 
   .main-display {
@@ -494,15 +519,19 @@ body {
   .main-display::after {
     font-size: 0.8em;
     padding: 8px 16px;
+    max-width: 80%; /* ДОДАНО */
   }
 
   .thumbnails-container {
     height: 120px;
+    gap: 10px; /* ДОДАНО */
   }
 
   .thumbnail {
     min-width: 80px;
+    width: 80px;
     height: 80px;
+    flex-shrink: 0;
   }
 
   .slide-counter {

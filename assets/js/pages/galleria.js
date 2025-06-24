@@ -1,19 +1,40 @@
 // Демонстраційні зображення
 const slides = [
   {
-    image: 'assets/img/hello/IMG_2132.jpg',
-    title: 'Зображення 1',
-    description: 'Красиве зображення природи'
+    image: 'assets/img/hello/1.jpg',
+    title: 'Зображення 1'
   },
   {
-    image: 'assets/img/hello/IMG_3639.jpg',
-    title: 'Зображення 2',
-    description: 'Архітектурна фотографія'
+    image: 'assets/img/hello/2.webp',
+    title: 'Зображення 2'
   },
   {
-    image: 'assets/img/hello/IMG_6437.jpg',
-    title: 'Зображення 3',
-    description: 'Абстрактне мистецтво'
+    image: 'assets/img/hello/3.jpg',
+    title: 'Зображення 3'
+  },
+  {
+    image: 'assets/img/hello/4.jpg',
+    title: 'Фото 4'
+  },
+  {
+    image: 'assets/img/hello/5.jpg',
+    title: 'Фото 5'
+  },
+  {
+    image: 'assets/img/hello/6.jpg',
+    title: 'Фото 6'
+  },
+  {
+    image: 'assets/img/hello/7.jpg',
+    title: 'Фото 7'
+  },
+  {
+    image: 'assets/img/hello/8.jpg',
+    title: 'Фото 8'
+  },
+  {
+    image: 'assets/img/hello/9.jpg',
+    title: 'Фото 9'
   }
 ];
 
@@ -181,7 +202,7 @@ function changeSlide(index, element) {
     element.classList.add('active');
   }
 
-  // Оновлення лічильника та прогрес-бару
+  // Оновлення лічільника та прогрес-бару
   const currentSlideElement = document.getElementById('currentSlide');
   const progressBar = document.getElementById('progressBar');
 
