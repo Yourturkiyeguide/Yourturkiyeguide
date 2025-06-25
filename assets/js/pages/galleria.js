@@ -40,8 +40,6 @@ const slides = [
 
 let currentIndex = 0;
 let isFullscreen = false;
-let autoPlayInterval = null;
-let isAutoPlaying = false;
 
 // Мобільні змінні
 let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -94,16 +92,14 @@ function createThumbnails() {
     thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
     thumbnail.setAttribute('data-index', index);
 
-    // Оптимізація для мобільних - використовуємо touchend замість click
+    // Універсальний обробник для всіх пристроїв
+    thumbnail.addEventListener('click', () => changeSlide(index, thumbnail));
+
+    // Додатковий обробник для touch пристроїв
     if (isMobile) {
-      thumbnail.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (!isDragging) {
-          changeSlide(index, thumbnail);
-        }
-      }, { passive: false });
-    } else {
-      thumbnail.addEventListener('click', () => changeSlide(index, thumbnail));
+      thumbnail.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+      }, { passive: true });
     }
 
     const img = createImageElement(
@@ -170,16 +166,7 @@ function changeSlide(index, element) {
       mainImageContainer.appendChild(img);
 
       // Додаємо обробник для відкриття повноекранного режиму
-      if (isMobile) {
-        img.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          if (!isDragging) {
-            openFullscreen();
-          }
-        }, { passive: false });
-      } else {
-        img.addEventListener('click', openFullscreen);
-      }
+      img.addEventListener('click', openFullscreen);
     },
     () => {
       // Помилка завантаження
@@ -242,41 +229,6 @@ function prevSlide() {
   changeSlide(prevIndex, prevThumbnail);
 }
 
-function toggleAutoPlay() {
-  if (isAutoPlaying) {
-    stopAutoPlay();
-  } else {
-    startAutoPlay();
-  }
-}
-
-function startAutoPlay() {
-  if (!isAutoPlaying) {
-    isAutoPlaying = true;
-    const button = document.querySelector('[onclick="toggleAutoPlay()"]');
-    if (button) {
-      button.textContent = '⏸️ Пауза';
-    }
-    autoPlayInterval = setInterval(() => {
-      nextSlide();
-    }, 3000);
-  }
-}
-
-function stopAutoPlay() {
-  if (isAutoPlaying) {
-    isAutoPlaying = false;
-    const button = document.querySelector('[onclick="toggleAutoPlay()"]');
-    if (button) {
-      button.textContent = '▶️ Автоплей';
-    }
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = null;
-    }
-  }
-}
-
 function openFullscreen() {
   const overlay = document.getElementById('fullscreenOverlay');
   if (!overlay) return;
@@ -293,7 +245,6 @@ function openFullscreen() {
 
   updateFullscreenContent();
   overlay.classList.add('active');
-  stopAutoPlay();
 }
 
 function closeFullscreen() {
@@ -364,14 +315,7 @@ function navigateFullscreen(direction) {
   }
 }
 
-function shuffleSlides() {
-  const randomIndex = Math.floor(Math.random() * slides.length);
-  const randomThumbnail = document.querySelectorAll('.thumbnail')[randomIndex];
-  changeSlide(randomIndex, randomThumbnail);
-}
-
 function resetGallery() {
-  stopAutoPlay();
   const firstThumbnail = document.querySelectorAll('.thumbnail')[0];
   changeSlide(0, firstThumbnail);
 
@@ -380,51 +324,50 @@ function resetGallery() {
   }
 }
 
-// Покращена обробка тач-подій для мобільних пристроїв
+// Обробка тач-подій для свайпів
 function handleTouchStart(e) {
-  // Перевіряємо чи це не кнопка управління
-  if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  // Перевіряємо чи це не елемент управління
+  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
     return;
   }
 
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
+  const touch = e.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
   isDragging = false;
-
-  // Запобігаємо скролу сторінки під час свайпу в повноекранному режимі
-  if (isFullscreen) {
-    e.preventDefault();
-  }
 }
 
 function handleTouchMove(e) {
-  if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
     return;
   }
 
-  touchEndX = e.touches[0].clientX;
-  touchEndY = e.touches[0].clientY;
+  const touch = e.touches[0];
+  touchEndX = touch.clientX;
+  touchEndY = touch.clientY;
 
   const deltaX = Math.abs(touchEndX - touchStartX);
   const deltaY = Math.abs(touchEndY - touchStartY);
 
-  // Визначаємо, що користувач почав перетягувати
+  // Визначаємо, що почався свайп
   if (deltaX > 10 || deltaY > 10) {
     isDragging = true;
   }
 
-  // Запобігаємо скролу сторінки під час свайпу
-  if (isFullscreen || deltaX > deltaY) {
+  // Запобігаємо скролу тільки для горизонтальних свайпів або в повноекранному режимі
+  if ((deltaX > deltaY && deltaX > 20) || isFullscreen) {
     e.preventDefault();
   }
 }
 
 function handleTouchEnd(e) {
-  if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
     return;
   }
 
-  if (!isDragging) return;
+  if (!isDragging) {
+    return;
+  }
 
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
@@ -460,8 +403,6 @@ function showHelp() {
 • ←/→ - Навігація в повноекранному режимі
 • Enter - Повноекранний режим
 • Escape - Вихід/Скидання
-• Space - Автоплей
-• R - Випадковий слайд
 • H - Ця довідка
 
 Мобільне управління:
@@ -500,10 +441,6 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         nextSlide();
         break;
-      case ' ':
-        e.preventDefault();
-        toggleAutoPlay();
-        break;
       case 'Enter':
         e.preventDefault();
         openFullscreen();
@@ -511,11 +448,6 @@ document.addEventListener('keydown', (e) => {
       case 'Escape':
         e.preventDefault();
         resetGallery();
-        break;
-      case 'r':
-      case 'R':
-        e.preventDefault();
-        shuffleSlides();
         break;
       case 'h':
       case 'H':
@@ -526,149 +458,107 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Оптимізовані обробники тач-подій з passive опцією
-document.addEventListener('touchstart', handleTouchStart, { passive: false });
+// Автоматичне налаштування чутливості для різних пристроїв
+function autoAdjustSensitivity() {
+  if (isMobile) {
+    // На мобільних пристроях більша чутливість
+    minSwipeDistance = 30;
+  } else {
+    // На десктопі менша чутливість для тач-падів
+    minSwipeDistance = 50;
+  }
+}
+
+// Додаємо обробники тач-подій до документу з оптимізованими налаштуваннями
+document.addEventListener('touchstart', handleTouchStart, { passive: true });
 document.addEventListener('touchmove', handleTouchMove, { passive: false });
 document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-// Додаткові обробники для кнопок управління
-function setupControlButtons() {
-  // Кнопки навігації в звичайному режимі
-  const prevBtn = document.querySelector('[onclick="prevSlide()"]');
-  const nextBtn = document.querySelector('[onclick="nextSlide()"]');
-  const autoPlayBtn = document.querySelector('[onclick="toggleAutoPlay()"]');
-  const fullscreenBtn = document.querySelector('[onclick="openFullscreen()"]');
-  const shuffleBtn = document.querySelector('[onclick="shuffleSlides()"]');
-  const resetBtn = document.querySelector('[onclick="resetGallery()"]');
-  const helpBtn = document.querySelector('[onclick="showHelp()"]');
-
-  // Кнопки в повноекранному режимі
-  const fullscreenPrevBtn = document.querySelector('[onclick="navigateFullscreen(-1)"]');
-  const fullscreenNextBtn = document.querySelector('[onclick="navigateFullscreen(1)"]');
-  const closeBtn = document.querySelector('[onclick="closeFullscreen()"]');
-
-  // Функція для додавання мобільних обробників
-  function addMobileHandler(button, handler) {
-    if (button && isMobile) {
-      button.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handler();
-      }, { passive: false });
-
-      // Додаємо візуальний feedback
-      button.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        button.style.opacity = '0.7';
-      }, { passive: false });
-
-      button.addEventListener('touchend', (e) => {
-        setTimeout(() => {
-          button.style.opacity = '';
-        }, 100);
-      }, { passive: true });
-    }
+// Запобігання zoom на подвійний тап
+document.addEventListener('touchstart', function(e) {
+  if (e.touches.length > 1) {
+    e.preventDefault();
   }
+});
 
-  // Додаємо обробники для всіх кнопок
-  addMobileHandler(prevBtn, prevSlide);
-  addMobileHandler(nextBtn, nextSlide);
-  addMobileHandler(autoPlayBtn, toggleAutoPlay);
-  addMobileHandler(fullscreenBtn, openFullscreen);
-  addMobileHandler(shuffleBtn, shuffleSlides);
-  addMobileHandler(resetBtn, resetGallery);
-  addMobileHandler(helpBtn, showHelp);
-  addMobileHandler(fullscreenPrevBtn, () => navigateFullscreen(-1));
-  addMobileHandler(fullscreenNextBtn, () => navigateFullscreen(1));
-  addMobileHandler(closeBtn, closeFullscreen);
-}
-
-// Ініціалізація галереї після завантаження DOM
-document.addEventListener('DOMContentLoaded', () => {
-  // Оновлення загальної кількості слайдів
-  const totalSlidesElement = document.getElementById('totalSlides');
-  const fullscreenTotalSlidesElement = document.getElementById('fullscreenTotalSlides');
-
-  if (totalSlidesElement) {
-    totalSlidesElement.textContent = slides.length;
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(e) {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
   }
-  if (fullscreenTotalSlidesElement) {
-    fullscreenTotalSlidesElement.textContent = slides.length;
-  }
+  lastTouchEnd = now;
+});
+
+// Ініціалізація після завантаження DOM
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🖼️ Gallery initialization started');
+
+  // Автоматичне налаштування чутливості
+  autoAdjustSensitivity();
 
   // Створення мініатюр
   createThumbnails();
 
-  // Завантаження першого слайду
+  // Ініціалізація першого слайду
   const firstThumbnail = document.querySelectorAll('.thumbnail')[0];
   changeSlide(0, firstThumbnail);
 
-  // Налаштування кнопок управління для мобільних
-  setupControlButtons();
+  // Оновлення загальної кількості слайдів
+  const totalSlidesElement = document.getElementById('totalSlides');
+  if (totalSlidesElement) {
+    totalSlidesElement.textContent = slides.length;
+  }
 
-  console.log('Галерея ініціалізована успішно!');
-  console.log(`Завантажено ${slides.length} слайдів`);
-  console.log(`Мобільний пристрій: ${isMobile}`);
-  console.log('Натисніть H для довідки по управлінню');
+  console.log('✅ Gallery initialized successfully');
+  console.log(`📱 Device type: ${isMobile ? 'Mobile' : 'Desktop'}`);
+  console.log(`📏 Swipe sensitivity: ${minSwipeDistance}px`);
+  console.log(`🖼️ Total slides: ${slides.length}`);
+  console.log('💡 Press H for help');
 });
 
-// Обробка закриття повноекранного режиму
-const fullscreenOverlay = document.getElementById('fullscreenOverlay');
-if (fullscreenOverlay) {
-  fullscreenOverlay.addEventListener('click', (e) => {
-    if (e.target === fullscreenOverlay) {
-      closeFullscreen();
-    }
-  });
+// Обробка помилок
+window.addEventListener('error', function(e) {
+  console.error('Gallery error:', e.error);
+  showError('Сталася помилка в галереї. Перевірте консоль для деталей.');
+});
 
-  // Мобільна версія закриття
-  fullscreenOverlay.addEventListener('touchend', (e) => {
-    if (e.target === fullscreenOverlay && !isDragging) {
-      closeFullscreen();
-    }
-  }, { passive: true });
+// Обробка зміни орієнтації на мобільних
+window.addEventListener('orientationchange', function() {
+  if (isMobile) {
+    setTimeout(() => {
+      // Повторна ініціалізація після зміни орієнтації
+      if (isFullscreen) {
+        updateFullscreenContent();
+      }
+    }, 500);
+  }
+});
+
+// Cleanup функції для видалення обробників подій
+function cleanup() {
+  document.removeEventListener('touchstart', handleTouchStart);
+  document.removeEventListener('touchmove', handleTouchMove);
+  document.removeEventListener('touchend', handleTouchEnd);
+
+  console.log('🧹 Gallery cleanup completed');
 }
 
-// Запобігання закриттю при кліку на контент
-const fullscreenContent = document.querySelector('.fullscreen-content');
-if (fullscreenContent) {
-  fullscreenContent.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  fullscreenContent.addEventListener('touchend', (e) => {
-    e.stopPropagation();
-  });
-}
-
-// Оптимізація для мобільних: запобігання зуму при подвійному тапі
-document.addEventListener('gesturestart', (e) => {
-  e.preventDefault();
-});
-
-document.addEventListener('gesturechange', (e) => {
-  e.preventDefault();
-});
-
-document.addEventListener('gestureend', (e) => {
-  e.preventDefault();
-});
-
-// Експорт функцій для глобального доступу
-window.galleryAPI = {
+// Експорт функцій для зовнішнього використання
+window.GalleryAPI = {
   nextSlide,
   prevSlide,
   changeSlide,
-  toggleAutoPlay,
-  startAutoPlay,
-  stopAutoPlay,
   openFullscreen,
   closeFullscreen,
-  shuffleSlides,
   resetGallery,
-  showHelp,
-  getCurrentIndex: () => currentIndex,
-  getSlidesCount: () => slides.length,
-  isAutoPlaying: () => isAutoPlaying,
-  isFullscreenMode: () => isFullscreen,
-  isMobileDevice: () => isMobile
+  cleanup,
+  getCurrentSlide: () => currentIndex,
+  getTotalSlides: () => slides.length,
+  isFullscreen: () => isFullscreen,
+  isMobile: () => isMobile,
+  getSwipeSensitivity: () => minSwipeDistance
 };
+
+console.log('🚀 Gallery script loaded successfully');
+console.log('📘 Access gallery functions via window.GalleryAPI');
