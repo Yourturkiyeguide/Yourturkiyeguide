@@ -82,7 +82,9 @@ body {
 }
 
 .main-display::after {
-  content: '🔍 Натисніть для повноекранного перегляду';
+  content: '\f002  Натисніть для повноекранного перегляду';
+  font-family: 'Font Awesome 6 Free', sans-serif;
+  font-weight: 900;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -100,6 +102,29 @@ body {
   z-index: 3;
   max-width: 90%; /* ДОДАНО: обмежує ширину підказки */
   text-align: center;
+}
+
+.main-display::after::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.main-display::after::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+  top: 12px;
+  left: 12px;
 }
 
 .main-display:hover::after {
