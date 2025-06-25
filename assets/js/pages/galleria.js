@@ -169,27 +169,24 @@ function changeSlide(index, element) {
       mainImageContainer.innerHTML = '';
       mainImageContainer.appendChild(img);
 
-      // Додаємо обробник для відкриття повноекранного режиму
-      if (isMobile) {
-        img.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          if (!isDragging) {
-            openFullscreen();
-          }
-        }, { passive: false });
-      } else {
-        img.addEventListener('click', openFullscreen);
-      }
+      // ВАЖЛИВО: Додаємо обробники свайпу для нового зображення
+      setupSwipeHandlers(img);
     },
     () => {
       // Помилка завантаження
-      mainImageContainer.innerHTML = `
-        <div class="image-placeholder error">
-          <span>❌</span>
-          <span>Не вдалося завантажити зображення</span>
-          <small style="margin-top: 10px; opacity: 0.7;">${slide.image}</small>
-        </div>
+      const placeholderDiv = document.createElement('div');
+      placeholderDiv.className = 'image-placeholder error';
+      placeholderDiv.innerHTML = `
+        <span>❌</span>
+        <span>Не вдалося завантажити зображення</span>
+        <small style="margin-top: 10px; opacity: 0.7;">${slide.image}</small>
       `;
+      mainImageContainer.innerHTML = '';
+      mainImageContainer.appendChild(placeholderDiv);
+
+      // ВАЖЛИВО: Додаємо обробники свайпу навіть для placeholder
+      setupSwipeHandlers(placeholderDiv);
+
       showError(`Не вдалося завантажити зображення: ${slide.title || 'Зображення ' + (index + 1)}`);
     }
   );
@@ -228,6 +225,94 @@ function changeSlide(index, element) {
       });
     }, 100);
   }
+}
+
+// НОВА ФУНКЦІЯ: Налаштування обробників свайпу для конкретного елемента
+function setupSwipeHandlers(element) {
+  if (!element || !isMobile) return;
+
+  // Видаляємо попередні обробники, якщо вони є
+  element.removeEventListener('touchstart', handleElementTouchStart);
+  element.removeEventListener('touchmove', handleElementTouchMove);
+  element.removeEventListener('touchend', handleElementTouchEnd);
+
+  // Додаємо нові обробники
+  element.addEventListener('touchstart', handleElementTouchStart, { passive: false });
+  element.addEventListener('touchmove', handleElementTouchMove, { passive: false });
+  element.addEventListener('touchend', handleElementTouchEnd, { passive: true });
+}
+
+// НОВІ ФУНКЦІЇ: Специфічні обробники для елементів зображень
+function handleElementTouchStart(e) {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  isDragging = false;
+
+  // Додаємо візуальний feedback
+  if (e.currentTarget) {
+    e.currentTarget.style.opacity = '0.9';
+  }
+}
+
+function handleElementTouchMove(e) {
+  touchEndX = e.touches[0].clientX;
+  touchEndY = e.touches[0].clientY;
+
+  const deltaX = Math.abs(touchEndX - touchStartX);
+  const deltaY = Math.abs(touchEndY - touchStartY);
+
+  // Визначаємо, що користувач почав перетягувати
+  if (deltaX > 10 || deltaY > 10) {
+    isDragging = true;
+  }
+
+  // Запобігаємо скролу сторінки під час горизонтального свайпу
+  if (deltaX > deltaY && deltaX > 10) {
+    e.preventDefault();
+  }
+}
+
+function handleElementTouchEnd(e) {
+  // Повертаємо візуальний стан
+  if (e.currentTarget) {
+    e.currentTarget.style.opacity = '';
+  }
+
+  if (!isDragging) {
+    // Якщо не було перетягування, відкриваємо повноекранний режим
+    openFullscreen();
+    return;
+  }
+
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Визначаємо напрямок свайпу
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Горизонтальний свайп
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        // Свайп вправо - попереднє зображення
+        prevSlide();
+      } else {
+        // Свайп вліво - наступне зображення
+        nextSlide();
+      }
+    }
+  } else {
+    // Вертикальний свайп
+    if (Math.abs(deltaY) > minSwipeDistance) {
+      if (deltaY > 0) {
+        // Свайп вниз - попереднє зображення
+        prevSlide();
+      } else {
+        // Свайп вгору - наступне зображення
+        nextSlide();
+      }
+    }
+  }
+
+  isDragging = false;
 }
 
 function nextSlide() {
@@ -380,10 +465,15 @@ function resetGallery() {
   }
 }
 
-// Покращена обробка тач-подій для мобільних пристроїв
+// Покращена обробка тач-подій для мобільних пристроїв (загальна для сторінки)
 function handleTouchStart(e) {
-  // Перевіряємо чи це не кнопка управління
+  // Перевіряємо чи це не кнопка управління або мініатюра
   if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+    return;
+  }
+
+  // Перевіряємо чи це головне зображення (воно має свої власні обробники)
+  if (e.target.closest('#mainImageContainer')) {
     return;
   }
 
@@ -399,6 +489,10 @@ function handleTouchStart(e) {
 
 function handleTouchMove(e) {
   if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+    return;
+  }
+
+  if (e.target.closest('#mainImageContainer')) {
     return;
   }
 
@@ -421,6 +515,10 @@ function handleTouchMove(e) {
 
 function handleTouchEnd(e) {
   if (e.target.closest('button') || e.target.closest('[onclick]') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+    return;
+  }
+
+  if (e.target.closest('#mainImageContainer')) {
     return;
   }
 
@@ -467,8 +565,9 @@ function showHelp() {
 Мобільне управління:
 • Тап по мініатюрі - Перехід до слайду
 • Тап по головному зображенню - Повноекранний режим
-• Свайп вліво/вправо - Навігація
-• Свайп вгору/вниз - Навігація (крім повноекранного режиму)
+• Свайп вліво/вправо на зображенні - Навігація
+• Свайп вгору/вниз на зображенні - Навігація
+• Перетягування на зображенні активує навігацію
   `;
 
   alert(helpText);
@@ -526,7 +625,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Оптимізовані обробники тач-подій з passive опцією
+// Оптимізовані обробники тач-подій з passive опцією (загальні для сторінки)
 document.addEventListener('touchstart', handleTouchStart, { passive: false });
 document.addEventListener('touchmove', handleTouchMove, { passive: false });
 document.addEventListener('touchend', handleTouchEnd, { passive: true });
