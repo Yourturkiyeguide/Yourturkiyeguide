@@ -151,7 +151,7 @@ body {
 
 .thumbnail {
   height: 120px;
-  min-height: 120px;
+  min-height: 80px;
   width: 100%; /* ВИПРАВЛЕНО: використовуємо всю доступну ширину */
   border-radius: 15px;
   cursor: pointer;
@@ -400,7 +400,7 @@ body {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 15px 30px;
   border-radius: 30px;
