@@ -5,10 +5,10 @@ html, body {
   max-width: 100%;
 }
 
-.gallery-container {
+/*.second-gallery-container {
   max-width: 1200px;
   width: 100%;
-  max-width: 100% !important; /* ВИПРАВЛЕНО: запобігає переповненню */
+  max-width: 100% !important; !* ВИПРАВЛЕНО: запобігає переповненню *!
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   border-radius: 25px;
@@ -16,10 +16,10 @@ html, body {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
-  box-sizing: border-box; /* ДОДАНО: правильне обчислення розмірів */
-}
+  box-sizing: border-box; !* ДОДАНО: правильне обчислення розмірів *!
+}*/
 
-.vertical-carousel {
+.vertical-display {
   display: flex;
   height: 600px;
   gap: 30px;
@@ -27,7 +27,7 @@ html, body {
   overflow: hidden;
 }
 
-.main-display {
+.main-photo-display {
   flex: 1;
   border-radius: 20px;
   display: flex;
@@ -46,7 +46,7 @@ html, body {
   min-width: 0 !important; /* ВИПРАВЛЕНО: запобігає переповненню */
 }
 
-.main-display img {
+.main-photo-display img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -55,7 +55,7 @@ html, body {
   display: block;
 }
 
-.main-display::before {
+.main-photo-display::before {
   content: '';
   position: absolute;
   top: 0;
@@ -69,11 +69,11 @@ html, body {
   z-index: 2;
 }
 
-.main-display:hover::before {
+.main-photo-display:hover::before {
   transform: translateX(100%);
 }
 
-.main-display::after {
+.main-photo-display::after {
   content: '\f002  Натисніть для повноекранного перегляду';
   font-family: 'Font Awesome 6 Free', sans-serif;
   font-weight: 900;
@@ -96,7 +96,7 @@ html, body {
   text-align: center;
 }
 
-.main-display::after::before {
+.main-photo-display::after::before {
   content: '';
   display: inline-block;
   width: 16px;
@@ -108,7 +108,7 @@ html, body {
   vertical-align: middle;
 }
 
-.main-display::after::after {
+.main-photo-display::after::after {
   content: '';
   position: absolute;
   width: 6px;
@@ -119,11 +119,11 @@ html, body {
   left: 12px;
 }
 
-.main-display:hover::after {
+.main-photo-display:hover::after {
   opacity: 1;
 }
 
-.image-placeholder {
+.photo-placeholder {
   width: 100%;
   height: 100%;
   display: flex;
@@ -137,7 +137,7 @@ html, body {
   overflow: hidden;
 }
 
-.thumbnails-container {
+.photo-thumbnails {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -153,22 +153,22 @@ html, body {
   flex-shrink: 0;
 }
 
-.thumbnails-container::-webkit-scrollbar {
+.photo-thumbnails::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.thumbnails-container::-webkit-scrollbar-track {
+.photo-thumbnails::-webkit-scrollbar-track {
   background: rgba(255,255,255,0.1);
   border-radius: 3px;
 }
 
-.thumbnails-container::-webkit-scrollbar-thumb {
+.photo-thumbnails::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.3);
   border-radius: 3px;
 }
 
-.thumbnail {
+.photo-thumbnail {
   height: 120px;
   min-height: 80px;
   width: 100%;
@@ -191,7 +191,7 @@ html, body {
   flex-shrink: 0;
 }
 
-.thumbnail img {
+.photo-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -200,7 +200,7 @@ html, body {
   display: block;
 }
 
-.thumbnail::before {
+.photo-thumbnail::before {
   content: '';
   position: absolute;
   top: 0;
@@ -213,23 +213,23 @@ html, body {
   z-index: 2;
 }
 
-.thumbnail:hover::before {
+.photo-thumbnail:hover::before {
   left: 100%;
 }
 
-.thumbnail:hover, .thumbnail.active {
+.photo-thumbnail:hover, .photo-thumbnail.active {
   opacity: 1;
   transform: translateX(0) scale(1.05);
   border-color: rgba(255,255,255,0.4);
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.thumbnail.active {
+.photo-thumbnail.active {
   border-color: rgba(255,255,255,0.6);
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-.thumbnail-placeholder {
+.photo-thumbnail-placeholder {
   width: 100%;
   height: 100%;
   display: flex;
@@ -242,7 +242,7 @@ html, body {
   overflow: hidden;
 }
 
-.progress-bar {
+.photo-progress {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -254,7 +254,7 @@ html, body {
   z-index: 4;
 }
 
-.slide-counter {
+.photo-counter {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -268,15 +268,15 @@ html, body {
   z-index: 4;
 }
 
-.gallery-info {
+.second-gallery-info {
   text-align: center;
-  color: rgba(255,255,255,0.8);
+  color: var(--text-dark);
   margin-top: 30px;
   font-size: 1.1em;
   line-height: 1.6;
 }
 
-.error-message {
+.photo-error {
   color: #ff6b6b;
   font-size: 0.9em;
   margin-top: 10px;
@@ -284,7 +284,7 @@ html, body {
 }
 
 /* Стилі для повноекранного режиму */
-.fullscreen-overlay {
+.photo-fullscreen-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -302,12 +302,12 @@ html, body {
   overflow: hidden;
 }
 
-.fullscreen-overlay.active {
+.photo-fullscreen-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-.fullscreen-content {
+.photo-fullscreen-content {
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
@@ -322,11 +322,11 @@ html, body {
   overflow: hidden;
 }
 
-.fullscreen-overlay.active .fullscreen-content {
+.photo-fullscreen-overlay.active .photo-fullscreen-content {
   transform: scale(1);
 }
 
-.fullscreen-main {
+.photo-fullscreen-main {
   border-radius: 30px;
   padding: 20px;
   position: relative;
@@ -343,7 +343,7 @@ html, body {
   height: fit-content;
 }
 
-.fullscreen-main img {
+.photo-fullscreen-main img {
   max-width: 80vw;
   max-height: 80vh;
   width: auto;
@@ -354,7 +354,7 @@ html, body {
   display: block;
 }
 
-.close-button {
+.photo-close-button {
   position: absolute;
   top: 30px;
   right: 30px;
@@ -375,12 +375,12 @@ html, body {
   z-index: 10;
 }
 
-.close-button:hover {
+.photo-close-button:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1) rotate(90deg);
 }
 
-.fullscreen-nav {
+.photo-fullscreen-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -401,20 +401,20 @@ html, body {
   z-index: 10;
 }
 
-.fullscreen-nav:hover {
+.photo-fullscreen-nav:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-50%) scale(1.1);
 }
 
-.nav-prev {
+.photo-nav-prev {
   left: 30px;
 }
 
-.nav-next {
+.photo-nav-next {
   right: 30px;
 }
 
-.fullscreen-counter {
+.photo-fullscreen-counter {
   position: absolute;
   bottom: 30px;
   left: 50%;
@@ -431,31 +431,31 @@ html, body {
 
 /* Адаптивні стилі з виправленнями переповнення */
 @media (max-width: 768px) {
-  .gallery-container {
-    padding: 15px !important; /* ВИПРАВЛЕНО: зменшено padding */
-    margin: 10px;
-    box-sizing: border-box;
-  }
+  /*.second-gallery-container {*/
+  /*  padding: 15px !important; !* ВИПРАВЛЕНО: зменшено padding *!*/
+  /*  margin: 10px;*/
+  /*  box-sizing: border-box;*/
+  /*}*/
 
-  .vertical-carousel {
+  .vertical-display {
     flex-direction: column;
     height: auto;
     gap: 20px;
   }
 
-  .main-display {
+  .main-photo-display {
     height: 400px;
     order: 2;
     width: 100%;
   }
 
-  .main-display::after {
+  .main-photo-display::after {
     font-size: 0.9em;
     padding: 10px 20px;
     max-width: 85%;
   }
 
-  .thumbnails-container {
+  .photo-thumbnails {
     flex-direction: row;
     width: 100%;
     max-width: 100% !important; /* ВИПРАВЛЕНО: дозволяє повну ширину на мобільних */
@@ -466,7 +466,7 @@ html, body {
     padding: 10px 0;
   }
 
-  .thumbnail {
+  .photo-thumbnail {
     min-width: 100px;
     width: 100px;
     height: 100px;
@@ -474,52 +474,52 @@ html, body {
     transform: translateY(20px);
   }
 
-  .thumbnail:hover, .thumbnail.active {
+  .photo-thumbnail:hover, .photo-thumbnail.active {
     transform: translateY(0) scale(1.05);
   }
 
-  .fullscreen-content {
+  .photo-fullscreen-content {
     max-width: 95vw;
     max-height: 95vh;
     width: 95vw;
     height: 95vh;
   }
 
-  .fullscreen-main {
+  .photo-fullscreen-main {
     padding: 15px;
   }
 
-  .close-button, .fullscreen-nav {
+  .photo-close-button, .photo-fullscreen-nav {
     width: 50px;
     height: 50px;
     font-size: 1.5em;
   }
 
-  .close-button {
+  .photo-close-button {
     top: 20px;
     right: 20px;
   }
 
-  .nav-prev {
+  .photo-nav-prev {
     left: 20px;
   }
 
-  .nav-next {
+  .photo-nav-next {
     right: 20px;
   }
 
-  .fullscreen-counter {
+  .photo-fullscreen-counter {
     bottom: 20px;
     padding: 12px 24px;
     font-size: 1em;
   }
 
-  .fullscreen-main img {
+  .photo-fullscreen-main img {
     max-width: 85vw;
     max-height: 75vh;
   }
 
-  .slide-counter {
+  .photo-counter {
     top: 15px;
     right: 15px;
     padding: 8px 16px;
@@ -528,70 +528,70 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .gallery-container {
-    padding: 15px;
-    margin: 10px;
-    box-sizing: border-box;
-  }
+  /*.second-gallery-container {*/
+  /*  padding: 15px;*/
+  /*  margin: 10px;*/
+  /*  box-sizing: border-box;*/
+  /*}*/
 
-  .main-display {
+  .main-photo-display {
     height: 300px;
   }
 
-  .main-display::after {
+  .main-photo-display::after {
     font-size: 0.8em;
     padding: 8px 16px;
     max-width: 80%;
   }
 
-  .thumbnails-container {
+  .photo-thumbnails {
     height: 120px;
     gap: 10px;
   }
 
-  .thumbnail {
+  .photo-thumbnail {
     min-width: 80px;
     width: 80px;
     height: 80px;
     flex-shrink: 0;
   }
 
-  .slide-counter {
+  .photo-counter {
     top: 10px;
     right: 10px;
     padding: 6px 12px;
     font-size: 0.8em;
   }
 
-  .fullscreen-main {
+  .photo-fullscreen-main {
     padding: 10px;
   }
 
-  .fullscreen-main img {
+  .photo-fullscreen-main img {
     max-width: 90vw;
     max-height: 70vh;
   }
 
-  .close-button, .fullscreen-nav {
+  .photo-close-button, .photo-fullscreen-nav {
     width: 45px;
     height: 45px;
     font-size: 1.3em;
   }
 
-  .close-button {
+  .photo-close-button {
     top: 15px;
     right: 15px;
   }
 
-  .nav-prev {
+  .photo-nav-prev {
     left: 15px;
   }
 
-  .nav-next {
+  .photo-nav-next {
     right: 15px;
   }
 
-  .fullscreen-counter {
+  .photo-fullscreen-counter {
     bottom: 15px;
     padding: 10px 20px;
     font-size: 0.9em;

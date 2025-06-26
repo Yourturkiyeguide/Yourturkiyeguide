@@ -1,39 +1,39 @@
 // Демонстраційні зображення
-const slides = [
+const gallerySlides = [
   {
-    image: 'assets/img/hello/1.jpg',
+    image: '/assets/img/hello/1.jpg',
     title: 'Зображення 1'
   },
   {
-    image: 'assets/img/hello/2.webp',
+    image: '/assets/img/hello/2.webp',
     title: 'Зображення 2'
   },
   {
-    image: 'assets/img/hello/3.jpg',
+    image: '/assets/img/hello/3.jpg',
     title: 'Зображення 3'
   },
   {
-    image: 'assets/img/hello/4.jpg',
+    image: '/assets/img/hello/4.jpg',
     title: 'Фото 4'
   },
   {
-    image: 'assets/img/hello/5.jpg',
+    image: '/assets/img/hello/5.jpg',
     title: 'Фото 5'
   },
   {
-    image: 'assets/img/hello/6.jpg',
+    image: '/assets/img/hello/6.jpg',
     title: 'Фото 6'
   },
   {
-    image: 'assets/img/hello/7.jpg',
+    image: '/assets/img/hello/7.jpg',
     title: 'Фото 7'
   },
   {
-    image: 'assets/img/hello/8.jpg',
+    image: '/assets/img/hello/8.jpg',
     title: 'Фото 8'
   },
   {
-    image: 'assets/img/hello/9.jpg',
+    image: '/assets/img/hello/9.jpg',
     title: 'Фото 9'
   }
 ];
@@ -54,9 +54,8 @@ function createImageElement(src, alt = '', onLoad = null, onError = null) {
   const img = document.createElement('img');
   img.src = src;
   img.alt = alt;
-  img.draggable = false; // Важливо для мобільних
+  img.draggable = false;
 
-  // Запобігання контекстному меню на мобільних
   img.addEventListener('contextmenu', (e) => e.preventDefault());
 
   if (onLoad) {
@@ -71,7 +70,7 @@ function createImageElement(src, alt = '', onLoad = null, onError = null) {
 }
 
 function showError(message) {
-  const errorElement = document.getElementById('errorMessage');
+  const errorElement = document.querySelector('.photo-error');
   if (errorElement) {
     errorElement.textContent = message;
     errorElement.style.display = 'block';
@@ -82,20 +81,18 @@ function showError(message) {
 }
 
 function createThumbnails() {
-  const container = document.getElementById('thumbnailsContainer');
+  const container = document.querySelector('.photo-thumbnails');
   if (!container) return;
 
   container.innerHTML = '';
 
-  slides.forEach((slide, index) => {
+  gallerySlides.forEach((slide, index) => {
     const thumbnail = document.createElement('div');
-    thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+    thumbnail.className = `photo-thumbnail ${index === 0 ? 'active' : ''}`;
     thumbnail.setAttribute('data-index', index);
 
-    // Універсальний обробник для всіх пристроїв
     thumbnail.addEventListener('click', () => changeSlide(index, thumbnail));
 
-    // Додатковий обробник для touch пристроїв
     if (isMobile) {
       thumbnail.addEventListener('touchstart', (e) => {
         e.stopPropagation();
@@ -103,35 +100,32 @@ function createThumbnails() {
     }
 
     const img = createImageElement(
-      slide.image,
-      slide.title || `Зображення ${index + 1}`,
-      () => {
-        // Зображення завантажилося успішно
-        const placeholder = thumbnail.querySelector('.thumbnail-placeholder');
-        if (placeholder) {
-          placeholder.remove();
+        slide.image,
+        slide.title || `Зображення ${index + 1}`,
+        () => {
+          const placeholder = thumbnail.querySelector('.photo-thumbnail-placeholder');
+          if (placeholder) {
+            placeholder.remove();
+          }
+        },
+        () => {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'photo-thumbnail-placeholder';
+          placeholder.innerHTML = `
+         <span>❌</span>
+         <span>Помилка</span>
+       `;
+          thumbnail.innerHTML = '';
+          thumbnail.appendChild(placeholder);
         }
-      },
-      () => {
-        // Помилка завантаження зображення
-        const placeholder = document.createElement('div');
-        placeholder.className = 'thumbnail-placeholder error';
-        placeholder.innerHTML = `
-          <span>❌</span>
-          <span>Помилка</span>
-        `;
-        thumbnail.innerHTML = '';
-        thumbnail.appendChild(placeholder);
-      }
     );
 
-    // Додаємо placeholder поки завантажується зображення
     const placeholder = document.createElement('div');
-    placeholder.className = 'thumbnail-placeholder';
+    placeholder.className = 'photo-thumbnail-placeholder';
     placeholder.innerHTML = `
-      <span>📷</span>
-      <span>Завантаження...</span>
-    `;
+     <span>📷</span>
+     <span>Завантаження...</span>
+   `;
 
     thumbnail.appendChild(placeholder);
     thumbnail.appendChild(img);
@@ -140,72 +134,63 @@ function createThumbnails() {
 }
 
 function changeSlide(index, element) {
-  if (index < 0 || index >= slides.length) return;
+  if (index < 0 || index >= gallerySlides.length) return;
 
   currentIndex = index;
-  const slide = slides[index];
-  const mainImageContainer = document.getElementById('mainImageContainer');
+  const slide = gallerySlides[index];
+  const mainDisplay = document.querySelector('.main-photo-display');
 
-  if (!mainImageContainer) return;
+  if (!mainDisplay) return;
 
-  // Очищуємо попередній контент
-  mainImageContainer.innerHTML = `
-    <div class="image-placeholder">
-      <span>📷</span>
-      <span>Завантаження зображення...</span>
-    </div>
-  `;
+  mainDisplay.innerHTML = `
+   <div class="photo-placeholder">
+     <span>📷</span>
+     <span>Завантаження зображення...</span>
+   </div>
+ `;
 
-  // Створюємо нове зображення
   const img = createImageElement(
-    slide.image,
-    slide.title || `Зображення ${index + 1}`,
-    () => {
-      // Зображення завантажилося успішно
-      mainImageContainer.innerHTML = '';
-      mainImageContainer.appendChild(img);
+      slide.image,
+      slide.title || `Зображення ${index + 1}`,
+      () => {
+        mainDisplay.innerHTML = '';
+        mainDisplay.appendChild(img);
 
-      // Додаємо обробник для відкриття повноекранного режиму
-      img.addEventListener('click', openFullscreen);
-    },
-    () => {
-      // Помилка завантаження
-      mainImageContainer.innerHTML = `
-        <div class="image-placeholder error">
-          <span>❌</span>
-          <span>Не вдалося завантажити зображення</span>
-          <small style="margin-top: 10px; opacity: 0.7;">${slide.image}</small>
-        </div>
-      `;
-      showError(`Не вдалося завантажити зображення: ${slide.title || 'Зображення ' + (index + 1)}`);
-    }
+        img.addEventListener('click', openFullscreen);
+      },
+      () => {
+        mainDisplay.innerHTML = `
+       <div class="photo-placeholder">
+         <span>❌</span>
+         <span>Не вдалося завантажити зображення</span>
+         <small style="margin-top: 10px; opacity: 0.7;">${slide.image}</small>
+       </div>
+     `;
+        showError(`Не вдалося завантажити зображення: ${slide.title || 'Зображення ' + (index + 1)}`);
+      }
   );
 
-  // Оновлення активної мініатюри
-  document.querySelectorAll('.thumbnail').forEach(thumb => {
+  document.querySelectorAll('.photo-thumbnail').forEach(thumb => {
     thumb.classList.remove('active');
   });
   if (element) {
     element.classList.add('active');
   }
 
-  // Оновлення лічільника та прогрес-бару
-  const currentSlideElement = document.getElementById('currentSlide');
-  const progressBar = document.getElementById('progressBar');
+  const counter = document.querySelector('.photo-counter');
+  const progressBar = document.querySelector('.photo-progress');
 
-  if (currentSlideElement) {
-    currentSlideElement.textContent = index + 1;
+  if (counter) {
+    counter.textContent = `${index + 1} / ${gallerySlides.length}`;
   }
   if (progressBar) {
-    progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+    progressBar.style.width = `${((index + 1) / gallerySlides.length) * 100}%`;
   }
 
-  // Оновлення повноекранного контенту, якщо відкрито
   if (isFullscreen) {
     updateFullscreenContent();
   }
 
-  // Скрол до активної мініатюри
   if (element && isMobile) {
     setTimeout(() => {
       element.scrollIntoView({
@@ -218,28 +203,26 @@ function changeSlide(index, element) {
 }
 
 function nextSlide() {
-  const nextIndex = (currentIndex + 1) % slides.length;
-  const nextThumbnail = document.querySelectorAll('.thumbnail')[nextIndex];
+  const nextIndex = (currentIndex + 1) % gallerySlides.length;
+  const nextThumbnail = document.querySelectorAll('.photo-thumbnail')[nextIndex];
   changeSlide(nextIndex, nextThumbnail);
 }
 
 function prevSlide() {
-  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-  const prevThumbnail = document.querySelectorAll('.thumbnail')[prevIndex];
+  const prevIndex = (currentIndex - 1 + gallerySlides.length) % gallerySlides.length;
+  const prevThumbnail = document.querySelectorAll('.photo-thumbnail')[prevIndex];
   changeSlide(prevIndex, prevThumbnail);
 }
 
 function openFullscreen() {
-  const overlay = document.getElementById('fullscreenOverlay');
+  const overlay = document.querySelector('.photo-fullscreen-overlay');
   if (!overlay) return;
 
   isFullscreen = true;
   document.body.style.overflow = 'hidden';
 
-  // Додаткові стилі для мобільних
   if (isMobile) {
     document.documentElement.style.overflow = 'hidden';
-    // Приховуємо адресну строку на мобільних
     window.scrollTo(0, 1);
   }
 
@@ -248,7 +231,7 @@ function openFullscreen() {
 }
 
 function closeFullscreen() {
-  const overlay = document.getElementById('fullscreenOverlay');
+  const overlay = document.querySelector('.photo-fullscreen-overlay');
   if (!overlay) return;
 
   isFullscreen = false;
@@ -262,48 +245,38 @@ function closeFullscreen() {
 }
 
 function updateFullscreenContent() {
-  const slide = slides[currentIndex];
-  const fullscreenMain = document.getElementById('fullscreenMain');
+  const slide = gallerySlides[currentIndex];
+  const fullscreenMain = document.querySelector('.photo-fullscreen-main');
 
   if (!fullscreenMain) return;
 
-  // Очищуємо попередній контент
   fullscreenMain.innerHTML = `
-    <div class="image-placeholder">
-      <span>📷</span>
-      <span>Завантаження зображення...</span>
-    </div>
-  `;
+   <div class="photo-placeholder">
+     <span>📷</span>
+     <span>Завантаження зображення...</span>
+   </div>
+ `;
 
-  // Створюємо нове зображення
   const img = createImageElement(
-    slide.image,
-    slide.title || `Зображення ${currentIndex + 1}`,
-    () => {
-      // Зображення завантажилося успішно
-      fullscreenMain.innerHTML = '';
-      fullscreenMain.appendChild(img);
-    },
-    () => {
-      // Помилка завантаження
-      fullscreenMain.innerHTML = `
-        <div class="image-placeholder error">
-          <span>❌</span>
-          <span>Не вдалося завантажити зображення</span>
-        </div>
-      `;
-    }
+      slide.image,
+      slide.title || `Зображення ${currentIndex + 1}`,
+      () => {
+        fullscreenMain.innerHTML = '';
+        fullscreenMain.appendChild(img);
+      },
+      () => {
+        fullscreenMain.innerHTML = `
+       <div class="photo-placeholder">
+         <span>❌</span>
+         <span>Не вдалося завантажити зображення</span>
+       </div>
+     `;
+      }
   );
 
-  // Оновлення лічільника
-  const fullscreenCurrentSlide = document.getElementById('fullscreenCurrentSlide');
-  const fullscreenTotalSlides = document.getElementById('fullscreenTotalSlides');
-
-  if (fullscreenCurrentSlide) {
-    fullscreenCurrentSlide.textContent = currentIndex + 1;
-  }
-  if (fullscreenTotalSlides) {
-    fullscreenTotalSlides.textContent = slides.length;
+  const fullscreenCounter = document.querySelector('.photo-fullscreen-counter');
+  if (fullscreenCounter) {
+    fullscreenCounter.textContent = `${currentIndex + 1} / ${gallerySlides.length}`;
   }
 }
 
@@ -316,7 +289,7 @@ function navigateFullscreen(direction) {
 }
 
 function resetGallery() {
-  const firstThumbnail = document.querySelectorAll('.thumbnail')[0];
+  const firstThumbnail = document.querySelectorAll('.photo-thumbnail')[0];
   changeSlide(0, firstThumbnail);
 
   if (isFullscreen) {
@@ -326,8 +299,7 @@ function resetGallery() {
 
 // Обробка тач-подій для свайпів
 function handleTouchStart(e) {
-  // Перевіряємо чи це не елемент управління
-  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  if (e.target.closest('button') || e.target.closest('.photo-close-button') || e.target.closest('.photo-fullscreen-nav') || e.target.closest('.photo-thumbnail')) {
     return;
   }
 
@@ -338,7 +310,7 @@ function handleTouchStart(e) {
 }
 
 function handleTouchMove(e) {
-  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  if (e.target.closest('button') || e.target.closest('.photo-close-button') || e.target.closest('.photo-fullscreen-nav') || e.target.closest('.photo-thumbnail')) {
     return;
   }
 
@@ -349,19 +321,17 @@ function handleTouchMove(e) {
   const deltaX = Math.abs(touchEndX - touchStartX);
   const deltaY = Math.abs(touchEndY - touchStartY);
 
-  // Визначаємо, що почався свайп
   if (deltaX > 10 || deltaY > 10) {
     isDragging = true;
   }
 
-  // Запобігаємо скролу тільки для горизонтальних свайпів або в повноекранному режимі
   if ((deltaX > deltaY && deltaX > 20) || isFullscreen) {
     e.preventDefault();
   }
 }
 
 function handleTouchEnd(e) {
-  if (e.target.closest('button') || e.target.closest('.controls') || e.target.closest('.thumbnail')) {
+  if (e.target.closest('button') || e.target.closest('.photo-close-button') || e.target.closest('.photo-fullscreen-nav') || e.target.closest('.photo-thumbnail')) {
     return;
   }
 
@@ -372,9 +342,7 @@ function handleTouchEnd(e) {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
-  // Визначаємо напрямок свайпу
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
-    // Горизонтальний свайп
     if (Math.abs(deltaX) > minSwipeDistance) {
       if (deltaX > 0) {
         prevSlide();
@@ -383,7 +351,6 @@ function handleTouchEnd(e) {
       }
     }
   } else {
-    // Вертикальний свайп (тільки якщо не в повноекранному режимі)
     if (!isFullscreen && Math.abs(deltaY) > minSwipeDistance) {
       if (deltaY > 0) {
         prevSlide();
@@ -399,18 +366,18 @@ function handleTouchEnd(e) {
 function showHelp() {
   const helpText = `
 Клавіатурні скорочення:
-• ↑/↓ - Навігація по слайдах
-• ←/→ - Навігація в повноекранному режимі
-• Enter - Повноекранний режим
-• Escape - Вихід/Скидання
-• H - Ця довідка
+- ↑/↓ - Навігація по слайдах
+- ←/→ - Навігація в повноекранному режимі
+- Enter - Повноекранний режим
+- Escape - Вихід/Скидання
+- H - Ця довідка
 
 Мобільне управління:
-• Тап по мініатюрі - Перехід до слайду
-• Тап по головному зображенню - Повноекранний режим
-• Свайп вліво/вправо - Навігація
-• Свайп вгору/вниз - Навігація (крім повноекранного режиму)
-  `;
+- Тап по мініатюрі - Перехід до слайду
+- Тап по головному зображенню - Повноекранний режим
+- Свайп вліво/вправо - Навігація
+- Свайп вгору/вниз - Навігація (крім повноекранного режиму)
+ `;
 
   alert(helpText);
 }
@@ -461,15 +428,13 @@ document.addEventListener('keydown', (e) => {
 // Автоматичне налаштування чутливості для різних пристроїв
 function autoAdjustSensitivity() {
   if (isMobile) {
-    // На мобільних пристроях більша чутливість
     minSwipeDistance = 30;
   } else {
-    // На десктопі менша чутливість для тач-падів
     minSwipeDistance = 50;
   }
 }
 
-// Додаємо обробники тач-подій до документу з оптимізованими налаштуваннями
+// Додаємо обробники тач-подій до документу
 document.addEventListener('touchstart', handleTouchStart, { passive: true });
 document.addEventListener('touchmove', handleTouchMove, { passive: false });
 document.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -494,26 +459,42 @@ document.addEventListener('touchend', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🖼️ Gallery initialization started');
 
-  // Автоматичне налаштування чутливості
   autoAdjustSensitivity();
-
-  // Створення мініатюр
   createThumbnails();
 
-  // Ініціалізація першого слайду
-  const firstThumbnail = document.querySelectorAll('.thumbnail')[0];
+  const firstThumbnail = document.querySelectorAll('.photo-thumbnail')[0];
   changeSlide(0, firstThumbnail);
 
-  // Оновлення загальної кількості слайдів
-  const totalSlidesElement = document.getElementById('totalSlides');
-  if (totalSlidesElement) {
-    totalSlidesElement.textContent = slides.length;
+  // Додаємо обробники для кнопок закриття та навігації в повноекранному режимі
+  const closeButton = document.querySelector('.photo-close-button');
+  if (closeButton) {
+    closeButton.addEventListener('click', closeFullscreen);
+  }
+
+  const prevButton = document.querySelector('.photo-nav-prev');
+  if (prevButton) {
+    prevButton.addEventListener('click', prevSlide);
+  }
+
+  const nextButton = document.querySelector('.photo-nav-next');
+  if (nextButton) {
+    nextButton.addEventListener('click', nextSlide);
+  }
+
+  // Обробник кліку по overlay для закриття
+  const overlay = document.querySelector('.photo-fullscreen-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeFullscreen();
+      }
+    });
   }
 
   console.log('✅ Gallery initialized successfully');
   console.log(`📱 Device type: ${isMobile ? 'Mobile' : 'Desktop'}`);
   console.log(`📏 Swipe sensitivity: ${minSwipeDistance}px`);
-  console.log(`🖼️ Total slides: ${slides.length}`);
+  console.log(`🖼️ Total gallerySlides: ${gallerySlides.length}`);
   console.log('💡 Press H for help');
 });
 
@@ -527,7 +508,6 @@ window.addEventListener('error', function(e) {
 window.addEventListener('orientationchange', function() {
   if (isMobile) {
     setTimeout(() => {
-      // Повторна ініціалізація після зміни орієнтації
       if (isFullscreen) {
         updateFullscreenContent();
       }
@@ -554,7 +534,7 @@ window.GalleryAPI = {
   resetGallery,
   cleanup,
   getCurrentSlide: () => currentIndex,
-  getTotalSlides: () => slides.length,
+  getTotalgallerySlides: () => gallerySlides.length,
   isFullscreen: () => isFullscreen,
   isMobile: () => isMobile,
   getSwipeSensitivity: () => minSwipeDistance
