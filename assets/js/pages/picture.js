@@ -1,9 +1,10 @@
 let currentSlide = 0;
-let isAutoPlay = true; // Повертаємо true для автозапуску
+let isAutoPlay = true; // Автозапуск увімкнено за замовчуванням
 let autoPlayInterval;
 const totalSlides = 5;
 const slides = document.querySelectorAll('.carousel-item');
 const indicators = document.querySelectorAll('.indicator');
+const carouselWrapper = document.querySelector('.carousel-wrapper');
 
 function updateCarousel() {
   slides.forEach((slide, index) => {
@@ -26,26 +27,37 @@ function updateCarousel() {
 function nextSlide() {
   currentSlide = (currentSlide + 1) % totalSlides;
   updateCarousel();
+  resetAutoPlay(); // Скидання таймера після ручного переключення
 }
 
 function prevSlide() {
   currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
   updateCarousel();
+  resetAutoPlay(); // Скидання таймера після ручного переключення
 }
 
 function goToSlide(index) {
   currentSlide = index;
   updateCarousel();
+  resetAutoPlay(); // Скидання таймера після ручного переключення
 }
 
 function startAutoPlay() {
+  stopAutoPlay(); // Запобігання дублювання інтервалів
   if (isAutoPlay) {
-    autoPlayInterval = setInterval(nextSlide, 10000);
+    autoPlayInterval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }, 10000); // 10 секунд
   }
 }
 
 function stopAutoPlay() {
   clearInterval(autoPlayInterval);
+}
+
+function resetAutoPlay() {
+  if (isAutoPlay) startAutoPlay(); // Перезапуск таймера
 }
 
 function toggleAutoPlay() {
@@ -91,16 +103,14 @@ function initializeButton() {
   }
 }
 
-// Обработчики событий для паузы при наведении
-const carouselWrapper = document.querySelector('.carousel-wrapper');
+// 🖱 Обробники подій для паузи при наведенні мишки
 carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
 carouselWrapper.addEventListener('mouseleave', () => {
   if (isAutoPlay) startAutoPlay();
 });
 
-// Поддержка свайпов для мобильных устройств
+// 📱 Підтримка свайпів для мобільних пристроїв
 let startX = 0;
-let endX = 0;
 
 carouselWrapper.addEventListener('touchstart', (e) => {
   startX = e.touches[0].clientX;
@@ -108,7 +118,7 @@ carouselWrapper.addEventListener('touchstart', (e) => {
 });
 
 carouselWrapper.addEventListener('touchend', (e) => {
-  endX = e.changedTouches[0].clientX;
+  const endX = e.changedTouches[0].clientX;
   const diffX = startX - endX;
 
   if (Math.abs(diffX) > 50) {
@@ -119,10 +129,10 @@ carouselWrapper.addEventListener('touchend', (e) => {
     }
   }
 
-  if (isAutoPlay) startAutoPlay();
+  resetAutoPlay(); // Використовуємо resetAutoPlay замість умовного startAutoPlay
 });
 
-// Поддержка клавиатуры
+// ⌨️ Підтримка клавіатури
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') {
     prevSlide();
@@ -134,7 +144,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Клик по слайду для перехода
+// 🖱 Клік по слайду для переходу
 slides.forEach(slide => {
   slide.addEventListener('click', () => {
     if (!slide.classList.contains('active')) {
@@ -144,6 +154,7 @@ slides.forEach(slide => {
   });
 });
 
-// Ініціалізація при завантаженні
+// 🚀 Ініціалізація при завантаженні
 initializeButton();
+updateCarousel(); // Додано виклик updateCarousel для правильної ініціалізації
 startAutoPlay();

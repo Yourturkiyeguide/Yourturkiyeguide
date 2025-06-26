@@ -1,19 +1,7 @@
 .korobka {
-  font-family: 'Poppins', sans-serif;
   background: var(--gradient-bg);
-  background-attachment: fixed;
   color: var(--text-dark);
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
   border-radius: var(--border-radius-sm);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
 }
 
 .gallery-container {
@@ -76,15 +64,24 @@
   border-radius: var(--border-radius-md);
   overflow: hidden;
   background: var(--card-bg);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  /* Оптимізовано для якості зображень */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   box-shadow: 0 8px 20px var(--shadow-light);
+  /* Додано для кращого рендерингу */
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Примусова апаратна прискорення */
 }
 
 .carousel-item.active {
-  transform: translate(-50%, -50%) scale(1.1) rotateY(0deg);
+  /* Зменшено масштабування для кращої якості */
+  transform: translate(-50%, -50%) scale(1.05) rotateY(0deg);
   z-index: 10;
   box-shadow: 0 20px 40px var(--shadow-medium);
+  /* Прибрано blur для активного слайду */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .carousel-item.prev {
@@ -111,10 +108,19 @@
   object-fit: cover;
   border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
   transition: transform 0.3s ease;
+  /* Оптимізація для якості зображень */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  /* Додано для кращої чіткості */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Зменшено hover ефект для кращої якості */
 .carousel-item:hover .item-image {
-  transform: scale(1.05);
+  transform: scale(1.02) translateZ(0);
 }
 
 .item-content {
@@ -166,12 +172,15 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px var(--shadow-light);
+  /* Додано для кращого рендерингу */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .control-btn:hover {
   background: var(--hover-color);
   color: var(--white);
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
   box-shadow: 0 6px 16px var(--shadow-medium);
 }
 
@@ -188,11 +197,14 @@
   cursor: pointer;
   transition: var(--transition-default);
   border: 2px solid var(--primary);
+  /* Додано для кращого рендерингу */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .indicator.active {
   background: var(--secondary);
-  transform: scale(1.3);
+  transform: scale(1.3) translateZ(0);
   box-shadow: 0 2px 6px var(--shadow-light);
 }
 
@@ -211,12 +223,15 @@
   transition: var(--transition-default);
   box-shadow: 0 4px 12px var(--shadow-light);
   font-weight: 500;
+  /* Додано для кращого рендерингу */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .auto-play-toggle:hover {
   background: var(--hover-color);
   color: var(--white);
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(0);
 }
 
 .play-triangle {
@@ -260,6 +275,9 @@
   color: var(--white);
   z-index: 2;
   box-shadow: 0 2px 6px var(--shadow-medium);
+  /* Додано для кращого рендерингу */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .floating-elements {
@@ -367,12 +385,12 @@
 @media (max-width: 480px) {
   .korobka {
     padding: 0;
-    min-height: auto !important; /* Вимикаємо min-height для мобільних */
+    min-height: auto !important;
   }
 
   .gallery-container {
-    min-height: auto !important; /* Це ключова зміна! */
-    padding: 20px 10px 10px 10px; /* Мінімальний нижній відступ */
+    min-height: auto !important;
+    padding: 20px 10px 10px 10px;
     padding-top: 40px;
     justify-content: flex-start;
     height: auto;
@@ -380,7 +398,7 @@
 
   .section-title {
     font-size: 1.8rem;
-    margin-bottom: 1rem; /* Зменшено з 1.5rem */
+    margin-bottom: 1rem;
     padding: 0 10px;
     line-height: 1.2;
   }
@@ -400,9 +418,13 @@
   .carousel-item {
     width: 260px;
     height: 340px;
+    /* Оптимізація для мобільних */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .carousel-item.active {
+    /* Без масштабування на мобільних для кращої якості */
     transform: translate(-50%, -50%) scale(1) rotateY(0deg);
     box-shadow: 0 12px 24px var(--shadow-medium);
   }
@@ -424,6 +446,13 @@
 
   .item-image {
     height: 60%;
+    /* Відключення ефектів на мобільних для кращої якості */
+    transform: none !important;
+    transition: none;
+  }
+
+  .carousel-item:hover .item-image {
+    transform: none !important;
   }
 
   .item-content {
@@ -452,7 +481,7 @@
   }
 
   .carousel-controls {
-    margin-top: 0.5rem; /* Зменшено з 1rem */
+    margin-top: 0.5rem;
     margin-bottom: 0;
     gap: 10px;
     flex-wrap: wrap;
@@ -470,7 +499,7 @@
     order: -1;
     width: 100%;
     justify-content: center;
-    margin-bottom: 10px; /* Зменшено з 15px */
+    margin-bottom: 10px;
   }
 
   .indicator {
@@ -480,7 +509,7 @@
   }
 
   .indicator.active {
-    transform: scale(1.2);
+    transform: scale(1.2) translateZ(0);
   }
 
   .auto-play-toggle {
@@ -495,18 +524,17 @@
     display: none;
   }
 
-  /* Альтернативно - можете використати більш специфічний брейкпоінт */
   .control-btn {
     display: none !important;
   }
 
   .carousel-controls {
     justify-content: center;
-    gap: 0; /* Прибираємо зайвий простір між елементами */
+    gap: 0;
   }
 
   .indicators {
-    margin: 0 auto; /* Центруємо індикатори */
+    margin: 0 auto;
   }
 
   /* Поліпшення доступності на мобільних */
@@ -521,7 +549,7 @@
   /* Оптимізація для дуже маленьких екранів */
   @media (max-width: 360px) {
     .gallery-container {
-      padding: 15px 5px 5px 5px; /* Ще менший відступ */
+      padding: 15px 5px 5px 5px;
       padding-top: 30px;
     }
 
@@ -580,7 +608,7 @@
   /* Альбомна орієнтація на мобільних */
   @media (max-width: 480px) and (orientation: landscape) {
     .gallery-container {
-      padding: 10px 10px 5px 10px; /* Мінімальний відступ */
+      padding: 10px 10px 5px 10px;
       padding-top: 20px;
     }
 
@@ -652,10 +680,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
