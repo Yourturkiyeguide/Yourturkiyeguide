@@ -525,6 +525,10 @@ html, body {
     padding: 8px 16px;
     font-size: 0.9em;
   }
+
+  .second-gallery-info {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -595,5 +599,8 @@ html, body {
     bottom: 15px;
     padding: 10px 20px;
     font-size: 0.9em;
+  }
+  .second-gallery-info {
+    display: none;
   }
 }

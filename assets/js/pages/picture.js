@@ -48,7 +48,7 @@ function startAutoPlay() {
     autoPlayInterval = setInterval(() => {
       currentSlide = (currentSlide + 1) % totalSlides;
       updateCarousel();
-    }, 10000); // 10 секунд
+    }, 5000); // 10 секунд
   }
 }
 

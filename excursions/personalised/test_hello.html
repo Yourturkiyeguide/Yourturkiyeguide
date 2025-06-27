@@ -259,8 +259,8 @@
 
       <!--Друга галарея-->
 <!--      <div class="second-gallery-container">-->
-        <div class="vertical-display">
-          <div class="main-photo-display" id="mainPhotoDisplay" onclick="openPhotoFullscreen()">
+      <div class="vertical-display">
+          <div class="main-photo-display" id="mainPhotoDisplay" onclick="openFullscreen()">
             <div class="photo-placeholder" id="mainPhotoContainer">
               <span>📷</span>
               <span>Завантаження зображення...</span>
@@ -274,13 +274,13 @@
           <div class="photo-thumbnails" id="photoThumbnails">
             <!-- Мініатюри будуть створені динамічно -->
           </div>
-        </div>
+      </div>
 
-        <div class="second-gallery-info">
+      <div class="second-gallery-info">
           <p>Натисніть на мініатюру для перегляду або використовуйте клавіші ↑/↓ для навігації</p>
           <p>Enter - повноекранний режим</p>
           <div class="photo-error" id="photoError" style="display: none;"></div>
-        </div>
+      </div>
 <!--      </div>-->
 
     </article>
@@ -288,9 +288,9 @@
     <!-- Повноекранний оверлей -->
     <div class="photo-fullscreen-overlay" id="photoFullscreenOverlay">
       <div class="photo-fullscreen-content">
-        <button class="photo-close-button" onclick="closePhotoFullscreen()">×</button>
-        <button class="photo-fullscreen-nav photo-nav-prev" onclick="navigatePhotoFullscreen(-1)">‹</button>
-        <button class="photo-fullscreen-nav photo-nav-next" onclick="navigatePhotoFullscreen(1)">›</button>
+        <button class="photo-close-button" onclick="closeFullscreen()">×</button>
+        <button class="photo-fullscreen-nav photo-nav-prev" onclick="navigateFullscreen(-1)">‹</button>
+        <button class="photo-fullscreen-nav photo-nav-next" onclick="navigateFullscreen(1)">›</button>
 
         <div class="photo-fullscreen-main" id="photoFullscreenMain">
           <div class="photo-placeholder">
