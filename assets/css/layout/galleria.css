@@ -429,6 +429,18 @@ html, body {
   z-index: 10;
 }
 
+.vertical-display.swipe-left,
+.vertical-display.swipe-up {
+  transform: translateX(-10px);
+  transition: transform 0.2s ease;
+}
+
+.vertical-display.swipe-right,
+.vertical-display.swipe-down {
+  transform: translateX(10px);
+  transition: transform 0.2s ease;
+}
+
 /* Адаптивні стилі з виправленнями переповнення */
 @media (max-width: 768px) {
   /*.second-gallery-container {*/

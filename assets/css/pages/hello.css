@@ -332,6 +332,16 @@
   outline-offset: 2px;
 }
 
+.carousel-wrapper.swipe-left {
+  transform: translateX(-10px);
+  transition: transform 0.2s ease;
+}
+
+.carousel-wrapper.swipe-right {
+  transform: translateX(10px);
+  transition: transform 0.2s ease;
+}
+
 @media (max-width: 768px) {
   /* Приховуємо стрілки навігації на мобільних пристроях */
   .control-btn {
