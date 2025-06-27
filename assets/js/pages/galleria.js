@@ -435,9 +435,14 @@ function autoAdjustSensitivity() {
 }
 
 // Додаємо обробники тач-подій до документу
-document.addEventListener('touchstart', handleTouchStart, { passive: true });
-document.addEventListener('touchmove', handleTouchMove, { passive: false });
-document.addEventListener('touchend', handleTouchEnd, { passive: true });
+const verticalGallery = document.querySelector('.vertical-display');
+
+if (verticalGallery) {
+  verticalGallery.addEventListener('touchstart', handleTouchStart, { passive: true });
+  verticalGallery.addEventListener('touchmove', handleTouchMove, { passive: false });
+  verticalGallery.addEventListener('touchend', handleTouchEnd, { passive: true });
+}
+
 
 // Запобігання zoom на подвійний тап
 document.addEventListener('touchstart', function(e) {

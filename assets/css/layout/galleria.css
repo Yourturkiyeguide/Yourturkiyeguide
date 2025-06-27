@@ -9,7 +9,7 @@ html, body {
   max-width: 1200px;
   width: 100%;
   max-width: 100% !important; !* ВИПРАВЛЕНО: запобігає переповненню *!
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--accent);
   backdrop-filter: blur(20px);
   border-radius: 25px;
   padding: 40px;
@@ -524,6 +524,10 @@ html, body {
     right: 15px;
     padding: 8px 16px;
     font-size: 0.9em;
+  }
+
+  .main-photo-display::after {
+    display: none;
   }
 
   .second-gallery-info {
