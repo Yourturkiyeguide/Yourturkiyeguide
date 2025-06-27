@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../../icon.png" type="favicon">
-  <link rel="stylesheet" href="../../assets/css/layout/style.css">
-  <link rel="stylesheet" href="../../assets/css/layout/tourMapSelected.css">
-  <link rel="stylesheet" href="../../assets/css/pages/hello.css">
+  <link rel="icon" href="/icon.png" type="favicon">
+  <link rel="stylesheet" href="/assets/css/layout/style.css">
+  <link rel="stylesheet" href="/assets/css/layout/tourMapSelected.css">
+  <link rel="stylesheet" href="/assets/css/pages/hello.css">
   <link rel="stylesheet" href="/assets/css/layout/galleria.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -23,32 +23,32 @@
 <header>
   <div class="container-header">
     <div class="logo">
-      <a href="../../index.html">
-        <img src="../../icon.png" alt="Іконка сайту" width="64" height="64">
+      <a href="/index.html">
+        <img src="/icon.png" alt="Іконка сайту" width="64" height="64">
         <span class="logo-text">TravelsTurkey</span>
       </a>
     </div>
     <div class="menu">
       <nav>
         <ul>
-          <li><a href="../../index.html">Главная</a></li>
-          <li><a href="../../about.html">Обо мне</a></li>
-          <li><a href="../excursions.html">Экскурсии</a>
+          <li><a href="/index.html">Главная</a></li>
+          <li><a href="/about.html">Обо мне</a></li>
+          <li><a href="/excursions/excursions.html">Экскурсии</a>
             <ul class="sub-menu">
-              <li><a href="../personalised.html">Индивидуальные экскурсии</a></li>
-              <li><a href="../group.html">Групповые экскурсии</a></li>
-              <li><a href="../copyright.html">Авторские туры</a></li>
+              <li><a href="/excursions/personalised.html">Индивидуальные экскурсии</a></li>
+              <li><a href="/excursions/group.html">Групповые экскурсии</a></li>
+              <li><a href="/excursions/copyright.html">Авторские туры</a></li>
             </ul>
           </li>
-          <li><a href="../../servis/servis.html">Другие услуги</a>
+          <li><a href="/servis/servis.html">Другие услуги</a>
             <ul class="sub-menu">
-              <li><a href="../../servis/yachts.html">Яхты</a></li>
-              <li><a href="../../servis/Transfer.html">Трансфер</a></li>
-              <li><a href="../../servis/medical.html">Медицинский туризм</a></li>
-              <li><a href="../../servis/shopping.html">Шопинг</a></li>
+              <li><a href="/servis/yachts.html">Яхты</a></li>
+              <li><a href="/servis/Transfer.html">Трансфер</a></li>
+              <li><a href="/servis/medical.html">Медицинский туризм</a></li>
+              <li><a href="/servis/shopping.html">Шопинг</a></li>
             </ul>
           </li>
-          <li><a href="../../reviews.html">Отзывы</a></li>
+          <li><a href="/reviews.html">Отзывы</a></li>
         </ul>
       </nav>
     </div>
@@ -89,9 +89,9 @@
 
           <div class="gallery-container">
             <button class="auto-play-toggle" onclick="toggleAutoPlay()">
-              <span id="autoPlayIcon">
-                <div class="play-triangle"></div>
-              </span>
+             <span id="autoPlayIcon">
+               <div class="play-triangle"></div>
+             </span>
               <span id="autoPlayText">Авто</span>
             </button>
 
@@ -147,15 +147,15 @@
             </div>
 
             <div class="carousel-controls">
-              <button class="control-btn" onclick="prevSlide()">‹</button>
+              <button class="control-btn" onclick="carouselPrevSlide()">‹</button>
               <div class="indicators">
-                <div class="indicator active" onclick="goToSlide(0)" tabindex="0"></div>
-                <div class="indicator" onclick="goToSlide(1)" tabindex="0"></div>
-                <div class="indicator" onclick="goToSlide(2)" tabindex="0"></div>
-                <div class="indicator" onclick="goToSlide(3)" tabindex="0"></div>
-                <div class="indicator" onclick="goToSlide(4)" tabindex="0"></div>
+                <div class="indicator active" onclick="carouselGoToSlide(0)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(1)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(2)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(3)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(4)" tabindex="0"></div>
               </div>
-              <button class="control-btn" onclick="nextSlide()">›</button>
+              <button class="control-btn" onclick="carouselNextSlide()">›</button>
             </div>
           </div>
         </div>
@@ -258,49 +258,49 @@
       </div>
 
       <!--Друга галарея-->
-      <div class="gallery-container">
-        <div class="vertical-carousel">
-          <div class="main-display" id="mainDisplay" onclick="openFullscreen()">
-            <div class="image-placeholder" id="mainImageContainer">
-              <span>📷</span>
-              <span>Завантаження зображення...</span>
-            </div>
-            <div class="slide-counter">
-              <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
-            </div>
-            <div class="progress-bar" id="progressBar" style="width: 33.33%;"></div>
+      <!--<div class="second-gallery-container">-->
+      <div class="vertical-display">
+        <div class="main-photo-display" id="mainPhotoDisplay" onclick="openFullscreen()">
+          <div class="photo-placeholder" id="mainPhotoContainer">
+            <span>📷</span>
+            <span>Завантаження зображення...</span>
           </div>
-
-          <div class="thumbnails-container" id="thumbnailsContainer">
-            <!-- Мініатюри будуть створені динамічно -->
+          <div class="photo-counter">
+            <span id="currentPhoto">1</span> / <span id="totalPhotos">3</span>
           </div>
+          <div class="photo-progress" id="photoProgress" style="width: 33.33%;"></div>
         </div>
 
-        <div class="gallery-info">
-          <p>Натисніть на мініатюру для перегляду або використовуйте клавіші ↑/↓ для навігації</p>
-          <p>Enter - повноекранний режим</p>
-          <div class="error-message" id="errorMessage" style="display: none;"></div>
+        <div class="photo-thumbnails" id="photoThumbnails">
+          <!-- Мініатюри будуть створені динамічно -->
         </div>
       </div>
+
+      <div class="second-gallery-info">
+        <p>Натисніть на мініатюру для перегляду або використовуйте клавіші ↑/↓ для навігації</p>
+        <p>Enter - повноекранний режим</p>
+        <div class="photo-error" id="photoError" style="display: none;"></div>
+      </div>
+      <!--</div>-->
 
     </article>
 
     <!-- Повноекранний оверлей -->
-    <div class="fullscreen-overlay" id="fullscreenOverlay">
-      <div class="fullscreen-content">
-        <button class="close-button" onclick="closeFullscreen()">×</button>
-        <button class="fullscreen-nav nav-prev" onclick="navigateFullscreen(-1)">‹</button>
-        <button class="fullscreen-nav nav-next" onclick="navigateFullscreen(1)">›</button>
+    <div class="photo-fullscreen-overlay" id="photoFullscreenOverlay">
+      <div class="photo-fullscreen-content">
+        <button class="photo-close-button" onclick="closeFullscreen()">×</button>
+        <button class="photo-fullscreen-nav photo-nav-prev" onclick="navigateFullscreen(-1)">‹</button>
+        <button class="photo-fullscreen-nav photo-nav-next" onclick="navigateFullscreen(1)">›</button>
 
-        <div class="fullscreen-main" id="fullscreenMain">
-          <div class="image-placeholder">
+        <div class="photo-fullscreen-main" id="photoFullscreenMain">
+          <div class="photo-placeholder">
             <span>📷</span>
             <span>Завантаження зображення...</span>
           </div>
         </div>
 
-        <div class="fullscreen-counter">
-          <span id="fullscreenCurrentSlide">1</span> / <span id="fullscreenTotalSlides">3</span>
+        <div class="photo-fullscreen-counter">
+          <span id="photoFullscreenCurrent">1</span> / <span id="photoFullscreenTotal">3</span>
         </div>
       </div>
     </div>
@@ -314,11 +314,11 @@
     <p>📧 Email: <a href="mailto:firatdicle_47@hotmail.com"> firatdicle_47@hotmail.com</a></p>
   </div>
   <div class="footer-social">
-    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="../../assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
-    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="../../assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
-    <a href="https://t.me/+905443266871"target="_blank"><img src="../../assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
-    <a href="https://wa.me/+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
-    <a href="viber://chat?number=+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
+    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="/assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
+    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="/assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
+    <a href="https://t.me/+905443266871"target="_blank"><img src="/assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
+    <a href="https://wa.me/+905443266871" target="_blank"><img src="/assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
+    <a href="viber://chat?number=+905443266871" target="_blank"><img src="/assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
   </div>
   <div class="footer-copy">
     <p>&copy; 2025 Türkiye Travellings. Усі права захищені.</p>
@@ -327,25 +327,25 @@
 
 <!-- Додаємо нижнє меню всередину <body>, перед </body> -->
 <nav class="mobile-menu">
-  <a href="../../index.html">
-    <img src="../../assets/img/icon/home.png" alt="Главная" width="24" height="24">
+  <a href="/index.html">
+    <img src="/assets/img/icon/home.png" alt="Главная" width="24" height="24">
   </a>
-  <a href="../../about.html">
-    <img src="../../assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
+  <a href="/about.html">
+    <img src="/assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
   </a>
-  <a href="../../excursions/excursions.html">
-    <img src="../../assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
+  <a href="/excursions/excursions.html">
+    <img src="/assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
   </a>
-  <a href="../../servis/servis.html">
-    <img src="../../assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
+  <a href="/servis/servis.html">
+    <img src="/assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
   </a>
-  <a href="../../reviews.html">
-    <img src="../../assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
+  <a href="/reviews.html">
+    <img src="/assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
   </a>
 </nav>
 
-<script src="../../assets/js/script.js"></script>
-<script src="../../assets/js/pages/picture.js"></script>
-<script src="../../assets/js/pages/galleria.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/pages/picture.js"></script>
+<script src="/assets/js/pages/galleria.js"></script>
 </body>
 </html>
