@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="/assets/css/pages/hello.css">
   <link rel="stylesheet" href="/assets/css/layout/galleria.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/layout/accordion.css">
+  <link rel="stylesheet" href="/assets/css/pages/reviews.css">
 </head>
 
 <body>
@@ -258,7 +260,6 @@
       </div>
 
       <!--Друга галарея-->
-      <!--<div class="second-gallery-container">-->
       <div class="vertical-display">
         <div class="main-photo-display" id="mainPhotoDisplay" onclick="openFullscreen()">
           <div class="photo-placeholder" id="mainPhotoContainer">
@@ -281,7 +282,117 @@
         <p>Enter - повноекранний режим</p>
         <div class="photo-error" id="photoError" style="display: none;"></div>
       </div>
-      <!--</div>-->
+
+      <!--Запитання -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Питання №1</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore et nihil quae quas. Atque debitis dolor eveniet expedita facilis magnam neque nisi, numquam quidem repellendus!</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Питання №2</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dolorum eius, error hic mollitia
+              recusandae reprehenderit tempora vero! Ad aperiam beatae dolorem dolorum expedita, voluptatem!</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Питання №3</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa dignissimos dolore eaque,
+              exercitationem explicabo, id itaque iusto laborum nobis pariatur recusandae repellat suscipit,
+              tempore.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Питання №4</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci autem consequatur, delectus,
+              deleniti ducimus eaque, eos impedit nemo optio porro tenetur vel velit vero!</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Відгуки-->
+      <!--Відгуки-->
+      <div class="reviews-container">
+        <div class="reviews-section">
+          <h2 class="reviews-section-title">Відгуки клієнтів</h2>
+          <p class="reviews-section-subtitle">Дізнайтеся, що думають наші клієнти про наші послуги</p>
+
+          <!-- Статистика відгуків -->
+          <div class="reviews-stats">
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="totalReviews">0</div>
+              <div class="reviews-stat-label">Всього відгуків</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="averageRating">0.0</div>
+              <div class="reviews-stat-label">Середній рейтинг</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="fiveStarCount">0</div>
+              <div class="reviews-stat-label">5-зіркових відгуків</div>
+            </div>
+          </div>
+
+          <!-- Форма додавання відгуку -->
+          <form class="reviews-add-form" id="reviewForm">
+            <h3 class="reviews-form-title">Залишити відгук</h3>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerName">Ваше ім'я *</label>
+              <input type="text" id="reviewerName" class="reviews-form-input" required maxlength="50">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerEmail">Email (не буде опубліковано)</label>
+              <input type="email" id="reviewerEmail" class="reviews-form-input" maxlength="100">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label">Рейтинг *</label>
+              <div class="reviews-rating-input" id="ratingInput">
+                <span class="reviews-star" data-rating="1">★</span>
+                <span class="reviews-star" data-rating="2">★</span>
+                <span class="reviews-star" data-rating="3">★</span>
+                <span class="reviews-star" data-rating="4">★</span>
+                <span class="reviews-star" data-rating="5">★</span>
+              </div>
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewText">Ваш відгук *</label>
+              <textarea id="reviewText" class="reviews-form-textarea" required maxlength="500" placeholder="Поділіться своїм досвідом..."></textarea>
+            </div>
+
+            <button type="submit" class="reviews-submit-btn">Опублікувати відгук</button>
+          </form>
+
+          <!-- Список відгуків -->
+          <div class="reviews-grid" id="reviewsContainer">
+            <div class="reviews-empty-state">
+              <div class="reviews-empty-state-icon">💬</div>
+              <h3>Поки що немає відгуків</h3>
+              <p>Будьте першим, хто залишить відгук!</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </article>
 
@@ -347,5 +458,8 @@
 <script src="/assets/js/script.js"></script>
 <script src="/assets/js/pages/picture.js"></script>
 <script src="/assets/js/pages/galleria.js"></script>
+<script src="/assets/js/pages/accordion.js"></script>
+<!-- Firebase Script -->
+<script type="module" src="/assets/js/pages/reviews.js"></script>
 </body>
 </html>

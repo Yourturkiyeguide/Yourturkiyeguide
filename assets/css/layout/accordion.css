@@ -1,0 +1,74 @@
+.accordion {
+  margin: 25px 0 0 5px;
+  width: 100%;
+  background: #f5f6fa;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 10px 25px 25px rgba(0,0,0,0.3), -3px -10px 25px rgba(0,0,0,0.4);
+}
+
+.accordion-item {
+  border-bottom:  1px solid #eee;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: rgba(106,17,203,0.05);
+}
+
+.accordion-header h3  {
+  font-size: 1.2rem;
+  color: #1e272e;
+  margin: 0;
+}
+
+.accordion-header span {
+  font-size:  1.5rem;
+  color: #1e272e;
+  transition: transform  0.3s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition:  max-height 0.5s ease, padding 0.3s ease;
+}
+
+.accordion-content p {
+  padding: 0 1rem 1rem;
+  color: #485460;
+  line-height: 1.6;
+}
+
+/*Активний стан*/
+.accordion-content.active  .accordion-header {
+  background: #1e90ff;
+}
+
+.accordion-item.active .accordion-header span {
+  transform: rotate(45deg);
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 500px;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .accordion {
+    box-shadow: 8px 20px 20px rgba(0,0,0,0.2), -3px -8px 15px rgba(0,0,0,0.3);
+  }
+}

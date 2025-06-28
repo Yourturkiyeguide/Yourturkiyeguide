@@ -18,6 +18,8 @@
     --border-radius-md: 15px;
     --border-radius-lg: 25px;
     --transition-default: all 0.3s ease;
+  --star-color: #ffd700;
+  --star-empty: #e0e0e0;
 }
 
 /* Скидаємо базові стилі */
