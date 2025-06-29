@@ -59,36 +59,36 @@
       <!--Відгуки-->
       <div class="reviews-container">
         <div class="reviews-section">
-          <h2 class="reviews-section-title">Відгуки клієнтів</h2>
-          <p class="reviews-section-subtitle">Дізнайтеся, що думають наші клієнти про наші послуги</p>
+          <h2 class="reviews-section-title">Отзывы клиентов</h2>
+          <p class="reviews-section-subtitle">Узнайте, что думают наши клиенты о наших услугах</p>
 
           <!-- Статистика відгуків -->
           <div class="reviews-stats">
             <div class="reviews-stat-card">
               <div class="reviews-stat-number" id="totalReviews">0</div>
-              <div class="reviews-stat-label">Всього відгуків</div>
+              <div class="reviews-stat-label">Всего отзывов</div>
             </div>
             <div class="reviews-stat-card">
               <div class="reviews-stat-number" id="averageRating">0.0</div>
-              <div class="reviews-stat-label">Середній рейтинг</div>
+              <div class="reviews-stat-label">Средний рейтинг</div>
             </div>
             <div class="reviews-stat-card">
               <div class="reviews-stat-number" id="fiveStarCount">0</div>
-              <div class="reviews-stat-label">5-зіркових відгуків</div>
+              <div class="reviews-stat-label">5-звездочных отзывов</div>
             </div>
           </div>
 
           <!-- Форма додавання відгуку -->
           <form class="reviews-add-form" id="reviewForm">
-            <h3 class="reviews-form-title">Залишити відгук</h3>
+            <h3 class="reviews-form-title">Оставить отзыв</h3>
 
             <div class="reviews-form-group">
-              <label class="reviews-form-label" for="reviewerName">Ваше ім'я *</label>
+              <label class="reviews-form-label" for="reviewerName">Ваше имя *</label>
               <input type="text" id="reviewerName" class="reviews-form-input" required maxlength="50">
             </div>
 
             <div class="reviews-form-group">
-              <label class="reviews-form-label" for="reviewerEmail">Email (не буде опубліковано)</label>
+              <label class="reviews-form-label" for="reviewerEmail">Email (не будет опубликовано)</label>
               <input type="email" id="reviewerEmail" class="reviews-form-input" maxlength="100">
             </div>
 
@@ -104,19 +104,19 @@
             </div>
 
             <div class="reviews-form-group">
-              <label class="reviews-form-label" for="reviewText">Ваш відгук *</label>
-              <textarea id="reviewText" class="reviews-form-textarea" required maxlength="500" placeholder="Поділіться своїм досвідом..."></textarea>
+              <label class="reviews-form-label" for="reviewText">Ваш отзыв *</label>
+              <textarea id="reviewText" class="reviews-form-textarea" required maxlength="500" placeholder="Поделитесь своим опытом..."></textarea>
             </div>
 
-            <button type="submit" class="reviews-submit-btn">Опублікувати відгук</button>
+            <button type="submit" class="reviews-submit-btn">Опубликовать отзыв</button>
           </form>
 
           <!-- Список відгуків -->
           <div class="reviews-grid" id="reviewsContainer">
             <div class="reviews-empty-state">
               <div class="reviews-empty-state-icon">💬</div>
-              <h3>Поки що немає відгуків</h3>
-              <p>Будьте першим, хто залишить відгук!</p>
+              <h3>Пока что нет отзывов</h3>
+              <p>Будьте первым, кто оставит отзыв!</p>
             </div>
           </div>
         </div>

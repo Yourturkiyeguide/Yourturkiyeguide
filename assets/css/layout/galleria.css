@@ -64,7 +64,7 @@ html, body {
 }
 
 .main-photo-display::after {
-  content: '\f002  Натисніть для повноекранного перегляду';
+  content: '\f002  Нажмите для полноэкранного просмотра';
   font-family: 'Font Awesome 6 Free', sans-serif;
   font-weight: 900;
   position: absolute;

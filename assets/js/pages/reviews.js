@@ -29,38 +29,38 @@ class ReviewsSystem {
     this.captchaVerified = false;
     this.RATE_LIMIT_MINUTES = 15;
 
-    // Налаштування категорій
+    // Настройки категорий
     this.category = options.category || 'general';
-    this.categoryDisplayName = options.categoryDisplayName || 'Загальні відгуки';
+    this.categoryDisplayName = options.categoryDisplayName || 'Общие отзывы';
 
-    // Налаштування UI
+    // Настройки UI
     this.showCategorySelector = options.showCategorySelector || false;
     this.availableCategories = options.availableCategories || {
-      'general': 'Загальні',
+      'general': 'Общие',
       'istanbul': 'Стамбул',
       'ankara': 'Анкара',
-      'cappadocia': 'Каппадокія'
+      'cappadocia': 'Каппадокия'
     };
 
     this.init();
   }
 
   async debugReviews() {
-    console.log('🔍 Діагностика відгуків...');
-    console.log('Поточна категорія:', this.category);
+    console.log('🔍 Диагностика отзывов...');
+    console.log('Текущая категория:', this.category);
 
     try {
       const allQuery = query(collection(this.db, 'reviews'));
       const allSnapshot = await getDocs(allQuery);
 
-      console.log('📊 Всього відгуків в БД:', allSnapshot.size);
+      console.log('📊 Всего отзывов в БД:', allSnapshot.size);
 
       const allReviews = [];
       allSnapshot.forEach((doc) => {
         const data = doc.data();
         allReviews.push({
           id: doc.id,
-          category: data.category || 'не вказано',
+          category: data.category || 'не указано',
           verified: data.verified,
           name: data.name,
           text: data.text?.substring(0, 50) + '...'
@@ -70,10 +70,10 @@ class ReviewsSystem {
       console.table(allReviews);
 
       const categoryCount = allReviews.filter(r => r.category === this.category).length;
-      console.log(`📈 Відгуків для категорії "${this.category}":`, categoryCount);
+      console.log(`📈 Отзывов для категории "${this.category}":`, categoryCount);
 
     } catch (error) {
-      console.error('Помилка діагностики:', error);
+      console.error('Ошибка диагностики:', error);
     }
   }
 
@@ -87,15 +87,13 @@ class ReviewsSystem {
     this.updateStats();
     this.checkRateLimit();
 
-    // Діагностика
+    // Диагностика
     setTimeout(() => this.debugReviews(), 1000);
   }
 
   setupCategoryUI() {
     if (this.showCategorySelector) {
       this.createCategorySelector();
-    } else {
-      this.updatePageTitle();
     }
   }
 
@@ -105,7 +103,7 @@ class ReviewsSystem {
 
     const selectorHTML = `
       <div class="reviews-category-selector">
-        <label class="reviews-form-label">Категорія відгуку *</label>
+        <label class="reviews-form-label">Категория отзыва *</label>
         <select id="categorySelect" class="reviews-form-input" required>
           ${Object.entries(this.availableCategories).map(([key, name]) =>
       `<option value="${key}" ${key === this.category ? 'selected' : ''}>${name}</option>`
@@ -126,29 +124,23 @@ class ReviewsSystem {
     });
   }
 
-  updatePageTitle() {
-    const titleElement = document.querySelector('.reviews-title, h1, h2');
-    if (titleElement && this.categoryDisplayName !== 'Загальні відгуки') {
-      titleElement.textContent = `Відгуки - ${this.categoryDisplayName}`;
-    }
-  }
 
   async authenticateUser() {
     try {
       const result = await signInAnonymously(this.auth);
       this.user = result.user;
-      console.log('Анонімна автентифікація успішна:', this.user.uid);
+      console.log('Анонимная аутентификация успешна:', this.user.uid);
 
       onAuthStateChanged(this.auth, (user) => {
         if (user && user.isAnonymous) {
           this.user = user;
-          console.log('Анонімний користувач підтверджений:', user.uid);
+          console.log('Анонимный пользователь подтвержден:', user.uid);
         } else if (!user) {
           this.signInAnonymously();
         }
       });
     } catch (error) {
-      console.error('Помилка автентифікації:', error);
+      console.error('Ошибка аутентификации:', error);
       setTimeout(() => this.authenticateUser(), 2000);
     }
   }
@@ -157,9 +149,9 @@ class ReviewsSystem {
     try {
       const result = await signInAnonymously(this.auth);
       this.user = result.user;
-      console.log('Нова анонімна автентифікація:', this.user.uid);
+      console.log('Новая анонимная аутентификация:', this.user.uid);
     } catch (error) {
-      console.error('Помилка анонімної автентифікації:', error);
+      console.error('Ошибка анонимной аутентификации:', error);
       setTimeout(() => this.signInAnonymously(), 3000);
     }
   }
@@ -182,7 +174,7 @@ class ReviewsSystem {
 
     if (minutesDiff < this.RATE_LIMIT_MINUTES) {
       const remainingMinutes = this.RATE_LIMIT_MINUTES - minutesDiff;
-      this.disableForm(`Ви зможете залишити наступний відгук через ${remainingMinutes} хвилин`);
+      this.disableForm(`Вы сможете оставить следующий отзыв через ${remainingMinutes} минут`);
 
       setTimeout(() => {
         this.enableForm();
@@ -207,7 +199,7 @@ class ReviewsSystem {
     const inputs = form.querySelectorAll('input, textarea, button, select');
 
     inputs.forEach(input => input.disabled = false);
-    submitBtn.textContent = 'Опублікувати відгук';
+    submitBtn.textContent = 'Опубликовать отзыв';
     submitBtn.style.opacity = '1';
     this.createCaptcha();
   }
@@ -249,10 +241,10 @@ class ReviewsSystem {
 
     captchaContainer.innerHTML = `
       <div class="reviews-captcha">
-        <label class="reviews-form-label">Підтвердження: Скільки буде ${question}? *</label>
+        <label class="reviews-form-label">Подтверждение: Сколько будет ${question}? *</label>
         <input type="number" id="captchaInput" class="reviews-form-input" required style="width: 100px;">
         <span id="captchaStatus" class="reviews-captcha-status"></span>
-        <button type="button" id="refreshCaptcha" class="reviews-captcha-refresh" title="Оновити питання">🔄</button>
+        <button type="button" id="refreshCaptcha" class="reviews-captcha-refresh" title="Обновить вопрос">🔄</button>
       </div>
     `;
 
@@ -331,7 +323,7 @@ class ReviewsSystem {
   }
 
   validateContent(text) {
-    const bannedWords = ['спам', 'реклама', 'купити', 'продаж', 'дешево'];
+    const bannedWords = ['спам', 'реклама', 'купить', 'продажа', 'дешево'];
     const lowerText = text.toLowerCase();
 
     for (const word of bannedWords) {
@@ -340,7 +332,7 @@ class ReviewsSystem {
       }
     }
 
-    const upperCaseCount = (text.match(/[A-ZА-ЯЄІЇҐ]/g) || []).length;
+    const upperCaseCount = (text.match(/[A-ZА-ЯЁЄІЇҐ]/g) || []).length;
     if (upperCaseCount > text.length * 0.7) {
       return false;
     }
@@ -362,18 +354,18 @@ class ReviewsSystem {
       : this.category;
 
     if (!name || !text || this.selectedRating === 0) {
-      alert('Будь ласка, заповніть всі обов\'язкові поля та поставте рейтинг');
+      alert('Пожалуйста, заполните все обязательные поля и поставьте рейтинг');
       return;
     }
 
     if (!this.captchaVerified) {
-      alert('Будь ласка, правильно відповідайте на питання для підтвердження');
+      alert('Пожалуйста, правильно отвечайте на вопросы для подтверждения');
       document.getElementById('captchaInput').focus();
       return;
     }
 
     if (!this.user || !this.user.isAnonymous) {
-      alert('Помилка автентифікації. Перезавантажте сторінку');
+      alert('Ошибка аутентификации. Перезагрузите страницу');
       return;
     }
 
@@ -383,12 +375,12 @@ class ReviewsSystem {
 
     if (minutesDiff < this.RATE_LIMIT_MINUTES) {
       const remaining = this.RATE_LIMIT_MINUTES - minutesDiff;
-      alert(`Ви зможете залишити наступний відгук через ${remaining} хвилин`);
+      alert(`Вы сможете оставить следующий отзыв через ${remaining} минут`);
       return;
     }
 
     if (!this.validateContent(text) || !this.validateContent(name)) {
-      alert('Відгук містить неприйнятний контент. Будь ласка, перепишіть повідомлення');
+      alert('Отзыв содержит неприемлемый контент. Пожалуйста, перепишите сообщение');
       return;
     }
 
@@ -397,7 +389,7 @@ class ReviewsSystem {
       email: email ? this.sanitizeInput(email) : '',
       rating: this.selectedRating,
       text: this.sanitizeInput(text),
-      date: new Date().toLocaleDateString('uk-UA'),
+      date: new Date().toLocaleDateString('ru-RU'),
       timestamp: serverTimestamp(),
       userId: this.user.uid,
       verified: true,
@@ -407,7 +399,7 @@ class ReviewsSystem {
     try {
       const btn = document.querySelector('.reviews-submit-btn');
       const originalText = btn.textContent;
-      btn.textContent = 'Збереження...';
+      btn.textContent = 'Сохранение...';
       btn.disabled = true;
 
       await addDoc(collection(this.db, 'reviews'), review);
@@ -419,7 +411,7 @@ class ReviewsSystem {
       this.updateStats();
       this.resetForm();
 
-      btn.textContent = 'Відгук додано! ✓';
+      btn.textContent = 'Отзыв добавлен! ✓';
       setTimeout(() => {
         btn.textContent = originalText;
         btn.disabled = false;
@@ -427,11 +419,11 @@ class ReviewsSystem {
       }, 2000);
 
     } catch (error) {
-      console.error('Помилка при додаванні відгуку:', error);
-      alert('Помилка при збереженні відгуку. Спробуйте ще раз.');
+      console.error('Ошибка при добавлении отзыва:', error);
+      alert('Ошибка при сохранении отзыва. Попробуйте еще раз.');
 
       const btn = document.querySelector('.reviews-submit-btn');
-      btn.textContent = 'Опублікувати відгук';
+      btn.textContent = 'Опубликовать отзыв';
       btn.disabled = false;
     }
   }
@@ -456,33 +448,33 @@ class ReviewsSystem {
     }
   }
 
-  // 🔧 ВИПРАВЛЕНИЙ метод завантаження відгуків
+  // 🔧 ИСПРАВЛЕННЫЙ метод загрузки отзывов
   async loadReviews() {
-    console.log('🔄 Завантаження відгуків для категорії:', this.category);
+    console.log('🔄 Загрузка отзывов для категории:', this.category);
 
     try {
-      // Спробуємо простий запит тільки по verified
+      // Попробуем простой запрос только по verified
       const q = query(
         collection(this.db, 'reviews'),
         where('verified', '==', true)
       );
 
       const querySnapshot = await getDocs(q);
-      console.log('📥 Завантажено відгуків із БД:', querySnapshot.size);
+      console.log('📥 Загружено отзывов из БД:', querySnapshot.size);
 
       this.reviews = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
 
-        // Фільтруємо по категорії в коді
-        const reviewCategory = data.category || 'general'; // fallback для старих відгуків
+        // Фильтруем по категории в коде
+        const reviewCategory = data.category || 'general'; // fallback для старых отзывов
 
         if (this.category === 'general' || reviewCategory === this.category) {
           if (data.timestamp && data.timestamp.toDate) {
-            data.date = data.timestamp.toDate().toLocaleDateString('uk-UA');
+            data.date = data.timestamp.toDate().toLocaleDateString('ru-RU');
             data.timestampValue = data.timestamp.toDate().getTime();
           } else {
-            // Fallback для відгуків без timestamp
+            // Fallback для отзывов без timestamp
             data.timestampValue = Date.now();
           }
 
@@ -493,21 +485,21 @@ class ReviewsSystem {
         }
       });
 
-      // Сортуємо по часу (нові спочатку)
+      // Сортируем по времени (новые сначала)
       this.reviews.sort((a, b) => {
         const timeA = a.timestampValue || 0;
         const timeB = b.timestampValue || 0;
         return timeB - timeA;
       });
 
-      console.log(`✅ Відгуків для категорії "${this.category}":`, this.reviews.length);
+      console.log(`✅ Отзывов для категории "${this.category}":`, this.reviews.length);
 
     } catch (error) {
-      console.error('❌ Помилка при завантаженні відгуків:', error);
+      console.error('❌ Ошибка при загрузке отзывов:', error);
 
-      // Якщо і це не працює, спробуємо завантажити всі відгуки
+      // Если и это не работает, попробуем загрузить все отзывы
       try {
-        console.log('🔄 Пробую завантажити всі відгуки...');
+        console.log('🔄 Пробую загрузить все отзывы...');
         const allQuery = query(collection(this.db, 'reviews'));
         const allSnapshot = await getDocs(allQuery);
 
@@ -518,7 +510,7 @@ class ReviewsSystem {
 
           if (reviewCategory === this.category && (data.verified === true || data.verified === undefined)) {
             if (data.timestamp && data.timestamp.toDate) {
-              data.date = data.timestamp.toDate().toLocaleDateString('uk-UA');
+              data.date = data.timestamp.toDate().toLocaleDateString('ru-RU');
               data.timestampValue = data.timestamp.toDate().getTime();
             } else {
               data.timestampValue = Date.now();
@@ -537,10 +529,10 @@ class ReviewsSystem {
           return timeB - timeA;
         });
 
-        console.log(`✅ Знайдено відгуків (fallback):`, this.reviews.length);
+        console.log(`✅ Найдено отзывов (fallback):`, this.reviews.length);
 
       } catch (fallbackError) {
-        console.error('❌ Критична помилка завантаження:', fallbackError);
+        console.error('❌ Критическая ошибка загрузки:', fallbackError);
         this.reviews = [];
       }
     }
@@ -553,8 +545,8 @@ class ReviewsSystem {
       container.innerHTML = `
         <div class="reviews-empty-state">
           <div class="reviews-empty-state-icon">💬</div>
-          <h3>Поки що немає відгуків</h3>
-          <p>Будьте першим, хто залишить відгук про ${this.categoryDisplayName.toLowerCase()}!</p>
+          <h3>Пока нет отзывов</h3>
+          <p>Будьте первым, кто оставит отзыв о ${this.categoryDisplayName.toLowerCase()}!</p>
         </div>
       `;
       return;
@@ -610,7 +602,7 @@ class ReviewsSystem {
   }
 }
 
-// Стилі
+// Стили
 const categoryStyles = `
   .reviews-category-selector {
     margin-bottom: 20px;
@@ -678,15 +670,15 @@ const captchaStyles = `
   }
 `;
 
-// Додаємо стилі
+// Добавляем стили
 const styleSheet = document.createElement('style');
 styleSheet.textContent = categoryStyles + captchaStyles;
 document.head.appendChild(styleSheet);
 
-// Експортуємо клас
+// Экспортируем класс
 window.ReviewsSystem = ReviewsSystem;
 
-// Автоматична ініціалізація
+// Автоматическая инициализация
 document.addEventListener('DOMContentLoaded', () => {
   if (window.reviewsConfig) {
     new ReviewsSystem(window.reviewsConfig);
