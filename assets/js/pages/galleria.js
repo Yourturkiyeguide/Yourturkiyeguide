@@ -1,7 +1,7 @@
 // Демонстраційні зображення
 const gallerySlides = [
   {
-    image: '../assets/img/hello/1.jpg',
+    image: '../../assets/img/hello/1.jpg',
     title: 'Зображення 1'
   },
   {
