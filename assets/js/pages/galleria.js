@@ -40,6 +40,7 @@ const gallerySlides = [
 
 let currentIndex = 0;
 let isFullscreen = false;
+let userHasInteracted = false;
 // Змінні для запобігання подвійних спрацювань
 let preventClick = false;
 let clickTimeout = null;
@@ -270,7 +271,7 @@ function changeSlide(index, element) {
   }
 
   // Прокручуємо до активної мініатюри на мобільних
-  if (element && isMobile) {
+  if (element && isMobile && userHasInteracted) {
     setTimeout(() => {
       element.scrollIntoView({
         behavior: 'smooth',
@@ -653,6 +654,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const firstThumbnail = document.querySelectorAll('.photo-thumbnail')[0];
   changeSlide(0, firstThumbnail);
+
+  ['click', 'keydown', 'touchstart', 'wheel'].forEach(event => {
+    window.addEventListener(event, () => {
+      userHasInteracted = true;
+    }, { once: true });
+  });
 
   // Додаємо обробники для кнопок
   const closeButton = document.querySelector('.photo-close-button');
