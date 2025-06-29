@@ -165,9 +165,8 @@
 <script src="assets/js/script.js"></script>
 <!-- Firebase Script -->
 <script type="module">
-  import 'assets/js/pages/reviews'; // підключаємо основний файл
+  import './assets/js/pages/reviews.js';
 
-  // Ініціалізуємо для загальних відгуків
   document.addEventListener('DOMContentLoaded', () => {
     new ReviewsSystem({
       category: 'general',
@@ -175,5 +174,6 @@
     });
   });
 </script>
+
 </body>
 </html>

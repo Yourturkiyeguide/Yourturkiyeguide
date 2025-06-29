@@ -5,35 +5,35 @@ const gallerySlides = [
     title: 'Зображення 1'
   },
   {
-    image: '../assets/img/hello/2.webp',
+    image: '../../assets/img/hello/2.webp',
     title: 'Зображення 2'
   },
   {
-    image: '../assets/img/hello/3.jpg',
+    image: '../../assets/img/hello/3.jpg',
     title: 'Зображення 3'
   },
   {
-    image: '../assets/img/hello/4.jpg',
+    image: '../../assets/img/hello/4.jpg',
     title: 'Фото 4'
   },
   {
-    image: '../assets/img/hello/5.jpg',
+    image: '../../assets/img/hello/5.jpg',
     title: 'Фото 5'
   },
   {
-    image: '../assets/img/hello/6.jpg',
+    image: '../../assets/img/hello/6.jpg',
     title: 'Фото 6'
   },
   {
-    image: '../assets/img/hello/7.jpg',
+    image: '../../assets/img/hello/7.jpg',
     title: 'Фото 7'
   },
   {
-    image: '../assets/img/hello/8.jpg',
+    image: '../../assets/img/hello/8.jpg',
     title: 'Фото 8'
   },
   {
-    image: '../assets/img/hello/9.jpg',
+    image: '../../assets/img/hello/9.jpg',
     title: 'Фото 9'
   }
 ];
