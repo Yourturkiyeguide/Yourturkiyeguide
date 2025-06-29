@@ -3,12 +3,6 @@
   margin: 30px 0; /* Зменшено з 60px */
 }
 
-/*.personal-journey-container {
-  padding: 0 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}*/
-
 .booking-card {
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(25px);
@@ -242,17 +236,6 @@
 .whatsapp-btn:hover {
   transform: translateY(-2px) scale(1.03); /* Зменшено переміщення */
   box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
-}
-
-.telegram-btn {
-  background: linear-gradient(135deg, #0088cc, #0074b3, #005580);
-  color: white;
-  box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3); /* Зменшено тінь */
-}
-
-.telegram-btn:hover {
-  transform: translateY(-2px) scale(1.03); /* Зменшено переміщення */
-  box-shadow: 0 12px 28px rgba(0, 136, 204, 0.4);
 }
 
 .response-time {
