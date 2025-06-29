@@ -1,10 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Отзывы</title>
+  <!-- Підключення шрифтів Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="icon.png" type="favicon">
+  <link rel="stylesheet" href="assets/css/layout/style.css">
+  <link rel="stylesheet" href="assets/css/pages/reviews.css">
 </head>
+
 <body>
 
+<header>
+  <div class="container-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="icon.png" alt="Іконка сайту" width="64" height="64">
+        <span class="logo-text">TravelsTurkey</span>
+      </a>
+    </div>
+    <div class="menu">
+      <nav>
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="about.html">Обо мне</a></li>
+          <li><a href="excursions/excursions.html">Экскурсии</a>
+            <ul class="sub-menu">
+              <li><a href="excursions/personalised.html">Индивидуальные экскурсии</a></li>
+              <li><a href="excursions/group.html">Групповые экскурсии</a></li>
+              <li><a href="excursions/copyright.html">Авторские туры</a></li>
+            </ul>
+          </li>
+          <li><a href="servis/servis.html">Другие услуги</a>
+            <ul class="sub-menu">
+              <li><a href="servis/yachts.html">Яхты</a></li>
+              <li><a href="servis/Transfer.html">Трансфер</a></li>
+              <li><a href="servis/medical.html">Медицинский туризм</a></li>
+              <li><a href="servis/shopping.html">Шопинг</a></li>
+            </ul>
+          </li>
+          <li><a href="reviews.html">Отзывы</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <article>
+
+      <!--Відгуки-->
+      <div class="reviews-container">
+        <div class="reviews-section">
+          <h2 class="reviews-section-title">Відгуки клієнтів</h2>
+          <p class="reviews-section-subtitle">Дізнайтеся, що думають наші клієнти про наші послуги</p>
+
+          <!-- Статистика відгуків -->
+          <div class="reviews-stats">
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="totalReviews">0</div>
+              <div class="reviews-stat-label">Всього відгуків</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="averageRating">0.0</div>
+              <div class="reviews-stat-label">Середній рейтинг</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="fiveStarCount">0</div>
+              <div class="reviews-stat-label">5-зіркових відгуків</div>
+            </div>
+          </div>
+
+          <!-- Форма додавання відгуку -->
+          <form class="reviews-add-form" id="reviewForm">
+            <h3 class="reviews-form-title">Залишити відгук</h3>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerName">Ваше ім'я *</label>
+              <input type="text" id="reviewerName" class="reviews-form-input" required maxlength="50">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerEmail">Email (не буде опубліковано)</label>
+              <input type="email" id="reviewerEmail" class="reviews-form-input" maxlength="100">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label">Рейтинг *</label>
+              <div class="reviews-rating-input" id="ratingInput">
+                <span class="reviews-star" data-rating="1">★</span>
+                <span class="reviews-star" data-rating="2">★</span>
+                <span class="reviews-star" data-rating="3">★</span>
+                <span class="reviews-star" data-rating="4">★</span>
+                <span class="reviews-star" data-rating="5">★</span>
+              </div>
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewText">Ваш відгук *</label>
+              <textarea id="reviewText" class="reviews-form-textarea" required maxlength="500" placeholder="Поділіться своїм досвідом..."></textarea>
+            </div>
+
+            <button type="submit" class="reviews-submit-btn">Опублікувати відгук</button>
+          </form>
+
+          <!-- Список відгуків -->
+          <div class="reviews-grid" id="reviewsContainer">
+            <div class="reviews-empty-state">
+              <div class="reviews-empty-state-icon">💬</div>
+              <h3>Поки що немає відгуків</h3>
+              <p>Будьте першим, хто залишить відгук!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-contact">
+    <p>📞 Телефон:<a href="tel:+905443266871">+90 544 326 6871</a></p>
+    <p>📧 Email: <a href="mailto:firatdicle_47@hotmail.com"> firatdicle_47@hotmail.com</a></p>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
+    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
+    <a href="https://t.me/+905443266871"target="_blank"><img src="assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
+    <a href="https://wa.me/+905443266871" target="_blank"><img src="assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
+    <a href="viber://chat?number=+905443266871" target="_blank"><img src="assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
+  </div>
+  <div class="footer-copy">
+    <p>&copy; 2025 Türkiye Travellings. Усі права захищені.</p>
+  </div>
+</footer>
+
+<!-- Додаємо нижнє меню всередину <body>, перед </body> -->
+<nav class="mobile-menu">
+  <a href="index.html">
+    <img src="assets/img/icon/home.png" alt="Главная" width="24" height="24">
+  </a>
+  <a href="about.html">
+    <img src="assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
+  </a>
+  <a href="excursions/excursions.html">
+    <img src="assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
+  </a>
+  <a href="servis/servis.html">
+    <img src="assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
+  </a>
+  <a href="reviews.html">
+    <img src="assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
+  </a>
+</nav>
+
+<script src="assets/js/script.js"></script>
+<!-- Firebase Script -->
+<script type="module">
+  import '/assets/js/pages/reviews.js'; // підключаємо основний файл
+
+  // Ініціалізуємо для загальних відгуків
+  document.addEventListener('DOMContentLoaded', () => {
+    new ReviewsSystem({
+      category: 'general',
+      categoryDisplayName: 'Загальні відгуки'
+    });
+  });
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   background: #f5f6fa;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 10px 25px 25px rgba(0,0,0,0.3), -3px -10px 25px rgba(0,0,0,0.4);
+  box-shadow: 5px 10px 10px rgba(0,0,0,0.1), -1px -5px 10px rgba(0,0,0,0.2);
 }
 
 .accordion-item {
@@ -67,8 +67,3 @@
   padding: 1rem;
 }
 
-@media screen and (max-width: 768px) {
-  .accordion {
-    box-shadow: 8px 20px 20px rgba(0,0,0,0.2), -3px -8px 15px rgba(0,0,0,0.3);
-  }
-}

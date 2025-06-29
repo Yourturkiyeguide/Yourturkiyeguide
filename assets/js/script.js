@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Мапа відповідності підсторінок до батьківських розділів
   const pageMapping = {
     // Підрозділи екскурсій
-    'hello.html': 'excursions.html',
+    'hello.html': 'personalised.html',
     'transit.html': 'excursions.html',
     'copyright.html': 'excursions.html',
     'excursions.html': 'excursions.html',

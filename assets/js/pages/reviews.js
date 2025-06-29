@@ -1,6 +1,6 @@
 // Import Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, orderBy, query, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, orderBy, query, where, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 // Firebase configuration
@@ -19,7 +19,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 class ReviewsSystem {
-  constructor() {
+  constructor(options = {}) {
     this.reviews = [];
     this.selectedRating = 0;
     this.db = db;
@@ -27,41 +27,128 @@ class ReviewsSystem {
     this.user = null;
     this.lastSubmissionTime = this.getLastSubmissionTime();
     this.captchaVerified = false;
-    this.RATE_LIMIT_MINUTES = 15; // Обмеження: один відгук на 15 хвилин
+    this.RATE_LIMIT_MINUTES = 15;
+
+    // Налаштування категорій
+    this.category = options.category || 'general';
+    this.categoryDisplayName = options.categoryDisplayName || 'Загальні відгуки';
+
+    // Налаштування UI
+    this.showCategorySelector = options.showCategorySelector || false;
+    this.availableCategories = options.availableCategories || {
+      'general': 'Загальні',
+      'istanbul': 'Стамбул',
+      'ankara': 'Анкара',
+      'cappadocia': 'Каппадокія'
+    };
+
     this.init();
+  }
+
+  async debugReviews() {
+    console.log('🔍 Діагностика відгуків...');
+    console.log('Поточна категорія:', this.category);
+
+    try {
+      const allQuery = query(collection(this.db, 'reviews'));
+      const allSnapshot = await getDocs(allQuery);
+
+      console.log('📊 Всього відгуків в БД:', allSnapshot.size);
+
+      const allReviews = [];
+      allSnapshot.forEach((doc) => {
+        const data = doc.data();
+        allReviews.push({
+          id: doc.id,
+          category: data.category || 'не вказано',
+          verified: data.verified,
+          name: data.name,
+          text: data.text?.substring(0, 50) + '...'
+        });
+      });
+
+      console.table(allReviews);
+
+      const categoryCount = allReviews.filter(r => r.category === this.category).length;
+      console.log(`📈 Відгуків для категорії "${this.category}":`, categoryCount);
+
+    } catch (error) {
+      console.error('Помилка діагностики:', error);
+    }
   }
 
   async init() {
     this.setupEventListeners();
+    this.setupCategoryUI();
     await this.authenticateUser();
     this.createCaptcha();
     await this.loadReviews();
     this.renderReviews();
     this.updateStats();
     this.checkRateLimit();
+
+    // Діагностика
+    setTimeout(() => this.debugReviews(), 1000);
   }
 
-  // Анонімна авторизація
+  setupCategoryUI() {
+    if (this.showCategorySelector) {
+      this.createCategorySelector();
+    } else {
+      this.updatePageTitle();
+    }
+  }
+
+  createCategorySelector() {
+    const form = document.getElementById('reviewForm');
+    const firstInput = form.querySelector('input');
+
+    const selectorHTML = `
+      <div class="reviews-category-selector">
+        <label class="reviews-form-label">Категорія відгуку *</label>
+        <select id="categorySelect" class="reviews-form-input" required>
+          ${Object.entries(this.availableCategories).map(([key, name]) =>
+      `<option value="${key}" ${key === this.category ? 'selected' : ''}>${name}</option>`
+    ).join('')}
+        </select>
+      </div>
+    `;
+
+    firstInput.insertAdjacentHTML('beforebegin', selectorHTML);
+
+    document.getElementById('categorySelect').addEventListener('change', (e) => {
+      this.category = e.target.value;
+      this.categoryDisplayName = this.availableCategories[this.category];
+      this.loadReviews().then(() => {
+        this.renderReviews();
+        this.updateStats();
+      });
+    });
+  }
+
+  updatePageTitle() {
+    const titleElement = document.querySelector('.reviews-title, h1, h2');
+    if (titleElement && this.categoryDisplayName !== 'Загальні відгуки') {
+      titleElement.textContent = `Відгуки - ${this.categoryDisplayName}`;
+    }
+  }
+
   async authenticateUser() {
     try {
-      // Завжди використовуємо анонімну автентифікацію
       const result = await signInAnonymously(this.auth);
       this.user = result.user;
       console.log('Анонімна автентифікація успішна:', this.user.uid);
 
-      // Слухаємо зміни стану автентифікації
       onAuthStateChanged(this.auth, (user) => {
         if (user && user.isAnonymous) {
           this.user = user;
           console.log('Анонімний користувач підтверджений:', user.uid);
         } else if (!user) {
-          // Якщо користувач вийшов, створюємо нового анонімного
           this.signInAnonymously();
         }
       });
     } catch (error) {
       console.error('Помилка автентифікації:', error);
-      // Повторна спроба через 2 секунди
       setTimeout(() => this.authenticateUser(), 2000);
     }
   }
@@ -73,20 +160,18 @@ class ReviewsSystem {
       console.log('Нова анонімна автентифікація:', this.user.uid);
     } catch (error) {
       console.error('Помилка анонімної автентифікації:', error);
-      // Повторна спроба через 3 секунди
       setTimeout(() => this.signInAnonymously(), 3000);
     }
   }
 
-  // Система обмеження частоти
   getLastSubmissionTime() {
-    const saved = localStorage.getItem('lastReviewSubmission');
+    const saved = localStorage.getItem(`lastReviewSubmission_${this.category}`);
     return saved ? parseInt(saved) : 0;
   }
 
   setLastSubmissionTime() {
     const now = Date.now();
-    localStorage.setItem('lastReviewSubmission', now.toString());
+    localStorage.setItem(`lastReviewSubmission_${this.category}`, now.toString());
     this.lastSubmissionTime = now;
   }
 
@@ -99,7 +184,6 @@ class ReviewsSystem {
       const remainingMinutes = this.RATE_LIMIT_MINUTES - minutesDiff;
       this.disableForm(`Ви зможете залишити наступний відгук через ${remainingMinutes} хвилин`);
 
-      // Встановлюємо таймер для відновлення форми
       setTimeout(() => {
         this.enableForm();
         this.checkRateLimit();
@@ -110,7 +194,7 @@ class ReviewsSystem {
   disableForm(message) {
     const form = document.getElementById('reviewForm');
     const submitBtn = document.querySelector('.reviews-submit-btn');
-    const inputs = form.querySelectorAll('input, textarea, button');
+    const inputs = form.querySelectorAll('input, textarea, button, select');
 
     inputs.forEach(input => input.disabled = true);
     submitBtn.textContent = message;
@@ -120,15 +204,14 @@ class ReviewsSystem {
   enableForm() {
     const form = document.getElementById('reviewForm');
     const submitBtn = document.querySelector('.reviews-submit-btn');
-    const inputs = form.querySelectorAll('input, textarea, button');
+    const inputs = form.querySelectorAll('input, textarea, button, select');
 
     inputs.forEach(input => input.disabled = false);
     submitBtn.textContent = 'Опублікувати відгук';
     submitBtn.style.opacity = '1';
-    this.createCaptcha(); // Створюємо нову капчу
+    this.createCaptcha();
   }
 
-  // Система CAPTCHA
   createCaptcha() {
     const captchaContainer = this.getCaptchaContainer();
     const num1 = Math.floor(Math.random() * 10) + 1;
@@ -173,7 +256,6 @@ class ReviewsSystem {
       </div>
     `;
 
-    // Додаємо обробники подій для капчі
     document.getElementById('captchaInput').addEventListener('input', (e) => {
       this.verifyCaptcha(parseInt(e.target.value));
     });
@@ -189,7 +271,6 @@ class ReviewsSystem {
       container = document.createElement('div');
       container.id = 'captchaContainer';
 
-      // Вставляємо капчу перед кнопкою відправки
       const submitBtn = document.querySelector('.reviews-submit-btn');
       submitBtn.parentNode.insertBefore(container, submitBtn);
     }
@@ -211,7 +292,6 @@ class ReviewsSystem {
   }
 
   setupEventListeners() {
-    // Рейтинг зірочки
     const stars = document.querySelectorAll('.reviews-rating-input .reviews-star');
     stars.forEach(star => {
       star.addEventListener('click', (e) => {
@@ -229,7 +309,6 @@ class ReviewsSystem {
       this.updateStarDisplay();
     });
 
-    // Форма
     document.getElementById('reviewForm').addEventListener('submit', (e) => {
       e.preventDefault();
       this.addReview();
@@ -251,9 +330,7 @@ class ReviewsSystem {
     this.highlightStars(this.selectedRating);
   }
 
-  // Валідація та фільтрація контенту
   validateContent(text) {
-    // Список заборонених слів (можна розширити)
     const bannedWords = ['спам', 'реклама', 'купити', 'продаж', 'дешево'];
     const lowerText = text.toLowerCase();
 
@@ -263,13 +340,11 @@ class ReviewsSystem {
       }
     }
 
-    // Перевірка на надмірну кількість великих літер
     const upperCaseCount = (text.match(/[A-ZА-ЯЄІЇҐ]/g) || []).length;
     if (upperCaseCount > text.length * 0.7) {
       return false;
     }
 
-    // Перевірка на повторювані символи
     if (/(.)\1{4,}/.test(text)) {
       return false;
     }
@@ -282,26 +357,26 @@ class ReviewsSystem {
     const email = document.getElementById('reviewerEmail').value.trim();
     const text = document.getElementById('reviewText').value.trim();
 
-    // Базова валідація
+    const selectedCategory = document.getElementById('categorySelect')
+      ? document.getElementById('categorySelect').value
+      : this.category;
+
     if (!name || !text || this.selectedRating === 0) {
       alert('Будь ласка, заповніть всі обов\'язкові поля та поставте рейтинг');
       return;
     }
 
-    // Перевірка капчі
     if (!this.captchaVerified) {
       alert('Будь ласка, правильно відповідайте на питання для підтвердження');
       document.getElementById('captchaInput').focus();
       return;
     }
 
-    // Перевірка автентифікації (тільки анонімна)
     if (!this.user || !this.user.isAnonymous) {
       alert('Помилка автентифікації. Перезавантажте сторінку');
       return;
     }
 
-    // Перевірка обмеження частоти
     const now = Date.now();
     const timeDiff = now - this.lastSubmissionTime;
     const minutesDiff = Math.floor(timeDiff / (1000 * 60));
@@ -312,7 +387,6 @@ class ReviewsSystem {
       return;
     }
 
-    // Валідація контенту
     if (!this.validateContent(text) || !this.validateContent(name)) {
       alert('Відгук містить неприйнятний контент. Будь ласка, перепишіть повідомлення');
       return;
@@ -325,35 +399,31 @@ class ReviewsSystem {
       text: this.sanitizeInput(text),
       date: new Date().toLocaleDateString('uk-UA'),
       timestamp: serverTimestamp(),
-      userId: this.user.uid, // Додаємо UID користувача для безпеки
-      verified: true
+      userId: this.user.uid,
+      verified: true,
+      category: selectedCategory
     };
 
     try {
-      // Показуємо індикатор завантаження
       const btn = document.querySelector('.reviews-submit-btn');
       const originalText = btn.textContent;
       btn.textContent = 'Збереження...';
       btn.disabled = true;
 
-      // Додаємо в Firebase
       await addDoc(collection(this.db, 'reviews'), review);
 
-      // Оновлюємо час останньої відправки
       this.setLastSubmissionTime();
 
-      // Оновлюємо локальні дані
       await this.loadReviews();
       this.renderReviews();
       this.updateStats();
       this.resetForm();
 
-      // Показуємо повідомлення про успіх
       btn.textContent = 'Відгук додано! ✓';
       setTimeout(() => {
         btn.textContent = originalText;
         btn.disabled = false;
-        this.checkRateLimit(); // Перевіряємо обмеження після успішної відправки
+        this.checkRateLimit();
       }, 2000);
 
     } catch (error) {
@@ -366,12 +436,11 @@ class ReviewsSystem {
     }
   }
 
-  // Санітизація введених даних
   sanitizeInput(input) {
     return input
-      .replace(/[<>]/g, '') // Видаляємо < та >
-      .replace(/javascript:/gi, '') // Видаляємо javascript:
-      .replace(/on\w+=/gi, '') // Видаляємо обробники подій
+      .replace(/[<>]/g, '')
+      .replace(/javascript:/gi, '')
+      .replace(/on\w+=/gi, '')
       .trim();
   }
 
@@ -379,32 +448,101 @@ class ReviewsSystem {
     document.getElementById('reviewForm').reset();
     this.selectedRating = 0;
     this.updateStarDisplay();
-    this.createCaptcha(); // Створюємо нову капчу
+    this.createCaptcha();
+
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) {
+      categorySelect.value = this.category;
+    }
   }
 
+  // 🔧 ВИПРАВЛЕНИЙ метод завантаження відгуків
   async loadReviews() {
+    console.log('🔄 Завантаження відгуків для категорії:', this.category);
+
     try {
-      const q = query(collection(this.db, 'reviews'), orderBy('timestamp', 'desc'));
+      // Спробуємо простий запит тільки по verified
+      const q = query(
+        collection(this.db, 'reviews'),
+        where('verified', '==', true)
+      );
+
       const querySnapshot = await getDocs(q);
+      console.log('📥 Завантажено відгуків із БД:', querySnapshot.size);
 
       this.reviews = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        // Фільтруємо тільки верифіковані відгуки
-        if (data.verified) {
-          // Конвертуємо timestamp в дату якщо потрібно
+
+        // Фільтруємо по категорії в коді
+        const reviewCategory = data.category || 'general'; // fallback для старих відгуків
+
+        if (this.category === 'general' || reviewCategory === this.category) {
           if (data.timestamp && data.timestamp.toDate) {
             data.date = data.timestamp.toDate().toLocaleDateString('uk-UA');
+            data.timestampValue = data.timestamp.toDate().getTime();
+          } else {
+            // Fallback для відгуків без timestamp
+            data.timestampValue = Date.now();
           }
+
           this.reviews.push({
             id: doc.id,
             ...data
           });
         }
       });
+
+      // Сортуємо по часу (нові спочатку)
+      this.reviews.sort((a, b) => {
+        const timeA = a.timestampValue || 0;
+        const timeB = b.timestampValue || 0;
+        return timeB - timeA;
+      });
+
+      console.log(`✅ Відгуків для категорії "${this.category}":`, this.reviews.length);
+
     } catch (error) {
-      console.error('Помилка при завантаженні відгуків:', error);
-      this.reviews = [];
+      console.error('❌ Помилка при завантаженні відгуків:', error);
+
+      // Якщо і це не працює, спробуємо завантажити всі відгуки
+      try {
+        console.log('🔄 Пробую завантажити всі відгуки...');
+        const allQuery = query(collection(this.db, 'reviews'));
+        const allSnapshot = await getDocs(allQuery);
+
+        this.reviews = [];
+        allSnapshot.forEach((doc) => {
+          const data = doc.data();
+          const reviewCategory = data.category || 'general';
+
+          if (reviewCategory === this.category && (data.verified === true || data.verified === undefined)) {
+            if (data.timestamp && data.timestamp.toDate) {
+              data.date = data.timestamp.toDate().toLocaleDateString('uk-UA');
+              data.timestampValue = data.timestamp.toDate().getTime();
+            } else {
+              data.timestampValue = Date.now();
+            }
+
+            this.reviews.push({
+              id: doc.id,
+              ...data
+            });
+          }
+        });
+
+        this.reviews.sort((a, b) => {
+          const timeA = a.timestampValue || 0;
+          const timeB = b.timestampValue || 0;
+          return timeB - timeA;
+        });
+
+        console.log(`✅ Знайдено відгуків (fallback):`, this.reviews.length);
+
+      } catch (fallbackError) {
+        console.error('❌ Критична помилка завантаження:', fallbackError);
+        this.reviews = [];
+      }
     }
   }
 
@@ -416,7 +554,7 @@ class ReviewsSystem {
         <div class="reviews-empty-state">
           <div class="reviews-empty-state-icon">💬</div>
           <h3>Поки що немає відгуків</h3>
-          <p>Будьте першим, хто залишить відгук!</p>
+          <p>Будьте першим, хто залишить відгук про ${this.categoryDisplayName.toLowerCase()}!</p>
         </div>
       `;
       return;
@@ -472,7 +610,44 @@ class ReviewsSystem {
   }
 }
 
-// Додаємо стилі для капчі
+// Стилі
+const categoryStyles = `
+  .reviews-category-selector {
+    margin-bottom: 20px;
+  }
+
+  .reviews-category-selector select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+  }
+
+  .reviews-category-selector select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+
+  .reviews-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+
+  .reviews-empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .reviews-empty-state h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+`;
+
 const captchaStyles = `
   .reviews-captcha {
     margin-bottom: 20px;
@@ -503,12 +678,17 @@ const captchaStyles = `
   }
 `;
 
-// Додаємо стилі до документа
+// Додаємо стилі
 const styleSheet = document.createElement('style');
-styleSheet.textContent = captchaStyles;
+styleSheet.textContent = categoryStyles + captchaStyles;
 document.head.appendChild(styleSheet);
 
-// Ініціалізація системи відгуків
+// Експортуємо клас
+window.ReviewsSystem = ReviewsSystem;
+
+// Автоматична ініціалізація
 document.addEventListener('DOMContentLoaded', () => {
-  new ReviewsSystem();
+  if (window.reviewsConfig) {
+    new ReviewsSystem(window.reviewsConfig);
+  }
 });

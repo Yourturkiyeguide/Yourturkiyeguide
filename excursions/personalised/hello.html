@@ -11,13 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/icon.png" type="favicon">
-  <link rel="stylesheet" href="/assets/css/layout/style.css">
-  <link rel="stylesheet" href="/assets/css/layout/tourMapSelected.css">
-  <link rel="stylesheet" href="/assets/css/pages/hello.css">
-  <link rel="stylesheet" href="/assets/css/layout/galleria.css">
+  <link rel="stylesheet" href="../../assets/css/layout/style.css">
+  <link rel="stylesheet" href="../../assets/css/layout/tourMapSelected.css">
+  <link rel="stylesheet" href="../../assets/css/pages/hello.css">
+  <link rel="stylesheet" href="../../assets/css/layout/galleria.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="/assets/css/layout/accordion.css">
-  <link rel="stylesheet" href="/assets/css/pages/reviews.css">
+  <link rel="stylesheet" href="../../assets/css/layout/accordion.css">
+  <link rel="stylesheet" href="../../assets/css/pages/reviews.css">
+  <link rel="stylesheet" href="../../assets/css/layout/fix.css">
+  <link rel="stylesheet" href="../../assets/css/layout/reservation.css">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
 <header>
   <div class="container-header">
     <div class="logo">
-      <a href="/index.html">
+      <a href="../../index.html">
         <img src="/icon.png" alt="Іконка сайту" width="64" height="64">
         <span class="logo-text">TravelsTurkey</span>
       </a>
@@ -33,24 +35,24 @@
     <div class="menu">
       <nav>
         <ul>
-          <li><a href="/index.html">Главная</a></li>
-          <li><a href="/about.html">Обо мне</a></li>
-          <li><a href="/excursions/excursions.html">Экскурсии</a>
+          <li><a href="../../index.html">Главная</a></li>
+          <li><a href="../../about.html">Обо мне</a></li>
+          <li><a href="../excursions.html">Экскурсии</a>
             <ul class="sub-menu">
-              <li><a href="/excursions/personalised.html">Индивидуальные экскурсии</a></li>
-              <li><a href="/excursions/group.html">Групповые экскурсии</a></li>
-              <li><a href="/excursions/copyright.html">Авторские туры</a></li>
+              <li><a href="../personalised.html">Индивидуальные экскурсии</a></li>
+              <li><a href="../group.html">Групповые экскурсии</a></li>
+              <li><a href="../copyright.html">Авторские туры</a></li>
             </ul>
           </li>
-          <li><a href="/servis/servis.html">Другие услуги</a>
+          <li><a href="../../servis/servis.html">Другие услуги</a>
             <ul class="sub-menu">
-              <li><a href="/servis/yachts.html">Яхты</a></li>
-              <li><a href="/servis/Transfer.html">Трансфер</a></li>
-              <li><a href="/servis/medical.html">Медицинский туризм</a></li>
-              <li><a href="/servis/shopping.html">Шопинг</a></li>
+              <li><a href="../../servis/yachts.html">Яхты</a></li>
+              <li><a href="../../servis/Transfer.html">Трансфер</a></li>
+              <li><a href="../../servis/medical.html">Медицинский туризм</a></li>
+              <li><a href="../../servis/shopping.html">Шопинг</a></li>
             </ul>
           </li>
-          <li><a href="/reviews.html">Отзывы</a></li>
+          <li><a href="../../reviews.html">Отзывы</a></li>
         </ul>
       </nav>
     </div>
@@ -194,13 +196,6 @@
       </div>
 
 
-      <!--Питання-->
-      <div class="cta">
-        <h2>Остались вопросы?</h2>
-        <p>Можно задать все вопросы организатору до оплаты!</p>
-        <a href="https://t.me/+905443266871" target="_blank" class="cta-btn">Зв'язатись у Telegram</a>
-        <a href="https://wa.me/+905443266871" target="_blank" class="cta-btn1">Зв'язатись у WhatsApp</a>
-      </div>
 
       <!--Умови бронювання-->
       <div class="booking-conditions">
@@ -255,6 +250,71 @@
             <p class="condition-description">
               можно <span class="highlight">в заказе до предоплаты</span>
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!--Персональна подорож-->
+      <div class="personal-journey-section">
+        <div class="personal-journey-container">
+          <div class="booking-card">
+            <div class="reservation-header">
+              <h1 class="tour-type">Персональна Подорож</h1>
+              <p class="subtitle">Унікальний досвід для вашої групи</p>
+            </div>
+
+            <div class="details-grid">
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Тривалість</div>
+                  <div class="detail-value">4 години насолоди</div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Формат</div>
+                  <div class="detail-value">1-6 осіб • Сімейний</div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Спосіб проведення</div>
+                  <div class="detail-value">Пішки з цікавими зупинками</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="price-section">
+              <div class="price">€206</div>
+              <div class="price-description">для групи 1-6 осіб • фіксована вартість</div>
+            </div>
+
+            <div class="booking-buttons">
+              <!-- WhatsApp -->
+              <a href="https://wa.me/+380971115402?text=Здравствуйте!%20Хочу%20забронировать%20персональную%20экскурсию%20%22Привет,%20Стамбул!%22%20на%204%20часа%20для%20группы.%0A%0A📅%20Дата:%20[введите%20дату]%0A👥%20Количество%20человек:%20[до%206]%0A👶%20Будут%20ли%20дети:%20[да/нет]%0A💬%20Комментарий:%20[ваш%20вопрос]%0A%0AСпасибо!"
+                 class="booking-btn whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+
+            <div class="response-time">
+              <div class="pulse-dot"></div>
+              Зазвичай відповідаємо протягом 10 хвилин
+            </div>
           </div>
         </div>
       </div>
@@ -327,7 +387,14 @@
         </div>
       </div>
 
-      <!--Відгуки-->
+      <!--Питання-->
+      <div class="cta">
+        <h2>Остались вопросы?</h2>
+        <p>Можно задать все вопросы организатору до оплаты!</p>
+        <a href="https://t.me/+905443266871" target="_blank" class="cta-btn">Зв'язатись у Telegram</a>
+        <a href="https://wa.me/+905443266871" target="_blank" class="cta-btn1">Зв'язатись у WhatsApp</a>
+      </div>
+
       <!--Відгуки-->
       <div class="reviews-container">
         <div class="reviews-section">
@@ -425,11 +492,11 @@
     <p>📧 Email: <a href="mailto:firatdicle_47@hotmail.com"> firatdicle_47@hotmail.com</a></p>
   </div>
   <div class="footer-social">
-    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="/assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
-    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="/assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
-    <a href="https://t.me/+905443266871"target="_blank"><img src="/assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
-    <a href="https://wa.me/+905443266871" target="_blank"><img src="/assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
-    <a href="viber://chat?number=+905443266871" target="_blank"><img src="/assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
+    <a href="https://www.facebook.com/share/1BtNQc47ZZ/?mibextid=wwXIfr" target="_blank"><img src="../../assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
+    <a href="https://www.instagram.com/tourkey.travels/" target="_blank"><img src="../../assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
+    <a href="https://t.me/+905443266871"target="_blank"><img src="../../assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
+    <a href="https://wa.me/+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
+    <a href="viber://chat?number=+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
   </div>
   <div class="footer-copy">
     <p>&copy; 2025 Türkiye Travellings. Усі права захищені.</p>
@@ -438,28 +505,38 @@
 
 <!-- Додаємо нижнє меню всередину <body>, перед </body> -->
 <nav class="mobile-menu">
-  <a href="/index.html">
-    <img src="/assets/img/icon/home.png" alt="Главная" width="24" height="24">
+  <a href="../../index.html">
+    <img src="../../assets/img/icon/home.png" alt="Главная" width="24" height="24">
   </a>
-  <a href="/about.html">
-    <img src="/assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
+  <a href="../../about.html">
+    <img src="../../assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
   </a>
-  <a href="/excursions/excursions.html">
-    <img src="/assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
+  <a href="../excursions.html">
+    <img src="../../assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
   </a>
-  <a href="/servis/servis.html">
-    <img src="/assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
+  <a href="../../servis/servis.html">
+    <img src="../../assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
   </a>
-  <a href="/reviews.html">
-    <img src="/assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
+  <a href="../../reviews.html">
+    <img src="../../assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
   </a>
 </nav>
 
-<script src="/assets/js/script.js"></script>
-<script src="/assets/js/pages/picture.js"></script>
-<script src="/assets/js/pages/galleria.js"></script>
-<script src="/assets/js/pages/accordion.js"></script>
+<script src="../../assets/js/script.js"></script>
+<script src="../../assets/js/pages/picture.js"></script>
+<script src="../../assets/js/pages/galleria.js"></script>
+<script src="../../assets/js/pages/accordion.js"></script>
 <!-- Firebase Script -->
-<script type="module" src="/assets/js/pages/reviews.js"></script>
+<script type="module">
+  import '../../assets/js/pages/reviews.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new ReviewsSystem({
+      category: 'istanbul',
+      categoryDisplayName: 'Стамбул'
+    });
+  });
+</script>
+
 </body>
 </html>
