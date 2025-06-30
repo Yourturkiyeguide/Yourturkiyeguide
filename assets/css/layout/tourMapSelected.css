@@ -60,7 +60,7 @@
 
 .excursion-text > p {
   font-size: 1.2rem;
-  text-align: justify;
+  text-align: left;
   margin-bottom: 30px;
   color: var(--text-light);
 }
@@ -98,7 +98,7 @@
 }
 
 .subsection-text {
-  text-align: justify;
+  text-align: left;
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--text-light);
