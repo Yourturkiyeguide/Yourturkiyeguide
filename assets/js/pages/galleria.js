@@ -1,7 +1,7 @@
 // Демонстраційні зображення
 const gallerySlides = [
   {
-    image: '../../assets/img/hello/1.jpg',
+    image: '../../assets/img/hello/1.webp',
     title: 'Зображення 1'
   },
   {
@@ -9,32 +9,36 @@ const gallerySlides = [
     title: 'Зображення 2'
   },
   {
-    image: '../../assets/img/hello/3.jpg',
+    image: '../../assets/img/hello/3.webp',
     title: 'Зображення 3'
   },
   {
-    image: '../../assets/img/hello/4.jpg',
+    image: '../../assets/img/hello/4.webp',
     title: 'Фото 4'
   },
   {
-    image: '../../assets/img/hello/5.jpg',
+    image: '../../assets/img/hello/5.webp',
     title: 'Фото 5'
   },
   {
-    image: '../../assets/img/hello/6.jpg',
+    image: '../../assets/img/hello/6.webp',
     title: 'Фото 6'
   },
   {
-    image: '../../assets/img/hello/7.jpg',
+    image: '../../assets/img/hello/7.webp',
     title: 'Фото 7'
   },
   {
-    image: '../../assets/img/hello/8.jpg',
+    image: '../../assets/img/hello/8.webp',
     title: 'Фото 8'
   },
   {
-    image: '../../assets/img/hello/9.jpg',
+    image: '../../assets/img/hello/9.webp',
     title: 'Фото 9'
+  },
+  {
+    image: '../../assets/img/hello/10.webp',
+    title: 'Фото 10'
   }
 ];
 
