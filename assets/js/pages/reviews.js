@@ -39,7 +39,7 @@ class ReviewsSystem {
       'general': 'Общие',
       'istanbul': 'Стамбул',
       'colourful': 'Колорит',
-      'cappadocia': 'Каппадокия'
+      'tranzit': 'Транзит'
     };
 
     this.init();
