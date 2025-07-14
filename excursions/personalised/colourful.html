@@ -1,10 +1,553 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Колоритный Стамбул</title>
+  <!-- Підключення шрифтів Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../icon.png" type="favicon">
+  <link rel="stylesheet" href="../../assets/css/layout/style.css">
+  <link rel="stylesheet" href="../../assets/css/layout/tourMapSelected.css">
+  <link rel="stylesheet" href="../../assets/css/layout/route.css">
+  <link rel="stylesheet" href="../../assets/css/layout/galleria.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/layout/accordion.css">
+  <link rel="stylesheet" href="../../assets/css/pages/reviews.css">
+  <link rel="stylesheet" href="../../assets/css/layout/fix.css">
+  <link rel="stylesheet" href="../../assets/css/layout/reservation.css">
 </head>
+
 <body>
+
+<header>
+  <div class="container-header">
+    <div class="logo">
+      <a href="../../index.html">
+        <img src="../../icon.png" alt="Іконка сайту" width="64" height="64">
+        <span class="logo-text">TravelsTurkey</span>
+      </a>
+    </div>
+    <div class="menu">
+      <nav>
+        <ul>
+          <li><a href="../../index.html">Главная</a></li>
+          <li><a href="../../about.html">Обо мне</a></li>
+          <li><a href="../excursions.html">Экскурсии</a>
+            <ul class="sub-menu">
+              <li><a href="../personalised.html">Индивидуальные экскурсии</a></li>
+              <li><a href="../group.html">Групповые экскурсии</a></li>
+              <li><a href="../copyright.html">Авторские туры</a></li>
+            </ul>
+          </li>
+          <li><a href="../../services/services.html">Другие услуги</a>
+            <ul class="sub-menu">
+              <li><a href="../../services/yachts.html">Яхты</a></li>
+              <li><a href="../../services/transfer.html">Трансфер</a></li>
+              <li><a href="../../services/medical.html">Медицинский туризм</a></li>
+              <li><a href="../../services/shopping.html">Шопинг</a></li>
+            </ul>
+          </li>
+          <li><a href="../../reviews.html">Отзывы</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <article>
+
+      <!--Фотографія з текстом-->
+      <div class="photo-container" style="background-image: url('../../assets/img/colorful/1.webp');">
+        <div class="text-content">
+          <h1>Колоритный Стамбул</h1>
+          <p>Увидеть разные грани прекрасного города</p>
+        </div>
+      </div>
+
+      <!--Остновнний текст-->
+      <div class="excursion-text">
+        <p>Каждый уголок Стамбула наполнен историей и особой атмосферой. На этой прогулке вы увидите разный город — но всегда красочный и интересный. Заглянете в мечеть Сулеймание, посетите древний храм и церковь из чугуна. Погуляете по разноцветному Балату. Полюбуетесь панорамами с нескольких смотровых площадок. А я расскажу вам всё самое интересное о Стамбуле!</p>
+
+        <h2 class="section-title">Что вас ожидает</h2>
+
+        <div class="subsection-title">Мечеть Сулеймание</div>
+        <p class="subsection-text">«Эта мечеть будет стоять вечно!» — заявил архитектор Синан. И угадал. Я познакомлю вас с историей одного из самых известных символов Османской империи. Вы увидите тюрбе (усыпальницу) султана Сулеймана и Роксоланы. И побываете на смотровой площадке с прекрасным видом на Босфор.</p>
+
+        <div class="subsection-title">Район Балат</div>
+        <p class="subsection-text">Атмосферный контрастный Балат — один из старейших районов города. Когда-то здесь соседствовали разные народы и целых три религии. Сегодня же это один из самых богемных районов Стамбула, где проходят съёмки турецких сериалов. Мы неспешно погуляем по улочкам с разноцветными домиками и понаблюдаем за окружающей жизнью.</p>
+
+        <div class="subsection-title">Собор Святого Георгия</div>
+        <p class="subsection-text">Главный храм Константинополя со множеством христианских святынь, среди которых столб бичевания Христа, исторические иконы, трон Иоана Златоуста, мощи трёх святителей и трёх святых жён.</p>
+
+        <div class="subsection-title">Холм Пьер Лоти</div>
+        <p class="subsection-title">Одна из самых известных смотровых площадок Стамбула. Отсюда открывается прекрасный вид на бухту Золотой Рог и почти весь исторический центр города. А ещё здесь есть небольшое кафе, где можно выпить чашечку турецкого чая или кофе и насладиться панорамами.</p>
+
+       <!-- &lt;!&ndash;Галарея маршруту&ndash;&gt;
+        <div class="korobka">
+          <div class="floating-elements">
+            <div class="floating-circle" style="width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+            <div class="floating-circle" style="width: 60px; height: 60px; top: 70%; right: 10%; animation-delay: 2s;"></div>
+            <div class="floating-circle" style="width: 80px; height: 80px; top: 30%; right: 5%; animation-delay: 4s;"></div>
+          </div>
+
+          <div class="gallery-container">
+            <button class="auto-play-toggle" onclick="toggleAutoPlay()">
+             <span id="autoPlayIcon">
+               <div class="play-triangle"></div>
+             </span>
+              <span id="autoPlayText">Авто</span>
+            </button>
+
+            <h2 class="section-title">Маршрут экскурсии</h2>
+
+            <div class="carousel-wrapper">
+              <div class="carousel" id="carousel">
+                <div class="carousel-item active">
+                  <div class="step-number">1</div>
+                  <img src="../../assets/img/hello/1.webp" alt="Айя-София" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Айя-София</h3>
+                    <p class="item-description">Мечеть, сочетающая в себе элементы православной и мусульманской культуры, а также включенная в список Всемирного наследия Юнеско.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item next">
+                  <div class="step-number">2</div>
+                  <img src="../../assets/img/hello/7.webp" alt="Дворец Топкапы" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Дворец Топкапы</h3>
+                    <p class="item-description">Главный дворец Османской империи, в котором жили и правили 25 султанов.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item hidden">
+                  <div class="step-number">3</div>
+                  <img src="../../assets/img/hello/3.webp" alt="Римский ипподром" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Римский ипподром</h3>
+                    <p class="item-description">Площадь Султанахмед — это главная площадь Стамбула c сохранившимися памятниками разных цивилизаций.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item hidden">
+                  <div class="step-number">4</div>
+                  <img src="../../assets/img/hello/2.webp" alt="Голубая мечеть" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Голубая мечеть</h3>
+                    <p class="item-description">Выдающийся шедевр исламской и мировой архитектуры 17 века.</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item prev">
+                  <div class="step-number">5</div>
+                  <img src="../../assets/img/hello/5.webp" alt="Цистерна Базилика" class="item-image">
+                  <div class="item-content">
+                    <h3 class="item-title">Цистерна Базилика</h3>
+                    <p class="item-description">Одно из самых крупных и хорошо сохранившихся древних подземных водохранилищ Константинополя.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-controls">
+              <button class="control-btn" onclick="carouselPrevSlide()">‹</button>
+              <div class="indicators">
+                <div class="indicator active" onclick="carouselGoToSlide(0)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(1)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(2)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(3)" tabindex="0"></div>
+                <div class="indicator" onclick="carouselGoToSlide(4)" tabindex="0"></div>
+              </div>
+              <button class="control-btn" onclick="carouselNextSlide()">›</button>
+            </div>
+          </div>
+        </div>-->
+
+
+        <!--Деталі подорожу-->
+        <div class="info-sections">
+          <div class="info-block">
+            <h3 class="info-title">Организационные детали</h3>
+            <ul>
+              <li>Экскурсия пешая, но между некоторыми локациями мы будем перемещаться на общественном транспорте — трамвае или метро. Будет около 8 поездок, стоимость каждой — 27 лир за человека</li>
+              <li>Также дополнительно оплачивается подъём на холм Пьер Лоти на фуникулере — 27 лир за человека (по желанию)</li>
+              <li>По понедельникам вход в усыпальницу закрыт</li>
+              <li>Мы будем посещать храмы и мечети, поэтому, пожалуйста, позаботьтесь о соответствующей одежде (как женщины, так и мужчины)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="meeting-point">
+          <h3 class="info-title">Место встречи</h3>
+          <p>По договорённости с организатором. Вы можете обсудить его в заказе до предоплаты.</p>
+        </div>
+      </div>
+
+      <!--Умови бронювання-->
+      <div class="booking-conditions">
+        <h1 class="title">Условия бронирования</h1>
+
+        <div class="conditions-grid">
+          <div class="condition-card">
+            <span class="condition-icon">👥</span>
+            <h3 class="condition-title">Индивидуальный формат</h3>
+            <p class="condition-description">
+              Только для вас и вашей компании, <span class="highlight">1-6 человек</span>
+            </p>
+          </div>
+
+          <div class="condition-card">
+            <span class="condition-icon">💰</span>
+            <h3 class="condition-title">Предоплата 20%</h3>
+            <p class="condition-description">
+              <span class="highlight">остальное —</span><br>
+              организатору напрямую
+            </p>
+          </div>
+
+          <div class="condition-card">
+            <span class="condition-icon">🗣️</span>
+            <h3 class="condition-title">Проходит на русском языке</h3>
+            <p class="condition-description">
+              Экскурсия проводится на русском языке для лучшего понимания
+            </p>
+          </div>
+
+          <div class="condition-card">
+            <span class="condition-icon">❓</span>
+            <h3 class="condition-title">Задать вопросы организатору</h3>
+            <p class="condition-description">
+              можно <span class="highlight">в заказе до предоплаты</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--Персональна подорож-->
+      <div class="personal-journey-section">
+        <div class="personal-journey-container">
+          <div class="booking-card">
+            <div class="reservation-header">
+              <h1 class="tour-type">Забронировать экскурсию</h1>
+              <p class="subtitle">Уникальный опыт для вашей группы</p>
+            </div>
+
+            <div class="details-grid">
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Продолжительность</div>
+                  <div class="detail-value">3,5 часа наслаждения</div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Формат</div>
+                  <div class="detail-value">1-6 человек - Семейный</div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="detail-content">
+                  <div class="detail-label">Способ проведения</div>
+                  <div class="detail-value">Пешком с интересными остановками</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="price-section">
+              <div class="price">€155</div>
+              <div class="price-description">за 1–6 человек, независимо от числа участников</div>
+            </div>
+
+            <div class="booking-buttons">
+              <!-- WhatsApp -->
+              <a href="https://wa.me/+905443266871?text=Здравствуйте!%20Хочу%20забронировать%20персональную%20экскурсию%20%22Привет,%20Стамбул!%22%20на%204%20часа%20для%20группы.%0A%0A📅%20Дата:%20[введите%20дату]%0A👥%20Количество%20человек:%20[до%206]%0A👶%20Будут%20ли%20дети:%20[да/нет]%0A💬%20Комментарий:%20[ваш%20вопрос]%0A%0AСпасибо!"
+                 class="booking-btn whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+
+            <div class="response-time">
+              <div class="pulse-dot"></div>
+              Обычно отвечаю в течение 10 минут.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Друга галарея-->
+      <div class="vertical-display">
+        <div class="main-photo-display" id="mainPhotoDisplay" onclick="openFullscreen()">
+          <div class="photo-placeholder" id="mainPhotoContainer">
+            <span>📷</span>
+            <span>Загрузка изображения...</span>
+          </div>
+          <div class="photo-counter">
+            <span id="currentPhoto">1</span> / <span id="totalPhotos">3</span>
+          </div>
+          <div class="photo-progress" id="photoProgress" style="width: 33.33%;"></div>
+        </div>
+
+        <div class="photo-thumbnails" id="photoThumbnails">
+          <!-- Мініатюри будуть створені динамічно -->
+        </div>
+      </div>
+
+      <div class="second-gallery-info">
+        <p>Нажмите на миниатюру для просмотра или используйте клавиши ↑/↓ для навигации</p>
+        <p>Enter - полноэкранный режим</p>
+        <div class="photo-error" id="photoError" style="display: none;"></div>
+      </div>
+
+      <!--Запитання -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Почему лучше выбрать гида с лицензией ?</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Деятельность профессиональных гидов в Турции лицензируют специальные организации. Наличие документов подтверждает компетентность, профильное образование, богатый опыт, высокие знания специалиста, а также дает преимущество туристам посещать музеи и дворцы в сопровождении гида в не очереди.   Наличие официальной лицензии от министерства культуры и туризма страны гарантирует вам безопасное получение высококачественных услуг.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Почему лучше  выбирать для сопровождения местного гида?</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Местный экскурсовод с лицензией прекрасно разбирается в истории, культуре, традициях и бытовой жизни Турции. Лучше знает, где самый вкусный кофе, недорогие сладости и лучшие цены на любые товары и услуги. Какой бы ни была ваша цель: посещение достопримечательностей, гастротуризм, религиозное паломничество или шопинг - местный гид ориентируется в любой сфере.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Можно ли составить индивидуальный маршрут, экскурсию или тур? </h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Да , я могу составить индивидуальный маршрут, экскурсию либо тур  с учетом ваших пожеланий, ритма путешествия и бюджета.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Будет ли комфортно с детьми?</h3>
+            <span>+</span>
+          </div>
+          <div class="accordion-content">
+            <p>Если вам комфортно, то все супер. У меня большой опыт проведения экскурсий с детьми.</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Питання-->
+      <div class="cta">
+        <h2>Остались вопросы?</h2>
+        <p>Можно задать все вопросы организатору до оплаты!</p>
+        <a href="https://t.me/+905443266871" target="_blank" class="cta-btn">Связаться в Telegram</a>
+        <a href="https://wa.me/+905443266871" target="_blank" class="cta-btn1">Связаться в WhatsApp</a>
+      </div>
+
+      <!--Відгуки-->
+      <div class="reviews-container">
+        <div class="reviews-section">
+          <h2 class="reviews-section-title">Отзывы клиентов</h2>
+          <p class="reviews-section-subtitle">Узнайте, что думают наши клиенты о наших услугах</p>
+
+          <!-- Статистика відгуків -->
+          <div class="reviews-stats">
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="totalReviews">0</div>
+              <div class="reviews-stat-label">Всего отзывов</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="averageRating">0.0</div>
+              <div class="reviews-stat-label">Средний рейтинг</div>
+            </div>
+            <div class="reviews-stat-card">
+              <div class="reviews-stat-number" id="fiveStarCount">0</div>
+              <div class="reviews-stat-label">5-звездочных отзывов</div>
+            </div>
+          </div>
+
+          <!-- Форма додавання відгуку -->
+          <form class="reviews-add-form" id="reviewForm">
+            <h3 class="reviews-form-title">Оставить отзыв</h3>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerName">Ваше имя *</label>
+              <input type="text" id="reviewerName" class="reviews-form-input" required maxlength="50">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewerEmail">Email (не будет опубликовано)</label>
+              <input type="email" id="reviewerEmail" class="reviews-form-input" maxlength="100">
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label">Рейтинг *</label>
+              <div class="reviews-rating-input" id="ratingInput">
+                <span class="reviews-star" data-rating="1">★</span>
+                <span class="reviews-star" data-rating="2">★</span>
+                <span class="reviews-star" data-rating="3">★</span>
+                <span class="reviews-star" data-rating="4">★</span>
+                <span class="reviews-star" data-rating="5">★</span>
+              </div>
+            </div>
+
+            <div class="reviews-form-group">
+              <label class="reviews-form-label" for="reviewText">Ваш отзыв *</label>
+              <textarea id="reviewText" class="reviews-form-textarea" required maxlength="500" placeholder="Поделитесь своим опытом..."></textarea>
+            </div>
+
+            <button type="submit" class="reviews-submit-btn">Опубликовать отзыв</button>
+          </form>
+
+          <!-- Список відгуків -->
+          <div class="reviews-grid" id="reviewsContainer">
+            <div class="reviews-empty-state">
+              <div class="reviews-empty-state-icon">💬</div>
+              <h3>Пока что нет отзывов</h3>
+              <p>Будьте первым, кто оставит отзыв!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Повноекранний оверлей -->
+    <div class="photo-fullscreen-overlay" id="photoFullscreenOverlay">
+      <div class="photo-fullscreen-content">
+        <button class="photo-close-button" onclick="closeFullscreen()">×</button>
+        <button class="photo-fullscreen-nav photo-nav-prev" onclick="navigateFullscreen(-1)">‹</button>
+        <button class="photo-fullscreen-nav photo-nav-next" onclick="navigateFullscreen(1)">›</button>
+
+        <div class="photo-fullscreen-main" id="photoFullscreenMain">
+          <div class="photo-placeholder">
+            <span>📷</span>
+            <span>Загрузка изображения...</span>
+          </div>
+        </div>
+
+        <div class="photo-fullscreen-counter">
+          <span id="photoFullscreenCurrent">1</span> / <span id="photoFullscreenTotal">3</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-contact">
+    <p>📞 Телефон:<a href="tel:+905443266871">+90 544 326 6871</a></p>
+    <p>📧 Email: <a href="mailto:firatdicle_47@hotmail.com"> firatdicle_47@hotmail.com</a></p>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/firat.n.dinler" target="_blank"><img src="../../assets/img/icon/facebook-icon.png" alt="Facebook" width="24"></a>
+    <a href="https://www.instagram.com/tourkey_travels" target="_blank"><img src="../../assets/img/icon/instagram-icon.png" alt="Instagram" width="24"></a>
+    <a href="https://t.me/+905443266871"target="_blank"><img src="../../assets/img/icon/telegram-icon.png" alt="Telegram" width="24"></a>
+    <a href="https://wa.me/+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-whatsapp-4494494.png" alt="WhatsApp" width="24"></a>
+    <a href="viber://chat?number=+905443266871" target="_blank"><img src="../../assets/img/icon/free-icon-viber-3670059.png" alt="Viber" width="24"></a>
+  </div>
+  <div class="footer-copy">
+    <p>&copy; 2025 Türkiye Travellings. Усі права захищені.</p>
+  </div>
+</footer>
+
+<!-- Додаємо нижнє меню всередину <body>, перед </body> -->
+<nav class="mobile-menu">
+  <a href="../../index.html">
+    <img src="../../assets/img/icon/home.png" alt="Главная" width="24" height="24">
+  </a>
+  <a href="../../about.html">
+    <img src="../../assets/img/icon/man.png" alt="Обо мне" width="24" height="24">
+  </a>
+  <a href="../excursions.html">
+    <img src="../../assets/img/icon/destination.png" alt="Экскурсии" width="24" height="24">
+  </a>
+  <a href="../../services/services.html">
+    <img src="../../assets/img/icon/yatch.png" alt="Яхты" width="24" height="24">
+  </a>
+  <a href="../../reviews.html">
+    <img src="../../assets/img/icon/customer-feedback.png" alt="Отзывы" width="24" height="24">
+  </a>
+</nav>
+
+<script src="../../assets/js/script.js"></script>
+<script src="../../assets/js/pages/picture.js"></script>
+<script>// Демонстраційні зображення
+const gallerySlides = [
+  {
+    image: '../../assets/img/colorful/1.webp',
+    title: 'Зображення 1'
+  },
+  {
+    image: '../../assets/img/colorful/2.webp',
+    title: 'Зображення 2'
+  },
+  {
+    image: '../../assets/img/colorful/3.webp',
+    title: 'Зображення 3'
+  },
+  {
+    image: '../../assets/img/colorful/4.webp',
+    title: 'Фото 4'
+  },
+  {
+    image: '../../assets/img/colorful/5.webp',
+    title: 'Фото 5'
+  },
+  {
+    image: '../../assets/img/colorful/6.webp',
+    title: 'Фото 6'
+  },
+  {
+    image: '../../assets/img/colorful/7.webp',
+    title: 'Фото 7'
+  },
+  {
+    image: '../../assets/img/colorful/8.webp',
+    title: 'Фото 8'
+  },
+  {
+    image: '../../assets/img/colorful/9.webp',
+    title: 'Фото 9'
+  }
+];</script>
+<script src="../../assets/js/pages/galleria.js"></script>
+<script src="../../assets/js/pages/accordion.js"></script>
+<!-- Firebase Script -->
+<script type="module">
+  import '../../assets/js/pages/reviews.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new ReviewsSystem({
+      category: 'colourful',
+      categoryDisplayName: 'Колорит'
+    });
+  });
+</script>
 
 </body>
 </html>

@@ -38,7 +38,7 @@ class ReviewsSystem {
     this.availableCategories = options.availableCategories || {
       'general': 'Общие',
       'istanbul': 'Стамбул',
-      'ankara': 'Анкара',
+      'colourful': 'Колорит',
       'cappadocia': 'Каппадокия'
     };
 

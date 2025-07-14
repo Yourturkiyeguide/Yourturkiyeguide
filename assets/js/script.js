@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const pageMapping = {
     // Підрозділи екскурсій
     'hello.html': 'personalised.html',
-    'transit.html': 'excursions.html',
+    'colourful.html': 'personalised.html',
+    'transit.html': 'personalised.html',
     'copyright.html': 'excursions.html',
     'excursions.html': 'excursions.html',
     'group.html': 'excursions.html',
@@ -23,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function() {
     'Personalised excursions.html': 'excursions.html',
 
     // Підрозділи послуг
-    'yachts.html': 'servis.html',
-    'Transfer.html': 'servis.html',
-    'medical.html': 'servis.html',
-    'shopping.html': 'servis.html'
+    'yachts.html': 'services.html',
+    'Transfer.html': 'services.html',
+    'medical.html': 'services.html',
+    'shopping.html': 'services.html'
   };
 
   // Функція для перевірки активності посилання
