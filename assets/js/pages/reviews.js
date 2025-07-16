@@ -39,7 +39,8 @@ class ReviewsSystem {
       'general': 'Общие',
       'istanbul': 'Стамбул',
       'colourful': 'Колорит',
-      'tranzit': 'Транзит'
+      'tranzit': 'Транзит',
+      'sophisticated': 'Изысканный'
     };
 
     this.init();

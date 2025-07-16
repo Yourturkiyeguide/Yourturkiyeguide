@@ -14,14 +14,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Мапа відповідності підсторінок до батьківських розділів
   const pageMapping = {
     // Підрозділи екскурсій
+    'excursions.html': 'excursions.html',
+    'Personalised excursions.html': 'excursions.html',
+    'personalised.html': 'excursions.html',
     'hello.html': 'personalised.html',
     'colourful.html': 'personalised.html',
     'transit.html': 'personalised.html',
+    'sophisticated.html': 'personalised.html',
     'copyright.html': 'excursions.html',
-    'excursions.html': 'excursions.html',
     'group.html': 'excursions.html',
-    'personalised.html': 'excursions.html',
-    'Personalised excursions.html': 'excursions.html',
 
     // Підрозділи послуг
     'yachts.html': 'services.html',
