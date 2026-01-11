@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="../../icon.webp" type="favicon">
   <link rel="stylesheet" href="../../assets/css/layout/style.css">
+  <link rel="stylesheet" href="../../assets/css/pages/booking.css">
   <link rel="stylesheet" href="../../assets/css/layout/tourMapSelected.css">
   <link rel="stylesheet" href="../../assets/css/layout/route.css">
   <link rel="stylesheet" href="../../assets/css/layout/galleria.css">
@@ -237,7 +238,7 @@
       </div>
 
       <!--Персональна подорож-->
-      <div class="personal-journey-section">
+      <div class="personal-journey-section" id="booking-section">
         <div class="personal-journey-container">
           <div class="booking-card">
             <div class="reservation-header">
@@ -441,6 +442,14 @@
 
     </article>
 
+    <!-- Плаваюча кнопка бронювання - ВАРІАНТ 1: з текстом -->
+    <a href="#booking-section" class="floating-booking-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+      </svg>
+      <span>Забронировать</span>
+    </a>
+
     <!-- Повноекранний оверлей -->
     <div class="photo-fullscreen-overlay" id="photoFullscreenOverlay">
       <div class="photo-fullscreen-content">
@@ -546,6 +555,7 @@ const gallerySlides = [
   }
 ];</script>
 <script src="../../assets/js/pages/galleria.js"></script>
+<script src="../../assets/js/pages/booking.js"></script>
 <script src="../../assets/js/pages/accordion.js"></script>
 <!-- Firebase Script -->
 <script type="module">

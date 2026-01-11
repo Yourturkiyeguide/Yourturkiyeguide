@@ -1,0 +1,101 @@
+/* Плаваюча кнопка бронювання */
+.floating-booking-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 9999;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+  text-decoration: none;
+}
+
+.floating-booking-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+  animation: none;
+}
+
+.floating-booking-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Іконка календаря */
+.floating-booking-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Пульсуюча анімація */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.7);
+  }
+}
+
+/* Адаптив для мобільних */
+@media (max-width: 768px) {
+  .floating-booking-btn {
+    bottom: 80px;
+    right: 15px;
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .floating-booking-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .floating-booking-btn span {
+    display: none;
+  }
+}
+
+/* Альтернативний стиль - круглий варіант */
+.floating-booking-btn.round {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.floating-booking-btn.round span {
+  display: none;
+}
+
+/* Tooltip при наведенні (для круглої версії) */
+.floating-booking-btn.round::before {
+  content: 'Забронировать';
+  position: absolute;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.floating-booking-btn.round:hover::before {
+  opacity: 1;
+}
