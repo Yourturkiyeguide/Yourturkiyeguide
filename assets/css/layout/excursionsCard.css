@@ -227,6 +227,22 @@
   animation: slideUp 0.6s ease-out 0.8s both;
 }
 
+/* Стиль для новинки - без зайвих контейнерів */
+.card-rating.is-new {
+  background: linear-gradient(135deg, rgba(255, 98, 0, 0.95), rgba(255, 140, 0, 0.95));
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card:hover .card-rating.is-new {
+  background: linear-gradient(135deg, #ff6200, #ff8c00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 98, 0, 0.4);
+}
+
 .stars {
   color: #FFD700;
   font-size: 0.8rem;
