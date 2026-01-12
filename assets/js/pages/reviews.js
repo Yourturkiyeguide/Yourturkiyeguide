@@ -40,7 +40,9 @@ class ReviewsSystem {
       'istanbul': 'Стамбул',
       'colourful': 'Колорит',
       'tranzit': 'Транзит',
-      'sophisticated': 'Изысканный'
+      'sophisticated': 'Изысканный',
+      'stambul': 'Стамбул мост',
+      'bosphorus': 'По волнам Босфора'
     };
 
     this.init();
