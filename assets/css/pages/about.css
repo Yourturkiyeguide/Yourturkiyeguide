@@ -28,7 +28,8 @@ article p {
   line-height: 1.6;
 }
 
-/* Стилі для малих екранів (320x620) */
+/*
+!* Стилі для малих екранів (320x620) *!
 @media screen and (max-width: 320px) {
   article img {
     max-width: 100%;
@@ -62,9 +63,9 @@ article p {
     padding: 0 4px;
   }
 }
+*/
 
-/*
-!* Альтернативний варіант - якщо потрібно застосувати стилі для всіх малих екранів *!
+/* Альтернативний варіант - якщо потрібно застосувати стилі для всіх малих екранів */
 @media screen and (max-width: 375px) {
   article img {
     margin-bottom: 15px;
@@ -81,4 +82,3 @@ article p {
     padding: 0 8px;
   }
 }
-*/
