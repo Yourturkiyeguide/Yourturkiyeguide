@@ -42,7 +42,8 @@ class ReviewsSystem {
       'tranzit': 'Транзит',
       'sophisticated': 'Изысканный',
       'stambul': 'Стамбул мост',
-      'bosphorus': 'По волнам Босфора'
+      'bosphorus': 'По волнам Босфора',
+      'cappadocia': 'дикая Каппадокия'
     };
 
     this.init();

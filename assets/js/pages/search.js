@@ -113,7 +113,7 @@ class ExcursionFilter {
         margin-top: 5px;
         font-weight: 500;
       `;
-      warning.textContent = 'Мінімальна ціна не може бути більшою за максимальну';
+      warning.textContent = 'Минимальная цена не может быть больше максимальной';
       this.priceFromInput.parentNode.appendChild(warning);
     }
   }
@@ -141,7 +141,7 @@ class ExcursionFilter {
       search: this.searchInput.value
     };
     this.updateActiveFiltersDisplay();
-    this.performFilter(); // Добавляем автоматическое применение фильтра
+    this.performFilter();
   }
 
   updateActiveFiltersDisplay() {
@@ -165,13 +165,13 @@ class ExcursionFilter {
       }
 
       if (this.filterState.priceFrom || this.filterState.priceTo) {
-        let priceText = 'Ціна: ';
+        let priceText = 'Цена: ';
         if (this.filterState.priceFrom && this.filterState.priceTo) {
-          priceText += `$${this.filterState.priceFrom} - $${this.filterState.priceTo}`;
+          priceText += `€${this.filterState.priceFrom} - €${this.filterState.priceTo}`;
         } else if (this.filterState.priceFrom) {
-          priceText += `від $${this.filterState.priceFrom}`;
+          priceText += `от €${this.filterState.priceFrom}`;
         } else if (this.filterState.priceTo) {
-          priceText += `до $${this.filterState.priceTo}`;
+          priceText += `до €${this.filterState.priceTo}`;
         }
         this.addFilterTag(priceText, 'price');
       }
@@ -232,7 +232,7 @@ class ExcursionFilter {
     this.performFilter();
   }
 
-   performFilter() {
+  performFilter() {
     let visibleCount = 0;
 
     console.log('Performing filter with state:', this.filterState);
@@ -245,11 +245,16 @@ class ExcursionFilter {
         return;
       }
 
+      // Отримуємо дані картки
+      const durationRaw = (card.dataset.duration || '').toLowerCase();
+      const priceRaw = (card.dataset.price || '').replace(/[^0-9]/g, '');
+
       const cardData = {
         title: (card.dataset.title || '').toLowerCase(),
         description: (card.dataset.description || '').toLowerCase(),
-        duration: parseInt(card.dataset.duration) || 0,
-        price: parseInt(card.dataset.price) || 0,
+        durationRaw: durationRaw,
+        duration: this.parseDuration(durationRaw),
+        price: parseInt(priceRaw) || 0,
         category: card.dataset.category || ''
       };
 
@@ -271,10 +276,20 @@ class ExcursionFilter {
       // Фільтр за тривалістю
       if (this.filterState.duration) {
         const durationFilter = this.filterState.duration;
-        if (durationFilter === '6+' && cardData.duration <= 6) {
-          isVisible = false;
-        } else if (durationFilter !== '6+' && cardData.duration > parseInt(durationFilter)) {
-          isVisible = false;
+
+        if (durationFilter === 'дня') {
+          // Показуємо тільки багатоденні тури
+          if (!cardData.durationRaw.includes('дн')) {
+            isVisible = false;
+          }
+        } else if (durationFilter === '6+') {
+          if (cardData.duration <= 6) {
+            isVisible = false;
+          }
+        } else {
+          if (cardData.duration > parseInt(durationFilter)) {
+            isVisible = false;
+          }
         }
       }
 
@@ -303,6 +318,19 @@ class ExcursionFilter {
 
     // Показуємо повідомлення якщо немає результатів
     this.toggleNoResults(visibleCount === 0);
+  }
+
+  // Нова функція для парсингу тривалості
+  parseDuration(durationStr) {
+    // Якщо це дні (наприклад "4 дня", "4 дні")
+    if (durationStr.includes('дн')) {
+      const days = parseInt(durationStr);
+      return days ? days * 24 : 0; // конвертуємо в години для порівняння
+    }
+
+    // Якщо це години (наприклад "4", "3,5")
+    const hours = parseFloat(durationStr.replace(',', '.'));
+    return hours || 0;
   }
 
   toggleNoResults(show) {
